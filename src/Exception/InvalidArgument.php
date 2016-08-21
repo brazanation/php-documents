@@ -18,4 +18,9 @@ class InvalidArgument extends \InvalidArgumentException
     {
         return new static("The CPF({$cpf}) is not valid number");
     }
+
+    public static function isNotValidPispasep($pispasep)
+    {
+        return new static("The PisPasep({$pispasep}) is not valid number");
+    }
 }

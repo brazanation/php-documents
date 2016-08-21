@@ -10,13 +10,18 @@ A PHP library to provide Brazilian Documents safer, easier and fun!
 
 ```shell
 $ composer require brazanation/documents
-
 ```
+
 ```php
+use Brazanation\Documents\Cpf;
+use Brazanation\Documents\Cnpj;
+use Brazanation\Documents\PisPasep;
 
 $cpf = new Cpf('06843273173');
 
 $cnpj = new Cnpj('99999090910270');
+
+$pispasep = new PisPasep('51.82312.94-92');
 ```
 
 If number is not valid, it will throw an exception!

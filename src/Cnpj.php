@@ -4,7 +4,7 @@ namespace Brazanation\Documents;
 
 use Brazanation\Documents\Exception\InvalidArgument as InvalidArgumentException;
 
-final class Cnpj
+final class Cnpj implements DocumentInterface
 {
     const REGEX = '/^([\d]{2,3})([\d]{3})([\d]{3})([\d]{4})([\d]{2})$/';
 

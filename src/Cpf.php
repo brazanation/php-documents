@@ -4,7 +4,7 @@ namespace Brazanation\Documents;
 
 use Brazanation\Documents\Exception\InvalidArgument as InvalidArgumentException;
 
-final class Cpf
+final class Cpf implements DocumentInterface
 {
     const REGEX = '/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/';
 
