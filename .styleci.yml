@@ -1,0 +1,30 @@
+preset: PSR2
+
+risky: false
+
+linting: true
+
+enabled:
+    - no_extra_consecutive_blank_lines
+    - no_unused_imports
+    - no_whitespace_in_blank_lines
+    - ordered_imports
+    - phpdoc_align
+    - phpdoc_separation
+    - return
+    - short_array_syntax
+    - single_quote
+    - unalign_double_arrow
+
+finder:
+    exclude:
+        - "*.yml"
+        - "*.json"
+        - "*.lock"
+        - "*.xml"
+        - "*.md"
+    name:
+        - "*.php"
+    path:
+        - "src"
+        - "tests"
