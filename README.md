@@ -8,20 +8,80 @@ Brazanation Documents
 
 A PHP library to provide Brazilian Documents safer, easier and fun!
 
-```shell
-$ composer require brazanation/documents
+Installation
+------------
+
+Install the library using [composer][1]. Add the following to your `composer.json`:
+
+```json
+{
+    "require": {
+        "brazanation/documents": "0.1.*"
+    }
+}
 ```
+
+Now run the `install` command.
+
+```sh
+$ composer.phar install
+```
+
+or
+
+```sh
+$ composer require brazanation/documents 0.1.*
+```
+
+#### CPF (cadastro de pessoas físicas)
+
+Registration of individuals or Tax Identification
 
 ```php
 use Brazanation\Documents\Cpf;
-use Brazanation\Documents\Cnpj;
-use Brazanation\Documents\PisPasep;
+use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
-$cpf = new Cpf('06843273173');
-
-$cnpj = new Cnpj('99999090910270');
-
-$pispasep = new PisPasep('51.82312.94-92');
+try {
+    $cpf = new Cpf('06843273173');
+    echo $cpf->format(); // prints 068.432.731-73
+catch (InvalidDocumentException $e){
+    echo $e->getMessage();
+}
 ```
 
-If number is not valid, it will throw an exception!
+#### CNPJ (cadastro nacional da pessoa jurídica)
+
+Company Identification or National Register of Legal Entities
+```php
+use Brazanation\Documents\Cnpj;
+use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
+
+try {
+    $cnpj = new Cnpj('99999090910270');
+    echo $cnpj->format(); // prints 99.999.090/9102-70
+catch (InvalidDocumentException $e){
+    echo $e->getMessage();
+}
+```
+
+#### PIS/PASEP (programa de integração social e programa de formação do patrimônio do servidor público)
+
+Social Integration Program and Training Program of the Heritage of Public Servant
+
+```php
+use Brazanation\Documents\PisPasep;
+use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
+
+try {
+    $pispasep = new PisPasep('51.82312.94-92');
+    echo $pispasep->format(); // print 51.82312.94-92
+catch (InvalidDocumentException $e){
+    echo $e->getMessage();
+}
+```
+
+### License
+
+MIT, hell yeah!
+
+[1]: http://getcomposer.org/

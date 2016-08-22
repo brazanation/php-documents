@@ -3,7 +3,7 @@
 namespace Brazanation\Documents\Tests;
 
 use Brazanation\Documents\DocumentInterface;
-use Brazanation\Documents\Exception\InvalidArgument;
+use Brazanation\Documents\Exception\InvalidDocument;
 
 abstract class DocumentTestCase extends \PHPUnit_Framework_TestCase
 {
@@ -73,7 +73,7 @@ abstract class DocumentTestCase extends \PHPUnit_Framework_TestCase
      */
     final public function testShouldThrowExceptionForEmptyData($documentType, $number)
     {
-        $this->expectException(InvalidArgument::class);
+        $this->expectException(InvalidDocument::class);
         $this->expectExceptionMessage("The {$documentType} must not be empty");
         $this->createDocument($number);
     }
@@ -86,7 +86,7 @@ abstract class DocumentTestCase extends \PHPUnit_Framework_TestCase
      */
     public function testShouldThrowExceptionForInvalidNumbers($documentType, $number)
     {
-        $this->expectException(InvalidArgument::class);
+        $this->expectException(InvalidDocument::class);
         $this->expectExceptionMessage("The {$documentType}($number) is not valid");
         $this->createDocument($number);
     }

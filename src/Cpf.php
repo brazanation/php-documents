@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents;
 
-use Brazanation\Documents\Exception\InvalidArgument as InvalidArgumentException;
+use Brazanation\Documents\Exception\InvalidDocument as InvalidArgumentException;
 
 final class Cpf implements DocumentInterface
 {

@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents\Exception;
 
-class InvalidArgument extends \InvalidArgumentException
+class InvalidDocument extends \InvalidArgumentException
 {
     public static function notEmpty($type)
     {
