@@ -43,6 +43,7 @@ use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException
 
 try {
     $cpf = new Cpf('06843273173');
+    echo $cpf; // prints 06843273173
     echo $cpf->format(); // prints 068.432.731-73
 catch (InvalidDocumentException $e){
     echo $e->getMessage();
@@ -58,6 +59,7 @@ use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException
 
 try {
     $cnpj = new Cnpj('99999090910270');
+    echo $cnpj; // prints 99999090910270
     echo $cnpj->format(); // prints 99.999.090/9102-70
 catch (InvalidDocumentException $e){
     echo $e->getMessage();
@@ -74,7 +76,8 @@ use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException
 
 try {
     $pispasep = new PisPasep('51.82312.94-92');
-    echo $pispasep->format(); // print 51.82312.94-92
+    echo $pispasep; // prints 51823129492
+    echo $pispasep->format(); // prints 51.82312.94-92
 catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }

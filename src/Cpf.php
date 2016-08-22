@@ -22,47 +22,51 @@ final class Cpf implements DocumentInterface
     /**
      * Cpf constructor.
      *
-     * @param string $cpf Only accept numbers
+     * @param string $number Only accept numbers
      */
-    public function __construct($cpf)
+    public function __construct($number)
     {
-        $this->validate($cpf);
-        $this->cpf = preg_replace('/[\D]/', '', $cpf);
+        $number = preg_replace('/\D/', '', $number);
+        $this->validate($number);
+        $this->cpf = $number;
     }
 
     /**
      * Check if CPF is not empty and is a valid number.
      *
-     * @param string $cpf
+     * @param string $number
      *
      * @throws InvalidArgumentException when CPF is empty
      * @throws InvalidArgumentException when CPF is not valid number
      */
-    private function validate($cpf)
+    private function validate($number)
     {
-        if (empty($cpf)) {
+        if (empty($number)) {
             throw InvalidArgumentException::notEmpty(static::LABEL);
         }
-        if (!$this->isValidCV($cpf)) {
-            throw InvalidArgumentException::isNotValid(static::LABEL, $cpf);
+        if (!$this->isValidCV($number)) {
+            throw InvalidArgumentException::isNotValid(static::LABEL, $number);
         }
     }
 
     /**
      * Validates cpf is a valid number.
      *
-     * @param string $cpf A number to be validate.
+     * @param string $number A number to be validate.
      *
      * @return bool Returns true if it is a valid number, otherwise false.
      */
-    private function isValidCV($cpf)
+    private function isValidCV($number)
     {
-        $c = preg_replace('/\D/', '', $cpf);
-        if (strlen($c) != static::LENGTH || preg_match("/^{$c[0]}{" . static::LENGTH . '}$/', $c)) {
+        if (strlen($number) != static::LENGTH) {
             return false;
         }
 
-        return (new Modulo11(2, static::LENGTH))->validate($cpf);
+        if (preg_match("/^{$number[0]}{" . static::LENGTH . '}$/', $number)) {
+            return false;
+        }
+
+        return (new Modulo11(2, static::LENGTH))->validate($number);
     }
 
     /**
