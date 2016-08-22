@@ -6,6 +6,8 @@ use Brazanation\Documents\Exception\InvalidArgument as InvalidArgumentException;
 
 final class Cpf implements DocumentInterface
 {
+    const LENGTH = 11;
+
     const LABEL = 'CPF';
 
     const REGEX = '/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/';
@@ -42,7 +44,7 @@ final class Cpf implements DocumentInterface
             throw InvalidArgumentException::notEmpty(static::LABEL);
         }
         if (!$this->isValidCV($cpf)) {
-            throw InvalidArgumentException::isNotValidCpf($cpf);
+            throw InvalidArgumentException::isNotValid(static::LABEL, $cpf);
         }
     }
 
@@ -56,11 +58,11 @@ final class Cpf implements DocumentInterface
     private function isValidCV($cpf)
     {
         $c = preg_replace('/\D/', '', $cpf);
-        if (strlen($c) != 11 || preg_match("/^{$c[0]}{11}$/", $c)) {
+        if (strlen($c) != static::LENGTH || preg_match("/^{$c[0]}{" . static::LENGTH . '}$/', $c)) {
             return false;
         }
 
-        return (new Modulo11(2, 11))->validate($cpf);
+        return (new Modulo11(2, static::LENGTH))->validate($cpf);
     }
 
     /**

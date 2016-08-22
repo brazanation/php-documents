@@ -6,6 +6,8 @@ use Brazanation\Documents\Exception\InvalidArgument;
 
 final class PisPasep implements DocumentInterface
 {
+    const LENGTH = 11;
+
     const LABEL = 'PisPasep';
 
     const REGEX = '/^([\d]{3})([\d]{5})([\d]{2})([\d]{1})$/';
@@ -36,14 +38,14 @@ final class PisPasep implements DocumentInterface
             throw InvalidArgument::notEmpty(static::LABEL);
         }
         if (!$this->isValidCV($pispasep)) {
-            throw InvalidArgument::isNotValidPispasep($pispasep);
+            throw InvalidArgument::isNotValid(static::LABEL, $pispasep);
         }
     }
 
     private function isValidCV($pispasep)
     {
         $c = preg_replace('/\D/', '', $pispasep);
-        if (strlen($c) != 11 || preg_match("/^{$c[0]}{11}$/", $c)) {
+        if (strlen($c) != static::LENGTH || preg_match("/^{$c[0]}{" . static::LENGTH . '}$/', $c)) {
             return false;
         }
 

@@ -9,18 +9,8 @@ class InvalidArgument extends \InvalidArgumentException
         return new static("The {$type} must not be empty");
     }
 
-    public static function isNotValidCnpj($cnpj)
+    public static function isNotValid($type, $number)
     {
-        return new static("The CNPJ({$cnpj}) is not valid number");
-    }
-
-    public static function isNotValidCpf($cpf)
-    {
-        return new static("The CPF({$cpf}) is not valid number");
-    }
-
-    public static function isNotValidPispasep($pispasep)
-    {
-        return new static("The PisPasep({$pispasep}) is not valid number");
+        return new static("The {$type}({$number}) is not valid number");
     }
 }

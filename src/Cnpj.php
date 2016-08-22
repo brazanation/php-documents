@@ -6,6 +6,8 @@ use Brazanation\Documents\Exception\InvalidArgument as InvalidArgumentException;
 
 final class Cnpj implements DocumentInterface
 {
+    const LENGTH = 14;
+
     const LABEL = 'CNPJ';
 
     const REGEX = '/^([\d]{2,3})([\d]{3})([\d]{3})([\d]{4})([\d]{2})$/';
@@ -42,7 +44,7 @@ final class Cnpj implements DocumentInterface
             throw InvalidArgumentException::notEmpty(static::LABEL);
         }
         if (!$this->isValidCV($cnpj)) {
-            throw InvalidArgumentException::isNotValidCnpj($cnpj);
+            throw InvalidArgumentException::isNotValid(static::LABEL, $cnpj);
         }
     }
 
@@ -56,7 +58,8 @@ final class Cnpj implements DocumentInterface
     private function isValidCV($cnpj)
     {
         $c = preg_replace('/\D/', '', $cnpj);
-        if (strlen($c) != 14 || preg_match("/^{$c[0]}{14}$/", $c)) {
+
+        if (strlen($c) != static::LENGTH || preg_match("/^{$c[0]}{" . static::LENGTH . '}$/', $c)) {
             return false;
         }
 
