@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents;
 
-use Brazanation\Documents\Exception\InvalidArgument;
+use Brazanation\Documents\Exception\InvalidDocument;
 
 final class PisPasep implements DocumentInterface
 {
@@ -35,10 +35,10 @@ final class PisPasep implements DocumentInterface
     private function validate($pispasep)
     {
         if (empty($pispasep)) {
-            throw InvalidArgument::notEmpty(static::LABEL);
+            throw InvalidDocument::notEmpty(static::LABEL);
         }
         if (!$this->isValidCV($pispasep)) {
-            throw InvalidArgument::isNotValid(static::LABEL, $pispasep);
+            throw InvalidDocument::isNotValid(static::LABEL, $pispasep);
         }
     }
 
