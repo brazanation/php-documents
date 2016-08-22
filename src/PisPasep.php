@@ -24,32 +24,36 @@ final class PisPasep implements DocumentInterface
     /**
      * PisPasep constructor.
      *
-     * @param $pispasep
+     * @param $number
      */
-    public function __construct($pispasep)
+    public function __construct($number)
     {
-        $this->validate($pispasep);
-        $this->pispasep = $pispasep;
+        $number = preg_replace('/\D/', '', $number);
+        $this->validate($number);
+        $this->pispasep = $number;
     }
 
-    private function validate($pispasep)
+    private function validate($number)
     {
-        if (empty($pispasep)) {
+        if (empty($number)) {
             throw InvalidDocument::notEmpty(static::LABEL);
         }
-        if (!$this->isValidCV($pispasep)) {
-            throw InvalidDocument::isNotValid(static::LABEL, $pispasep);
+        if (!$this->isValidCV($number)) {
+            throw InvalidDocument::isNotValid(static::LABEL, $number);
         }
     }
 
-    private function isValidCV($pispasep)
+    private function isValidCV($number)
     {
-        $c = preg_replace('/\D/', '', $pispasep);
-        if (strlen($c) != static::LENGTH || preg_match("/^{$c[0]}{" . static::LENGTH . '}$/', $c)) {
+        if (strlen($number) != static::LENGTH) {
             return false;
         }
 
-        return (new Modulo11(1, 9))->validate($pispasep);
+        if (preg_match("/^{$number[0]}{" . static::LENGTH . '}$/', $number)) {
+            return false;
+        }
+
+        return (new Modulo11(1, 9))->validate($number);
     }
 
     /**

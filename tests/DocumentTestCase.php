@@ -51,6 +51,7 @@ abstract class DocumentTestCase extends \PHPUnit_Framework_TestCase
     {
         $document = $this->createDocument($number);
         $this->assertInstanceOf(DocumentInterface::class, $document);
+        $this->assertEquals(preg_replace('/[^\dX]/i', '', $number), (string) $document);
     }
 
     /**
@@ -86,8 +87,9 @@ abstract class DocumentTestCase extends \PHPUnit_Framework_TestCase
      */
     public function testShouldThrowExceptionForInvalidNumbers($documentType, $number)
     {
+        $numberSanitized = preg_replace('/[^\dX]/i', '', $number);
         $this->expectException(InvalidDocument::class);
-        $this->expectExceptionMessage("The {$documentType}($number) is not valid");
+        $this->expectExceptionMessage("The {$documentType}($numberSanitized) is not valid");
         $this->createDocument($number);
     }
 }

@@ -26,44 +26,47 @@ final class Cnpj implements DocumentInterface
      */
     public function __construct($cnpj)
     {
+        $cnpj = preg_replace('/\D/', '', $cnpj);
         $this->validate($cnpj);
-        $this->cnpj = preg_replace('/[\D]/', '', $cnpj);
+        $this->cnpj = $cnpj;
     }
 
     /**
      * Check if CNPJ is not empty and is a valid number.
      *
-     * @param string $cnpj
+     * @param string $number
      *
      * @throws InvalidArgumentException when CNPJ is empty
      * @throws InvalidArgumentException when CNPJ is not valid number
      */
-    private function validate($cnpj)
+    private function validate($number)
     {
-        if (empty($cnpj)) {
+        if (empty($number)) {
             throw InvalidArgumentException::notEmpty(static::LABEL);
         }
-        if (!$this->isValidCV($cnpj)) {
-            throw InvalidArgumentException::isNotValid(static::LABEL, $cnpj);
+        if (!$this->isValidCV($number)) {
+            throw InvalidArgumentException::isNotValid(static::LABEL, $number);
         }
     }
 
     /**
      * Validates cnpj is a valid number.
      *
-     * @param string $cnpj A number to be validate.
+     * @param string $number A number to be validate.
      *
      * @return bool Returns true if it is a valid number, otherwise false.
      */
-    private function isValidCV($cnpj)
+    private function isValidCV($number)
     {
-        $c = preg_replace('/\D/', '', $cnpj);
-
-        if (strlen($c) != static::LENGTH || preg_match("/^{$c[0]}{" . static::LENGTH . '}$/', $c)) {
+        if (strlen($number) != static::LENGTH) {
             return false;
         }
 
-        return (new Modulo11(2, 9))->validate($cnpj);
+        if (preg_match("/^{$number[0]}{" . static::LENGTH . '}$/', $number)) {
+            return false;
+        }
+
+        return (new Modulo11(2, 9))->validate($number);
     }
 
     /**
