@@ -6,7 +6,8 @@ interface DocumentInterface
 {
     /**
      * Formats current number.
-     * @return string Returns formatted number. 
+     *
+     * @return string Returns formatted number.
      */
     public function format();
 }

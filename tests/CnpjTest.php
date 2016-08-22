@@ -3,45 +3,15 @@
 namespace Brazanation\Documents\Tests;
 
 use Brazanation\Documents\Cnpj;
-use Brazanation\Documents\Exception\InvalidArgument;
 
-class CnpjTest extends \PHPUnit_Framework_TestCase
+class CnpjTest extends DocumentTestCase
 {
-    /**
-     * @param string $cnpj
-     * @dataProvider provideValidData
-     */
-    public function testShouldCreateInstance($cnpj)
+    public function createDocument($number)
     {
-        $object = new Cnpj($cnpj);
-        $this->assertInstanceOf(Cnpj::class, $object);
-        $formatted = $object->format();
-        $this->assertEquals(1, preg_match(Cnpj::FORMAT_REGEX, $formatted));
+        return new Cnpj($number);
     }
 
-    /**
-     * @param string $cnpj
-     * @dataProvider provideEmptyData
-     */
-    public function testShouldThrowExceptionForEmptyData($cnpj)
-    {
-        $this->expectException(InvalidArgument::class);
-        $this->expectExceptionMessage('The cnpj must not be empty');
-        new Cnpj($cnpj);
-    }
-
-    /**
-     * @param string $cnpj
-     * @dataProvider provideInvalidNumber
-     */
-    public function testShouldThrowExceptionForInvalidNumbers($cnpj)
-    {
-        $this->expectException(InvalidArgument::class);
-        $this->expectExceptionMessage("The CNPJ($cnpj) is not valid");
-        new Cnpj($cnpj);
-    }
-
-    public function provideValidData()
+    public function provideValidNumbers()
     {
         return [
             ['99999090910270'],
@@ -49,22 +19,30 @@ class CnpjTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    public function provideValidNumbersAndExpectedFormat()
+    {
+        return [
+            ['99999090910270', '99.999.090/9102-70'],
+            ['48.464.245/0001-04', '48.464.245/0001-04'],
+        ];
+    }
+
     public function provideEmptyData()
     {
         return [
-            [''],
-            [null],
-            [0],
+            [Cnpj::LABEL, ''],
+            [Cnpj::LABEL, null],
+            [Cnpj::LABEL, 0],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [1],
-            ['11111111111111'],
-            ['00111222100099'],
-            ['00.111.222/1000-99'],
+            [Cnpj::LABEL, 1],
+            [Cnpj::LABEL, '11111111111111'],
+            [Cnpj::LABEL, '00111222100099'],
+            [Cnpj::LABEL, '00.111.222/1000-99'],
         ];
     }
 }

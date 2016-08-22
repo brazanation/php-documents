@@ -6,6 +6,8 @@ use Brazanation\Documents\Exception\InvalidArgument as InvalidArgumentException;
 
 final class Cpf implements DocumentInterface
 {
+    const LABEL = 'CPF';
+
     const REGEX = '/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/';
 
     const FORMAT_REGEX = '/^[\d]{3}\.[\d]{3}\.[\d]{3}-[\d]{2}$/';
@@ -37,7 +39,7 @@ final class Cpf implements DocumentInterface
     private function validate($cpf)
     {
         if (empty($cpf)) {
-            throw InvalidArgumentException::notEmpty('cpf');
+            throw InvalidArgumentException::notEmpty(static::LABEL);
         }
         if (!$this->isValidCV($cpf)) {
             throw InvalidArgumentException::isNotValidCpf($cpf);

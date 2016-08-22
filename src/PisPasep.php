@@ -6,10 +6,15 @@ use Brazanation\Documents\Exception\InvalidArgument;
 
 final class PisPasep implements DocumentInterface
 {
+    const LABEL = 'PisPasep';
+
     const REGEX = '/^([\d]{3})([\d]{5})([\d]{2})([\d]{1})$/';
 
     const FORMAT_REGEX = '/^[\d]{3}\.[\d]{5}\.[\d]{2}-[\d]{1}$/';
 
+    /**
+     * @var string
+     */
     private $pispasep;
 
     protected $mask = '000.00000.00-0';
@@ -28,7 +33,7 @@ final class PisPasep implements DocumentInterface
     private function validate($pispasep)
     {
         if (empty($pispasep)) {
-            throw InvalidArgument::notEmpty('PisPasep');
+            throw InvalidArgument::notEmpty(static::LABEL);
         }
         if (!$this->isValidCV($pispasep)) {
             throw InvalidArgument::isNotValidPispasep($pispasep);
@@ -57,6 +62,6 @@ final class PisPasep implements DocumentInterface
 
     public function __toString()
     {
-        return $this->pispasep;
+        return (string) $this->pispasep;
     }
 }
