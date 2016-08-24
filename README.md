@@ -53,6 +53,24 @@ catch (InvalidDocumentException $e){
 #### CNPJ (cadastro nacional da pessoa jurídica)
 
 Company Identification or National Register of Legal Entities
+
+```php
+use Brazanation\Documents\Cnpj;
+use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
+
+try {
+    $cnpj = new Cnpj('99999090910270');
+    echo $cnpj; // prints 99999090910270
+    echo $cnpj->format(); // prints 99.999.090/9102-70
+catch (InvalidDocumentException $e){
+    echo $e->getMessage();
+}
+```
+
+#### CNH (carteira nacional de habilitação)
+
+National Driving License
+
 ```php
 use Brazanation\Documents\Cnpj;
 use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
