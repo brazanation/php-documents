@@ -72,13 +72,13 @@ catch (InvalidDocumentException $e){
 National Driving License
 
 ```php
-use Brazanation\Documents\Cnpj;
+use Brazanation\Documents\Cnh;
 use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
 try {
-    $cnpj = new Cnpj('99999090910270');
-    echo $cnpj; // prints 99999090910270
-    echo $cnpj->format(); // prints 99.999.090/9102-70
+    $cnh = new Cnh('83592802666');
+    echo $cnh; // prints 83592802666
+    echo $cnh->format(); // prints 83592802666
 catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
