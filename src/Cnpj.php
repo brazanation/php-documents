@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents;
 
-use Brazanation\Documents\Exception\InvalidDocument as InvalidArgumentException;
+use Brazanation\Documents\Exception\InvalidDocument as InvalidDocumentException;
 
 final class Cnpj implements DocumentInterface
 {
@@ -36,16 +36,16 @@ final class Cnpj implements DocumentInterface
      *
      * @param string $number
      *
-     * @throws InvalidArgumentException when CNPJ is empty
-     * @throws InvalidArgumentException when CNPJ is not valid number
+     * @throws InvalidDocumentException when CNPJ is empty
+     * @throws InvalidDocumentException when CNPJ is not valid number
      */
     private function validate($number)
     {
         if (empty($number)) {
-            throw InvalidArgumentException::notEmpty(static::LABEL);
+            throw InvalidDocumentException::notEmpty(static::LABEL);
         }
-        if (!$this->isValidCV($number)) {
-            throw InvalidArgumentException::isNotValid(static::LABEL, $number);
+        if (!$this->isValid($number)) {
+            throw InvalidDocumentException::isNotValid(static::LABEL, $number);
         }
     }
 
@@ -56,7 +56,7 @@ final class Cnpj implements DocumentInterface
      *
      * @return bool Returns true if it is a valid number, otherwise false.
      */
-    private function isValidCV($number)
+    private function isValid($number)
     {
         if (strlen($number) != static::LENGTH) {
             return false;
@@ -66,7 +66,9 @@ final class Cnpj implements DocumentInterface
             return false;
         }
 
-        return (new Modulo11(2, 9))->validate($number);
+        $digits = $this->calculateDigits(substr($number, 0, -2));
+
+        return $digits === substr($number, -2);
     }
 
     /**
@@ -87,5 +89,25 @@ final class Cnpj implements DocumentInterface
     public function __toString()
     {
         return $this->cnpj;
+    }
+
+    /**
+     * Calculate check digits from base number.
+     *
+     * @param string $number Base numeric section to be calculate your digit.
+     *
+     * @return string
+     */
+    private function calculateDigits($number)
+    {
+        $calculator = new DigitCalculator($number);
+        $calculator->useComplementaryInsteadOfModule();
+        $calculator->replaceWhen('0', 10, 11);
+        $calculator->withModule(DigitCalculator::MODULE_11);
+        $firstDigit = $calculator->calculate();
+        $calculator->addDigit($firstDigit);
+        $secondDigit = $calculator->calculate();
+
+        return "{$firstDigit}{$secondDigit}";
     }
 }

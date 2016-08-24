@@ -53,7 +53,9 @@ final class PisPasep implements DocumentInterface
             return false;
         }
 
-        return (new Modulo11(1, 9))->validate($number);
+        $digits = $this->calculateDigits(substr($number, 0, -1));
+
+        return $digits === substr($number, -1);
     }
 
     /**
@@ -69,5 +71,24 @@ final class PisPasep implements DocumentInterface
     public function __toString()
     {
         return (string) $this->pispasep;
+    }
+
+    /**
+     * Calculate check digits from base number.
+     *
+     * @param string $number Base numeric section to be calculate your digit.
+     *
+     * @return string
+     */
+    private function calculateDigits($number)
+    {
+        $calculator = new DigitCalculator($number);
+        $calculator->withMultipliersInterval(2, 9);
+        $calculator->useComplementaryInsteadOfModule();
+        $calculator->replaceWhen('0', 10, 11);
+        $calculator->withModule(DigitCalculator::MODULE_11);
+        $digit = $calculator->calculate();
+
+        return "{$digit}";
     }
 }
