@@ -33,7 +33,7 @@ or
 $ composer require brazanation/documents 0.1.*
 ```
 
-#### CPF (cadastro de pessoas físicas)
+### CPF (cadastro de pessoas físicas)
 
 Registration of individuals or Tax Identification
 
@@ -50,7 +50,7 @@ catch (InvalidDocumentException $e){
 }
 ```
 
-#### CNPJ (cadastro nacional da pessoa jurídica)
+### CNPJ (cadastro nacional da pessoa jurídica)
 
 Company Identification or National Register of Legal Entities
 
@@ -67,7 +67,7 @@ catch (InvalidDocumentException $e){
 }
 ```
 
-#### CNH (carteira nacional de habilitação)
+### CNH (carteira nacional de habilitação)
 
 National Driving License
 
@@ -84,7 +84,40 @@ catch (InvalidDocumentException $e){
 }
 ```
 
-#### PIS/PASEP (programa de integração social e programa de formação do patrimônio do servidor público)
+### Chave NFE (chave da nota fiscal eletrônica)
+
+NFe Access Key
+
+```php
+use Brazanation\Documents\NFeAccessKey;
+use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
+
+try {
+    $pispasep = new NFeAccessKey('52060433009911002506550120000007800267301615');
+    echo $pispasep; // prints 52060433009911002506550120000007800267301615
+    echo $pispasep->format(); // prints 5206 0433 0099 1100 2506 5501 2000 0007 8002 6730 1615
+catch (InvalidDocumentException $e){
+    echo $e->getMessage();
+}
+```
+or generate your number
+
+```php
+try {
+    $nfeKey = NFeAccessKey::generate(
+        52,
+        \DateTime::createFromFormat('ym', '0604'),
+        new Cnpj('33009911002506'),
+        12,
+        780,
+        26730161
+    );
+    echo $nfeKey; // prints 52060433009911002506550120000007800267301615
+catch (InvalidDocumentException $e){
+    echo $e->getMessage();
+}
+```
+### PIS/PASEP (programa de integração social e programa de formação do patrimônio do servidor público)
 
 Social Integration Program and Training Program of the Heritage of Public Servant
 
