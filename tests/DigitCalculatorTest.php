@@ -14,7 +14,7 @@ class DigitCalculatorTest extends \PHPUnit_Framework_TestCase
     public function testShouldGetSuccessOnValidateNumbers($number, $digit)
     {
         $calculator = new DigitCalculator($number);
-        $calculator->useAdditionalInsteadOfModule();
+        $calculator->useComplementaryInsteadOfModule();
         $this->assertEquals($digit, $calculator->calculate());
     }
 
@@ -26,7 +26,7 @@ class DigitCalculatorTest extends \PHPUnit_Framework_TestCase
     public function testShouldGetSuccessOnValidateBoletoNumbers($number, $digit)
     {
         $calculator = new DigitCalculator($number);
-        $calculator->useAdditionalInsteadOfModule();
+        $calculator->useComplementaryInsteadOfModule();
         $calculator->withMultipliersInterval(2, 9);
         $calculator->replaceWhen('1', 0, 10, 11);
         $calculator->withModule(DigitCalculator::MODULE_11);
