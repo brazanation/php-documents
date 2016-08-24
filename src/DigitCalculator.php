@@ -5,6 +5,27 @@ namespace Brazanation\Documents;
 /**
  * Class DigitCalculator is inspired in DigitoPara class from Java built by Caleum
  *
+ * A fluent interface to calculate digits, used for any Boletos and document numbers.
+ *
+ * For example, the digit from 0000039104766 with the multipliers starting from 2 until 7 and using module11,
+ * follow:
+ *
+ * <pre>
+ *    0  0  0  0  0  3  9  1  0  4  7  6  6 (numeric section)
+ *    2  7  6  5  4  3  2  7  6  5  4  3  2 (multipliers, from right to left and in cycle)
+ *    ----------------------------------------- multiplication digit by digit
+ *     0  0  0  0  0  9 18  7  0 20 28 18 12 -- sum = 112
+ * </pre>
+ *
+ * Gets module from this sum, so, does calculate the additional from module and, if number is 0, 10 or 11,
+ * the digit result will be 1.
+ *
+ * <pre>
+ *        sum = 112
+ *        sum % 11 = 2
+ *        11 - (sum % 11) = 9
+ * </pre>
+ *
  * @package Brazanation\Documents
  *
  * @see     https://github.com/caelum/caelum-stella/blob/master/stella-core/src/main/java/br/com/caelum/stella/DigitoPara.java
@@ -16,16 +37,21 @@ class DigitCalculator
     const MODULE_11 = 11;
 
     /**
+     * A list for digits.
+     *
      * @var \ArrayObject
      */
     protected $number;
 
     /**
+     * A list of integer multipliers.
+     *
      * @var \ArrayObject
      */
     protected $multipliers;
 
     /**
+     *
      * @var bool
      */
     protected $additional = false;
@@ -45,6 +71,12 @@ class DigitCalculator
      */
     private $replacements;
 
+    /**
+     * Creates object to be filled with fluent interface and store a numeric section into
+     * a list of digits. It is required because the numeric section could be so bigger than a integer number supports.
+     *
+     * @param string $number Base numeric section to be calculate your digit.
+     */
     public function __construct($number)
     {
         $this->number = new \ArrayObject(str_split(strrev($number)));
@@ -56,10 +88,13 @@ class DigitCalculator
     }
 
     /**
-     * Para multiplicadores (ou pesos) sequenciais e em ordem crescente, esse método permite
-     * criar a lista de multiplicadores que será usada ciclicamente, caso o número base seja
-     * maior do que a sequência de multiplicadores. Por padrão os multiplicadores são iniciados
-     * de 2 a 9. No momento em que você inserir outro valor este default será sobrescrito.
+     * Sequential multipliers (or coefficient) and ascending order, this method allow
+     * to create a list of multipliers.
+     *
+     * It will be used in cycle, when the base number is larger than multipliers sequence.
+     * By default, multipliers are started with 2-9.
+     *
+     * You can enter another value and this default will be overwritten.
      *
      * @param int $start First number of sequential interval of multipliers
      * @param int $end   Last number of sequential interval of multipliers
@@ -69,7 +104,7 @@ class DigitCalculator
     public function withMultipliersInterval($start, $end)
     {
         $multipliers = [];
-        for ($i = $start; $i <= $end; $i++) {
+        for ($i = $start; $i <= $end; ++$i) {
             array_push($multipliers, $i);
         }
 
@@ -77,27 +112,54 @@ class DigitCalculator
     }
 
     /**
-     * @param int[] $multipliers
+     * There are some documents in which the multipliers do not use all the numbers in a range or
+     * change your order.
+     *
+     * In such cases, the multipliers list can be passed through array of integers.
+     *
+     * @param int[] $multipliers A list of integers sequence, such as: [9, 8, 7, 6, 5, 4, 3, 2, 1].
      *
      * @return DigitCalculator
      */
     public function withMultipliers(array $multipliers)
     {
+        $multipliers = array_map(function ($multiplier) {
+            if (!assert(is_int($multiplier))) {
+                throw new \InvalidArgumentException("The multiplier({$multiplier}) must be integer");
+            }
+
+            return $multiplier;
+        }, $multipliers);
         $this->multipliers = new \ArrayObject($multipliers);
 
         return $this;
     }
 
     /**
+     * It is common digit generators need additional module instead of module itself.
+     *
+     * So to call this method enables a flag that is used in module method to decide
+     * if the returned result is pure module or its complementary.
+     *
      * @return DigitCalculator
      */
-    public function useAdditionalInsteadOfModule()
+    public function useComplementaryInsteadOfModule()
     {
         $this->additional = true;
 
         return $this;
     }
 
+    /**
+     * There are some documents with specific rules for calculated digits.
+     *
+     * Some cases is possible to find X as digit checker.
+     *
+     * @param string $replaceTo A string to replace a digit.
+     * @param int[]  $integers  A list of numbers to be replaced by $replaceTo
+     *
+     * @return DigitCalculator
+     */
     public function replaceWhen($replaceTo, ...$integers)
     {
         foreach ($integers as $integer) {
@@ -107,6 +169,15 @@ class DigitCalculator
         return $this;
     }
 
+    /**
+     * Full whereby the rest will be taken and also its complementary.
+     *
+     * The default value is DigitCalculator::MODULE_11.
+     *
+     * @param int $module A integer to define module (DigitCalculator::MODULE_11 or DigitCalculator::MODULE_10)
+     *
+     * @return DigitCalculator
+     */
     public function withModule($module)
     {
         $this->module = $module;
@@ -114,6 +185,14 @@ class DigitCalculator
         return $this;
     }
 
+    /**
+     * Indicates whether to calculate the module, the sum of the multiplication results
+     * should be considered digit by digit.
+     *
+     * Eg: 2 * 9 = 18, sum = 9 (1 + 8) instead of 18
+     *
+     * @return DigitCalculator
+     */
     public function singleSum()
     {
         $this->singleSum = true;
@@ -121,6 +200,11 @@ class DigitCalculator
         return $this;
     }
 
+    /**
+     * Calculates the check digit from given numeric section.
+     *
+     * @return string Returns a single calculated digit.
+     */
     public function calculate()
     {
         $sum = 0;
@@ -128,24 +212,57 @@ class DigitCalculator
         foreach ($this->number as $digit) {
             $multiplier = $this->multipliers->offsetGet($position);
             $total = $digit * $multiplier;
-            $sum += $this->digitSum($total);
+            $sum += $this->calculateSingleSum($total);
             $position = $this->nextMultiplier($position);
         }
 
         $result = $sum % $this->module;
 
-        if ($this->additional) {
-            $result = $this->module - $result;
-        }
+        $result = $this->calculateAdditionalDigit($result);
 
-        if ($this->replacements->offsetExists($result)) {
-            return $this->replacements->offsetGet($result);
-        }
-
-        return $result;
+        return $this->replaceDigit($result);
     }
 
-    private function digitSum($total)
+    /**
+     * Replaces the digit when mapped to be replaced by other digit.
+     *
+     * @param string $digit A digit to be replaced.
+     *
+     * @return string Returns digit replaced if it has been mapped, otherwise returns given digit.
+     */
+    private function replaceDigit($digit)
+    {
+        if ($this->replacements->offsetExists($digit)) {
+            return $this->replacements->offsetGet($digit);
+        }
+
+        return $digit;
+    }
+
+    /**
+     * Calculates additional digit when is additional is defined.
+     *
+     * @param string $digit A digit to be subtract from module.
+     *
+     * @return int Returns calculated digit.
+     */
+    private function calculateAdditionalDigit($digit)
+    {
+        if ($this->additional) {
+            $digit = $this->module - $digit;
+        }
+
+        return $digit;
+    }
+
+    /**
+     * Calculates single sum.
+     *
+     * @param int $total A total to be calculated.
+     *
+     * @return float Returns a calculated total.
+     */
+    private function calculateSingleSum($total)
     {
         if ($this->singleSum) {
             return ($total / 10) + ($total % 10);
@@ -154,9 +271,16 @@ class DigitCalculator
         return $total;
     }
 
+    /**
+     * Gets the next multiplier.
+     *
+     * @param int $position Current position.
+     *
+     * @return int Returns next position or zero (0) when it is greater than number of defined multipliers.
+     */
     private function nextMultiplier($position)
     {
-        $position++;
+        ++$position;
         if ($position == $this->multipliers->count()) {
             $position = 0;
         }
@@ -164,6 +288,13 @@ class DigitCalculator
         return $position;
     }
 
+    /**
+     * Adds a digit into number collection.
+     *
+     * @param string $digit Digit to be prepended into number collection.
+     *
+     * @return DigitCalculator
+     */
     public function addDigit($digit)
     {
         $numbers = $this->number->getArrayCopy();
