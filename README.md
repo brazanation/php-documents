@@ -144,10 +144,10 @@ use Brazanation\Documents\Voter;
 use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
 try {
-    $pispasep = new Voter('106644440302', 20, 42);
-    echo $pispasep; // prints 106644440302
-    echo $pispasep->getSection(); // prints 0020
-    echo $pispasep->getZone(); // prints 042
+    $voter = new Voter('106644440302', 20, 42);
+    echo $voter; // prints 106644440302
+    echo $voter->getSection(); // prints 0020
+    echo $voter->getZone(); // prints 042
 catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
