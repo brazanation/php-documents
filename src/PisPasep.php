@@ -12,14 +12,10 @@ final class PisPasep implements DocumentInterface
 
     const REGEX = '/^([\d]{3})([\d]{5})([\d]{2})([\d]{1})$/';
 
-    const FORMAT_REGEX = '/^[\d]{3}\.[\d]{5}\.[\d]{2}-[\d]{1}$/';
-
     /**
      * @var string
      */
     private $pispasep;
-
-    protected $mask = '000.00000.00-0';
 
     /**
      * PisPasep constructor.
@@ -53,7 +49,7 @@ final class PisPasep implements DocumentInterface
             return false;
         }
 
-        $digits = $this->calculateDigits(substr($number, 0, -1));
+        $digits = $this->calculateDigit(substr($number, 0, -1));
 
         return $digits === substr($number, -1);
     }
@@ -80,7 +76,7 @@ final class PisPasep implements DocumentInterface
      *
      * @return string
      */
-    private function calculateDigits($number)
+    private function calculateDigit($number)
     {
         $calculator = new DigitCalculator($number);
         $calculator->withMultipliersInterval(2, 9);

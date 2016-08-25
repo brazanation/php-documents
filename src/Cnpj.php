@@ -12,8 +12,6 @@ final class Cnpj implements DocumentInterface
 
     const REGEX = '/^([\d]{2,3})([\d]{3})([\d]{3})([\d]{4})([\d]{2})$/';
 
-    const FORMAT_REGEX = '/^[\d]{2,3}\.[\d]{3}\.[\d]{3}\/[\d]{4}-[\d]{2}$/';
-
     /**
      * @var string
      */
