@@ -40,10 +40,10 @@ final class Cnpj implements DocumentInterface
     private function validate($number)
     {
         if (empty($number)) {
-            throw InvalidDocumentException::notEmpty(static::LABEL);
+            throw InvalidDocumentException::notEmpty(self::LABEL);
         }
         if (!$this->isValid($number)) {
-            throw InvalidDocumentException::isNotValid(static::LABEL, $number);
+            throw InvalidDocumentException::isNotValid(self::LABEL, $number);
         }
     }
 
@@ -56,11 +56,11 @@ final class Cnpj implements DocumentInterface
      */
     private function isValid($number)
     {
-        if (strlen($number) != static::LENGTH) {
+        if (strlen($number) != self::LENGTH) {
             return false;
         }
 
-        if (preg_match("/^{$number[0]}{" . static::LENGTH . '}$/', $number)) {
+        if (preg_match("/^{$number[0]}{" . self::LENGTH . '}$/', $number)) {
             return false;
         }
 
@@ -76,7 +76,7 @@ final class Cnpj implements DocumentInterface
      */
     public function format()
     {
-        return preg_replace(static::REGEX, '$1.$2.$3/$4-$5', $this->cnpj);
+        return preg_replace(self::REGEX, '$1.$2.$3/$4-$5', $this->cnpj);
     }
 
     /**

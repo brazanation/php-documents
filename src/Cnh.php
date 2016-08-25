@@ -40,10 +40,10 @@ final class Cnh implements DocumentInterface
     private function validate($number)
     {
         if (empty($number)) {
-            throw InvalidArgumentException::notEmpty(static::LABEL);
+            throw InvalidArgumentException::notEmpty(self::LABEL);
         }
         if (!$this->isValidCV($number)) {
-            throw InvalidArgumentException::isNotValid(static::LABEL, $number);
+            throw InvalidArgumentException::isNotValid(self::LABEL, $number);
         }
     }
 
@@ -56,9 +56,9 @@ final class Cnh implements DocumentInterface
      */
     private function isValidCV($number)
     {
-        $isRepeated = preg_match("/^{$number[0]}{" . static::LENGTH . '}$/', $number);
+        $isRepeated = preg_match("/^{$number[0]}{" . self::LENGTH . '}$/', $number);
 
-        if (strlen($number) != static::LENGTH || $isRepeated) {
+        if (strlen($number) != self::LENGTH || $isRepeated) {
             return false;
         }
 
