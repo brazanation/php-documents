@@ -12,8 +12,6 @@ final class Cpf implements DocumentInterface
 
     const REGEX = '/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/';
 
-    const FORMAT_REGEX = '/^[\d]{3}\.[\d]{3}\.[\d]{3}-[\d]{2}$/';
-
     /**
      * @var string
      */

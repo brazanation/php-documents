@@ -52,14 +52,14 @@ final class NFeAccessKey implements DocumentInterface
 
         $baseNumber = "{$state}{$yearMonth}{$cnpj}{$model}{$serie}{$invoiceNumber}{$controlNumber}";
 
-        $digit = self::calculateDigits($baseNumber);
+        $digit = self::calculateDigit($baseNumber);
 
         return new self("{$baseNumber}{$digit}");
     }
 
     public function format()
     {
-        return trim(preg_replace(static::REGEX, static::MASK, $this->nfeKey));
+        return trim(preg_replace(self::REGEX, self::MASK, $this->nfeKey));
     }
 
     public function __toString()
@@ -70,29 +70,34 @@ final class NFeAccessKey implements DocumentInterface
     private function validate($number)
     {
         if (empty($number)) {
-            throw InvalidDocumentException::notEmpty(static::LABEL);
+            throw InvalidDocumentException::notEmpty(self::LABEL);
         }
         if (!$this->isValid($number)) {
-            throw InvalidDocumentException::isNotValid(static::LABEL, $number);
+            throw InvalidDocumentException::isNotValid(self::LABEL, $number);
         }
     }
 
     private function isValid($number)
     {
-        if (strlen($number) != static::LENGTH) {
+        if (strlen($number) != self::LENGTH) {
             return false;
         }
 
-        if (preg_match("/^{$number[0]}{" . static::LENGTH . '}$/', $number)) {
+        if (preg_match("/^{$number[0]}{" . self::LENGTH . '}$/', $number)) {
             return false;
         }
 
-        $digits = static::calculateDigits(substr($number, 0, -1));
+        $digits = self::calculateDigit(substr($number, 0, -1));
 
         return $digits === substr($number, -1);
     }
 
-    private static function calculateDigits($baseNumber)
+    /**
+     * @param string $baseNumber
+     *
+     * @return string
+     */
+    private static function calculateDigit($baseNumber)
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();
