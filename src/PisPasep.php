@@ -32,20 +32,20 @@ final class PisPasep implements DocumentInterface
     private function validate($number)
     {
         if (empty($number)) {
-            throw InvalidDocument::notEmpty(static::LABEL);
+            throw InvalidDocument::notEmpty(self::LABEL);
         }
         if (!$this->isValidCV($number)) {
-            throw InvalidDocument::isNotValid(static::LABEL, $number);
+            throw InvalidDocument::isNotValid(self::LABEL, $number);
         }
     }
 
     private function isValidCV($number)
     {
-        if (strlen($number) != static::LENGTH) {
+        if (strlen($number) != self::LENGTH) {
             return false;
         }
 
-        if (preg_match("/^{$number[0]}{" . static::LENGTH . '}$/', $number)) {
+        if (preg_match("/^{$number[0]}{" . self::LENGTH . '}$/', $number)) {
             return false;
         }
 
@@ -61,7 +61,7 @@ final class PisPasep implements DocumentInterface
      */
     public function format()
     {
-        return preg_replace(static::REGEX, '$1.$2.$3-$4', $this->pispasep);
+        return preg_replace(self::REGEX, '$1.$2.$3-$4', $this->pispasep);
     }
 
     public function __toString()
