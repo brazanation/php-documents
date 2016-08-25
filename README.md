@@ -117,6 +117,7 @@ catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
 ```
+
 ### PIS/PASEP (programa de integração social e programa de formação do patrimônio do servidor público)
 
 Social Integration Program and Training Program of the Heritage of Public Servant
@@ -129,6 +130,24 @@ try {
     $pispasep = new PisPasep('51.82312.94-92');
     echo $pispasep; // prints 51823129492
     echo $pispasep->format(); // prints 51.82312.94-92
+catch (InvalidDocumentException $e){
+    echo $e->getMessage();
+}
+```
+
+### Título de Eleitor
+
+Voter Registration
+
+```php
+use Brazanation\Documents\Voter;
+use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
+
+try {
+    $pispasep = new Voter('106644440302', 20, 42);
+    echo $pispasep; // prints 106644440302
+    echo $pispasep->getSection(); // prints 0020
+    echo $pispasep->getZone(); // prints 042
 catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
