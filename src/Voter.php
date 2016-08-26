@@ -2,15 +2,11 @@
 
 namespace Brazanation\Documents;
 
-use Brazanation\Documents\Exception\InvalidDocument as InvalidDocumentException;
-
-final class Voter implements DocumentInterface
+final class Voter extends AbstractDocument implements DocumentInterface
 {
     const LENGTH = 12;
 
     const LABEL = 'Voter';
-
-    private $voter;
 
     private $section;
 
@@ -25,14 +21,17 @@ final class Voter implements DocumentInterface
      */
     public function __construct($number, $section = null, $zone = null)
     {
-        $this->validate($number);
-        $this->voter = $number;
+        $number = preg_replace('/\D/', '', $number);
+        parent::__construct($number, self::LENGTH, 2, self::LABEL);
+
         $this->section = str_pad($section, 4, '0', STR_PAD_LEFT);
         $this->zone = str_pad($zone, 3, '0', STR_PAD_LEFT);
     }
 
     /**
-     * @return string
+     * Gets section.
+     *
+     * @return string Returns section.
      */
     public function getSection()
     {
@@ -40,7 +39,9 @@ final class Voter implements DocumentInterface
     }
 
     /**
-     * @return string
+     * Gets zone.
+     *
+     * @return string Returns zone.
      */
     public function getZone()
     {
@@ -48,66 +49,36 @@ final class Voter implements DocumentInterface
     }
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->voter;
-    }
-
-    /**
-     * @return string
+     * Voter does not has a specific format.
+     *
+     * @return string Returns only numbers.
      */
     public function format()
     {
-        return preg_replace('/[^\d]/', '', $this->voter);
+        return "{$this}";
     }
 
     /**
-     * @param string $number
-     *
-     * @throws InvalidDocumentException
+     * {@inheritdoc}
      */
-    private function validate($number)
+    public function calculateDigit($baseNumber)
     {
-        if (empty($number)) {
-            throw InvalidDocumentException::notEmpty(self::LABEL);
-        }
-        if (!$this->isValid($number)) {
-            throw InvalidDocumentException::isNotValid(self::LABEL, $number);
-        }
-    }
-
-    /**
-     * @param string $number
-     *
-     * @return bool
-     */
-    private function isValid($number)
-    {
-        if (strlen($number) != self::LENGTH) {
-            return false;
-        }
-
-        if (preg_match("/^{$number[0]}{" . self::LENGTH . '}$/', $number)) {
-            return false;
-        }
-
-        $baseNumber = substr($number, 0, -2);
         $firstDigit = $this->calculateFirstDigit($baseNumber);
         $secondDigit = $this->calculateSecondDigit("{$baseNumber}{$firstDigit}");
 
-        return "{$firstDigit}{$secondDigit}" === substr($number, -2);
+        return "{$firstDigit}{$secondDigit}";
     }
 
     /**
-     * @param string $number
+     * Calculate check digit from base number.
      *
-     * @return string
+     * @param string $baseNumber Base numeric section to be calculate your digit.
+     *
+     * @return string Returns the checker digit.
      */
-    private function calculateFirstDigit($number)
+    private function calculateFirstDigit($baseNumber)
     {
-        $calculator = new DigitCalculator(substr($number, 0, -2));
+        $calculator = new DigitCalculator(substr($baseNumber, 0, -2));
         $calculator->withMultipliers([9, 8, 7, 6, 5, 4, 3, 2]);
         $calculator->withModule(DigitCalculator::MODULE_11);
         $digit = $calculator->calculate();
@@ -116,13 +87,15 @@ final class Voter implements DocumentInterface
     }
 
     /**
-     * @param string $number
+     * Calculate check digit from base number.
      *
-     * @return string
+     * @param string $baseNumber Base numeric section to be calculate your digit.
+     *
+     * @return string Returns the checker digit.
      */
-    private function calculateSecondDigit($number)
+    private function calculateSecondDigit($baseNumber)
     {
-        $calculator = new DigitCalculator(substr($number, -3));
+        $calculator = new DigitCalculator(substr($baseNumber, -3));
         $calculator->withMultipliers([9, 8, 7]);
         $calculator->withModule(DigitCalculator::MODULE_11);
         $digit = $calculator->calculate();
