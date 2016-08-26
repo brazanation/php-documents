@@ -2,9 +2,7 @@
 
 namespace Brazanation\Documents;
 
-use Brazanation\Documents\Exception\InvalidDocument as InvalidDocumentException;
-
-final class NFeAccessKey implements DocumentInterface
+final class NFeAccessKey extends AbstractDocument implements DocumentInterface
 {
     const LABEL = 'NFeAccessKey';
 
@@ -17,87 +15,75 @@ final class NFeAccessKey implements DocumentInterface
     const MODEL = 55;
 
     /**
-     * @var string
-     */
-    private $nfeKey;
-
-    /**
      * NFeAccessKey constructor.
      *
      * @param $nfeKey
      */
     public function __construct($nfeKey)
     {
-        $this->validate($nfeKey);
-        $this->nfeKey = $nfeKey;
+        $nfeKey = preg_replace('/\D/', '', $nfeKey);
+        parent::__construct($nfeKey, self::LENGTH, 1, self::LABEL);
     }
 
     /**
-     * @param int       $state
-     * @param \DateTime $generatedAt
-     * @param Cnpj      $cnpj
-     * @param int       $serie
-     * @param int       $invoiceNumber
-     * @param int       $controlNumber
+     * Generates a valid NFe Access Key.
+     *
+     * @param int       $state         IBGE state code.
+     * @param \DateTime $generatedAt   Year and month when invoice was created.
+     * @param Cnpj      $cnpj          Cnpj from issuer.
+     * @param int       $sequence      Invoice sequence.
+     * @param int       $invoiceNumber Invoice number.
+     * @param int       $controlNumber Control number.
      *
      * @return NFeAccessKey
      */
-    public static function generate($state, \DateTime $generatedAt, Cnpj $cnpj, $serie, $invoiceNumber, $controlNumber)
-    {
+    public static function generate(
+        $state,
+        \DateTime $generatedAt,
+        Cnpj $cnpj,
+        $sequence,
+        $invoiceNumber,
+        $controlNumber
+    ) {
         $yearMonth = $generatedAt->format('ym');
-        $serie = str_pad($serie, 3, 0, STR_PAD_LEFT);
+        $sequence = str_pad($sequence, 3, 0, STR_PAD_LEFT);
         $model = self::MODEL;
         $invoiceNumber = str_pad($invoiceNumber, 9, 0, STR_PAD_LEFT);
         $controlNumber = str_pad($controlNumber, 9, 0, STR_PAD_LEFT);
 
-        $baseNumber = "{$state}{$yearMonth}{$cnpj}{$model}{$serie}{$invoiceNumber}{$controlNumber}";
+        $baseNumber = "{$state}{$yearMonth}{$cnpj}{$model}{$sequence}{$invoiceNumber}{$controlNumber}";
 
-        $digit = self::calculateDigit($baseNumber);
+        $digit = self::calculateDigitFrom($baseNumber);
 
         return new self("{$baseNumber}{$digit}");
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function format()
     {
-        return trim(preg_replace(self::REGEX, self::MASK, $this->nfeKey));
-    }
-
-    public function __toString()
-    {
-        return $this->nfeKey;
-    }
-
-    private function validate($number)
-    {
-        if (empty($number)) {
-            throw InvalidDocumentException::notEmpty(self::LABEL);
-        }
-        if (!$this->isValid($number)) {
-            throw InvalidDocumentException::isNotValid(self::LABEL, $number);
-        }
-    }
-
-    private function isValid($number)
-    {
-        if (strlen($number) != self::LENGTH) {
-            return false;
-        }
-
-        if (preg_match("/^{$number[0]}{" . self::LENGTH . '}$/', $number)) {
-            return false;
-        }
-
-        $digits = self::calculateDigit(substr($number, 0, -1));
-
-        return $digits === substr($number, -1);
+        return trim(preg_replace(self::REGEX, self::MASK, "{$this}"));
     }
 
     /**
-     * @param string $baseNumber
+     * {@inheritdoc}
+     */
+    public function calculateDigit($baseNumber)
+    {
+        return self::calculateDigitFrom($baseNumber);
+    }
+
+    /**
+     * Calculate check digit from base number.
+     *
+     * It is static because is used from generate static method.
+     *
+     * @param string $baseNumber Base numeric section to be calculate your digit.
      *
      * @return string
      */
-    private static function calculateDigit($baseNumber)
+    private static function calculateDigitFrom($baseNumber)
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();

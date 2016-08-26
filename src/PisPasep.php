@@ -2,20 +2,13 @@
 
 namespace Brazanation\Documents;
 
-use Brazanation\Documents\Exception\InvalidDocument;
-
-final class PisPasep implements DocumentInterface
+final class PisPasep extends AbstractDocument implements DocumentInterface
 {
     const LENGTH = 11;
 
     const LABEL = 'PisPasep';
 
     const REGEX = '/^([\d]{3})([\d]{5})([\d]{2})([\d]{1})$/';
-
-    /**
-     * @var string
-     */
-    private $pispasep;
 
     /**
      * PisPasep constructor.
@@ -25,60 +18,23 @@ final class PisPasep implements DocumentInterface
     public function __construct($number)
     {
         $number = preg_replace('/\D/', '', $number);
-        $this->validate($number);
-        $this->pispasep = $number;
-    }
-
-    private function validate($number)
-    {
-        if (empty($number)) {
-            throw InvalidDocument::notEmpty(self::LABEL);
-        }
-        if (!$this->isValidCV($number)) {
-            throw InvalidDocument::isNotValid(self::LABEL, $number);
-        }
-    }
-
-    private function isValidCV($number)
-    {
-        if (strlen($number) != self::LENGTH) {
-            return false;
-        }
-
-        if (preg_match("/^{$number[0]}{" . self::LENGTH . '}$/', $number)) {
-            return false;
-        }
-
-        $digits = $this->calculateDigit(substr($number, 0, -1));
-
-        return $digits === substr($number, -1);
+        parent::__construct($number, self::LENGTH, 1, self::LABEL);
     }
 
     /**
-     * Formats PIS/PASEP number
-     *
      * @return string Returns formatted number, such as: 00.00000.00-0
      */
     public function format()
     {
-        return preg_replace(self::REGEX, '$1.$2.$3-$4', $this->pispasep);
-    }
-
-    public function __toString()
-    {
-        return (string) $this->pispasep;
+        return preg_replace(self::REGEX, '$1.$2.$3-$4', "{$this}");
     }
 
     /**
-     * Calculate check digits from base number.
-     *
-     * @param string $number Base numeric section to be calculate your digit.
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    private function calculateDigit($number)
+    public function calculateDigit($baseNumber)
     {
-        $calculator = new DigitCalculator($number);
+        $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliersInterval(2, 9);
         $calculator->useComplementaryInsteadOfModule();
         $calculator->replaceWhen('0', 10, 11);

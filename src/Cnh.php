@@ -2,9 +2,7 @@
 
 namespace Brazanation\Documents;
 
-use Brazanation\Documents\Exception\InvalidDocument as InvalidArgumentException;
-
-final class Cnh implements DocumentInterface
+final class Cnh extends AbstractDocument implements DocumentInterface
 {
     const LENGTH = 11;
 
@@ -13,85 +11,45 @@ final class Cnh implements DocumentInterface
     const REGEX = '/^([\d]{3})([\d]{3})([\d]{4})([\d]{1})$/';
 
     /**
-     * @var string
-     */
-    private $cnh;
-
-    /**
      * Cnh constructor.
      *
      * @param string $cnh Only accept numbers
      */
     public function __construct($cnh)
     {
-        $cnh = preg_replace('/[\D]/', '', $cnh);
-        $this->validate($cnh);
-        $this->cnh = $cnh;
+        $cnh = preg_replace('/\D/', '', $cnh);
+        parent::__construct($cnh, self::LENGTH, 2, self::LABEL);
     }
 
     /**
-     * Check if CNH is not empty and is a valid number.
-     *
-     * @param string $number
-     *
-     * @throws InvalidArgumentException when CNH is empty
-     * @throws InvalidArgumentException when CNH is not valid number
+     * {@inheritdoc}
      */
-    private function validate($number)
+    public function calculateDigit($baseNumber)
     {
-        if (empty($number)) {
-            throw InvalidArgumentException::notEmpty(self::LABEL);
-        }
-        if (!$this->isValidCV($number)) {
-            throw InvalidArgumentException::isNotValid(self::LABEL, $number);
-        }
-    }
-
-    /**
-     * Validates CNH is a valid number.
-     *
-     * @param string $number A number to be validate.
-     *
-     * @return bool Returns true if it is a valid number, otherwise false.
-     */
-    private function isValidCV($number)
-    {
-        $isRepeated = preg_match("/^{$number[0]}{" . self::LENGTH . '}$/', $number);
-
-        if (strlen($number) != self::LENGTH || $isRepeated) {
-            return false;
-        }
-
-        $baseNumber = substr($number, 0, -2);
         $firstDigit = $this->calculateFirstDigit($baseNumber);
-        $secondDigit = $this->calculateSecondDigit("{$baseNumber}");
+        $secondDigit = $this->calculateSecondDigit($baseNumber);
 
-        return "{$firstDigit}{$secondDigit}" === substr($number, -2);
+        return "{$firstDigit}{$secondDigit}";
     }
 
     /**
-     * Formats CNH number
-     *
-     * @return string Returns formatted number.
+     * {@inheritdoc}
      */
     public function format()
     {
-        return preg_replace('/[^\d]/', '', $this->cnh);
+        return "{$this}";
     }
 
     /**
-     * Returns the CNH number
+     * Calculate check digit from base number.
      *
-     * @return string
+     * @param string $baseNumber Base numeric section to be calculate your digit.
+     *
+     * @return string Returns a calculated checker digit.
      */
-    public function __toString()
+    private function calculateFirstDigit($baseNumber)
     {
-        return $this->cnh;
-    }
-
-    private function calculateFirstDigit($number)
-    {
-        $calculator = new DigitCalculator($number);
+        $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliersInterval(1, 9);
         $calculator->replaceWhen('0', 10, 11);
         $calculator->withModule(DigitCalculator::MODULE_11);
@@ -100,9 +58,16 @@ final class Cnh implements DocumentInterface
         return "{$firstDigit}";
     }
 
-    private function calculateSecondDigit($number)
+    /**
+     * Calculate check digit from base number.
+     *
+     * @param string $baseNumber Base numeric section to be calculate your digit.
+     *
+     * @return string Returns a calculated checker digit.
+     */
+    private function calculateSecondDigit($baseNumber)
     {
-        $calculator = new DigitCalculator($number);
+        $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliers([9, 8, 7, 6, 5, 4, 3, 2, 1]);
         $calculator->replaceWhen('0', 10, 11);
         $calculator->withModule(DigitCalculator::MODULE_11);
