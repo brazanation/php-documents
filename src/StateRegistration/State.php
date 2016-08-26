@@ -2,9 +2,6 @@
 
 namespace Brazanation\Documents\StateRegistration;
 
-use Brazanation\Documents\DigitCalculator;
-use Brazanation\Documents\StateRegistration;
-
 abstract class State
 {
     /**
