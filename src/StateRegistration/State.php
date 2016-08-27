@@ -93,4 +93,16 @@ abstract class State
      * @return string
      */
     abstract public function calculateDigit($baseNumber);
+
+    /**
+     * Normalizes number removing non-digit chars.
+     *
+     * @param string $number
+     *
+     * @return string Returns only numbers.
+     */
+    public function normalizeNumber($number)
+    {
+        return preg_replace('/\D/', '', $number);
+    }
 }

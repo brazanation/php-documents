@@ -33,7 +33,7 @@ final class StateRegistration extends AbstractDocument implements DocumentInterf
      */
     public function __construct($number, State $state)
     {
-        $number = preg_replace('/\D/', '', $number);
+        $number = $state->normalizeNumber($number);
         $this->state = $state;
         parent::__construct($number, $state->getLength(), $state->getNumberOfDigits(), $state->getState());
     }
