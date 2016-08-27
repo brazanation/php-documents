@@ -23,7 +23,8 @@ final class Amazonas extends State
 
     /**
      * {@inheritdoc}
-     * @see http://www.sintegra.gov.br/Cad_Estados/cad_AP.html
+     *
+     * @link http://www.sintegra.gov.br/Cad_Estados/cad_AM.html
      */
     public function calculateDigit($baseNumber)
     {

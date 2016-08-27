@@ -23,7 +23,7 @@ final class Amapa extends State
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_AP.html
      */
     public function calculateDigit($baseNumber)
