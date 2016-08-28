@@ -8,7 +8,6 @@ use Brazanation\Documents\Tests\DocumentTestCase;
 
 class MinasGerais extends DocumentTestCase
 {
-
     public function createDocument($number)
     {
         return new StateRegistration($number, new MG());

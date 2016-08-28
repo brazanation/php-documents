@@ -6,15 +6,14 @@ use Brazanation\Documents\DigitCalculator;
 
 class MinasGerais extends State
 {
-
     const LABEL = 'MinasGerais';
-    
+
     const REGEX = '/^(\d{3})(\d{3})(\d{3})(\d{4})$/';
-    
+
     const FORMAT = '$1.$2.$3/$4';
-    
+
     const LENGTH = 13;
-    
+
     const DIGITS_COUNT = 1;
 
     public function __construct()
