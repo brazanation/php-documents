@@ -21,6 +21,11 @@ class DistritoFederal extends State
         parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @see http://www.sintegra.gov.br/Cad_Estados/cad_DF.html
+     */
     public function calculateDigit($baseNumber)
     {
         $calculator = new DigitCalculator($baseNumber);
