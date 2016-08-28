@@ -6,7 +6,7 @@ use Brazanation\Documents\StateRegistration;
 use Brazanation\Documents\StateRegistration\DistritoFederal as DF;
 use Brazanation\Documents\Tests\DocumentTestCase;
 
-class DistritoFederal extends DocumentTestCase
+class DistritoFederalTest extends DocumentTestCase
 {
     public function createDocument($number)
     {

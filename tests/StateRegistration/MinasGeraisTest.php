@@ -6,7 +6,7 @@ use Brazanation\Documents\StateRegistration;
 use Brazanation\Documents\StateRegistration\MinasGerais as MG;
 use Brazanation\Documents\Tests\DocumentTestCase;
 
-class MinasGerais extends DocumentTestCase
+class MinasGeraisTest extends DocumentTestCase
 {
     public function createDocument($number)
     {
