@@ -1,0 +1,113 @@
+<?php
+
+namespace Brazanation\Documents\StateRegistration;
+
+use Brazanation\Documents\DigitCalculator;
+
+final class Goias extends State
+{
+    const LABEL = 'Goias';
+
+    const REGEX = '/^(1[015])(\d{3})(\d{3})(\d{1})$/';
+
+    const FORMAT = '$1.$2.$3-$4';
+
+    const LENGTH = 9;
+
+    const DIGITS_COUNT = 1;
+
+    /**
+     * @var string
+     */
+    private $digit;
+
+    public function __construct()
+    {
+        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+    }
+
+    /**
+     *
+     * @param string $digit
+     *
+     * @return Goias
+     */
+    private function setCurrentDigit($digit)
+    {
+        $this->digit = $digit;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @see http://www.sintegra.gov.br/Cad_Estados/cad_GO.html
+     */
+    public function calculateDigit($baseNumber)
+    {
+        $digitToReplace = $this->discoverDigitToReplace(intval($baseNumber));
+
+        $calculator = new DigitCalculator($baseNumber);
+        $calculator->useComplementaryInsteadOfModule();
+        $calculator->replaceWhen($digitToReplace, 10);
+        $calculator->replaceWhen('0', 11);
+        $calculator->withModule(DigitCalculator::MODULE_11);
+
+        $digit = $calculator->calculate();
+
+        if ($this->isMagicNumber($baseNumber)) {
+            return $this->fixedDigitForMagicNumber($digit);
+        }
+
+        return "{$digit}";
+    }
+
+    /**
+     * A bizarre rule for this number(11094402).
+     *
+     * Default digit is 0, but could be 1 too :(
+     *
+     * @param string $number A magic base number.
+     *
+     * @return bool Returns true if number is magic, otherwise false.
+     */
+    private function isMagicNumber($number)
+    {
+        return $number == '11094402';
+    }
+
+    /**
+     * A big workaround for StateRegistration(11094402)
+     *
+     * @param string $digit
+     *
+     * @return string
+     */
+    private function fixedDigitForMagicNumber($digit)
+    {
+        if ($digit == $this->digit && $digit == '0') {
+            return '0';
+        }
+
+        return '1';
+    }
+
+    private function discoverDigitToReplace($number)
+    {
+        $digitToReplace = '0';
+        if ((10103105 <= $number) && ($number <= 10119997)) {
+            $digitToReplace = '1';
+        }
+
+        return $digitToReplace;
+    }
+
+    public function normalizeNumber($number)
+    {
+        $number = parent::normalizeNumber($number);
+        $this->setCurrentDigit(substr($number, -($this->getNumberOfDigits())));
+
+        return $number;
+    }
+}
