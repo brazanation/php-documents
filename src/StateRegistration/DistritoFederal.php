@@ -6,15 +6,14 @@ use Brazanation\Documents\DigitCalculator;
 
 class DistritoFederal extends State
 {
-
     const LABEL = 'DistritoFederal';
-    
+
     const REGEX = '/^(\d{2})(\d{6})(\d{3})(\d{2})$/';
-    
+
     const FORMAT = '$1.$2.$3-$4';
-    
+
     const LENGTH = 13;
-    
+
     const DIGITS_COUNT = 2;
 
     public function __construct()
