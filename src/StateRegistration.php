@@ -2,7 +2,6 @@
 
 namespace Brazanation\Documents;
 
-use Brazanation\Documents\StateRegistration\Acre;
 use Brazanation\Documents\StateRegistration\State;
 
 /**
@@ -14,12 +13,6 @@ use Brazanation\Documents\StateRegistration\State;
  */
 final class StateRegistration extends AbstractDocument implements DocumentInterface
 {
-    const ACRE = 'AC';
-
-    private $states = [
-        StateRegistration::ACRE => Acre::class,
-    ];
-
     /**
      * @var State
      */

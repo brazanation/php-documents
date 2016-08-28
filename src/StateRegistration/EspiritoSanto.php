@@ -24,7 +24,7 @@ final class EspiritoSanto extends State
     /**
      * {@inheritdoc}
      *
-     * @see http://www.sintegra.gov.br/Cad_Estados/cad_CE.html
+     * @see http://www.sintegra.gov.br/Cad_Estados/cad_ES.html
      */
     public function calculateDigit($baseNumber)
     {
