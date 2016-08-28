@@ -35,7 +35,7 @@ final class Bahia extends State
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_BA.html
      */
     public function calculateDigit($baseNumber)
