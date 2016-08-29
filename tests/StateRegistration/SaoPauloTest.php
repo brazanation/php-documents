@@ -32,15 +32,15 @@ class SaoPauloTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [SaoPaulo::LABEL, ''],
+            [SaoPaulo::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [SaoPaulo::LABEL, '1111111111'],
-            [SaoPaulo::LABEL, '00000000021464'],
+            [SaoPaulo::LONG_NAME, '1111111111'],
+            [SaoPaulo::LONG_NAME, '00000000021464'],
         ];
     }
 }

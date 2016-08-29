@@ -6,7 +6,7 @@ use Brazanation\Documents\DigitCalculator;
 
 final class Goias extends State
 {
-    const LABEL = 'Goias';
+    const LONG_NAME = 'Goias';
 
     const REGEX = '/^(1[015])(\d{3})(\d{3})(\d{1})$/';
 
@@ -16,6 +16,8 @@ final class Goias extends State
 
     const DIGITS_COUNT = 1;
 
+    const SHORT_NAME = 'GO';
+
     /**
      * @var string
      */
@@ -23,7 +25,7 @@ final class Goias extends State
 
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

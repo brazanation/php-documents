@@ -35,17 +35,17 @@ class DistritoFederalTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [DF::LABEL, ''],
-            [DF::LABEL, null],
-            [DF::LABEL, 0],
+            [DF::LONG_NAME, ''],
+            [DF::LONG_NAME, null],
+            [DF::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [DF::LABEL, 1],
-            [DF::LABEL, '0756855600125'],
+            [DF::LONG_NAME, 1],
+            [DF::LONG_NAME, '0756855600125'],
         ];
     }
 }

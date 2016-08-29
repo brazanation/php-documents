@@ -34,15 +34,15 @@ class AmazonasTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Amazonas::LABEL, 0],
+            [Amazonas::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Amazonas::LABEL, 1],
-            [Amazonas::LABEL, '03.012.345-8'],
+            [Amazonas::LONG_NAME, 1],
+            [Amazonas::LONG_NAME, '03.012.345-8'],
         ];
     }
 }

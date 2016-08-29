@@ -40,15 +40,15 @@ class RoraimaTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Roraima::LABEL, ''],
+            [Roraima::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Roraima::LABEL, '1111111111'],
-            [Roraima::LABEL, '00000000021464'],
+            [Roraima::LONG_NAME, '1111111111'],
+            [Roraima::LONG_NAME, '00000000021464'],
         ];
     }
 }

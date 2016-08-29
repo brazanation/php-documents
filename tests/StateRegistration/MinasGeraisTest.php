@@ -34,17 +34,17 @@ class MinasGeraisTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [MG::LABEL, 0],
-            [MG::LABEL, ''],
-            [MG::LABEL, null],
+            [MG::LONG_NAME, 0],
+            [MG::LONG_NAME, ''],
+            [MG::LONG_NAME, null],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [MG::LABEL, 1],
-            [MG::LABEL, '9987477353930'],
+            [MG::LONG_NAME, 1],
+            [MG::LONG_NAME, '9987477353930'],
         ];
     }
 }

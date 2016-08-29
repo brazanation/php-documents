@@ -31,15 +31,15 @@ class MaranhaoTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Maranhao::LABEL, 0],
+            [Maranhao::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Maranhao::LABEL, '1'],
-            [Maranhao::LABEL, '068645099'],
+            [Maranhao::LONG_NAME, '1'],
+            [Maranhao::LONG_NAME, '068645099'],
         ];
     }
 }

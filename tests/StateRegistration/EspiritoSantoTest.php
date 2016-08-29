@@ -36,15 +36,15 @@ class EspiritoSantoTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [EspiritoSanto::LABEL, 0],
+            [EspiritoSanto::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [EspiritoSanto::LABEL, '1'],
-            [EspiritoSanto::LABEL, '068645099'],
+            [EspiritoSanto::LONG_NAME, '1'],
+            [EspiritoSanto::LONG_NAME, '068645099'],
         ];
     }
 }

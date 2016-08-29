@@ -39,15 +39,15 @@ class RioGrandeDoNorteTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [RioGrandeDoNorte::LABEL, ''],
+            [RioGrandeDoNorte::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [RioGrandeDoNorte::LABEL, '11111111'],
-            [RioGrandeDoNorte::LABEL, '99874773'],
+            [RioGrandeDoNorte::LONG_NAME, '11111111'],
+            [RioGrandeDoNorte::LONG_NAME, '99874773'],
         ];
     }
 }

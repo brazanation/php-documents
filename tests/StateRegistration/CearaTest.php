@@ -34,15 +34,15 @@ class CearaTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Ceara::LABEL, 0],
+            [Ceara::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Ceara::LABEL, '1'],
-            [Ceara::LABEL, '06.864.509-9'],
+            [Ceara::LONG_NAME, '1'],
+            [Ceara::LONG_NAME, '06.864.509-9'],
         ];
     }
 }

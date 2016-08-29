@@ -32,15 +32,15 @@ class GoiasTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Goias::LABEL, 0],
+            [Goias::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Goias::LABEL, '1'],
-            [Goias::LABEL, '068645099'],
+            [Goias::LONG_NAME, '1'],
+            [Goias::LONG_NAME, '068645099'],
         ];
     }
 }

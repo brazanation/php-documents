@@ -10,7 +10,7 @@ class AcreTest extends DocumentTestCase
 {
     public function createDocument($number)
     {
-        return new StateRegistration($number, new Acre());
+        return StateRegistration::AC($number);
     }
 
     public function provideValidNumbers()
@@ -30,17 +30,17 @@ class AcreTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Acre::LABEL, ''],
-            [Acre::LABEL, null],
-            [Acre::LABEL, 0],
+            [Acre::LONG_NAME, ''],
+            [Acre::LONG_NAME, null],
+            [Acre::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Acre::LABEL, 1],
-            [Acre::LABEL, '0100482300113'],
+            [Acre::LONG_NAME, 1],
+            [Acre::LONG_NAME, '0100482300113'],
         ];
     }
 }

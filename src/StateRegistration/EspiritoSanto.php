@@ -6,7 +6,7 @@ use Brazanation\Documents\DigitCalculator;
 
 final class EspiritoSanto extends State
 {
-    const LABEL = 'EspiritoSanto';
+    const LONG_NAME = 'EspiritoSanto';
 
     const REGEX = '/^(\d{3})(\d{3})(\d{2})(\d{1})$/';
 
@@ -16,9 +16,11 @@ final class EspiritoSanto extends State
 
     const DIGITS_COUNT = 1;
 
+    const SHORT_NAME = 'ES';
+
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

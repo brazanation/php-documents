@@ -31,15 +31,15 @@ class SergipeTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Sergipe::LABEL, ''],
+            [Sergipe::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Sergipe::LABEL, '1111111111'],
-            [Sergipe::LABEL, '00000000021464'],
+            [Sergipe::LONG_NAME, '1111111111'],
+            [Sergipe::LONG_NAME, '00000000021464'],
         ];
     }
 }

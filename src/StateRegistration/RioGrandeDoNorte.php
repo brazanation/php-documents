@@ -6,7 +6,7 @@ use Brazanation\Documents\DigitCalculator;
 
 class RioGrandeDoNorte extends State
 {
-    const LABEL = 'RioGrandeDoNorte';
+    const LONG_NAME = 'RioGrandeDoNorte';
 
     const REGEX = '/^(20)(\d)?(\d{3})(\d{3})(\d{1})$/';
 
@@ -19,6 +19,8 @@ class RioGrandeDoNorte extends State
     const LENGTH = 10;
 
     const DIGITS_COUNT = 1;
+
+    const SHORT_NAME = 'RN';
 
     /**
      * @var int
@@ -40,7 +42,7 @@ class RioGrandeDoNorte extends State
         $this->length = self::LENGTH;
         $this->format = self::FORMAT;
         $this->regex = self::REGEX;
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

@@ -32,15 +32,15 @@ class PiauiTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Piaui::LABEL, null],
+            [Piaui::LONG_NAME, null],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Piaui::LABEL, '11111111111'],
-            [Piaui::LABEL, '99874773539'],
+            [Piaui::LONG_NAME, '11111111111'],
+            [Piaui::LONG_NAME, '99874773539'],
         ];
     }
 }

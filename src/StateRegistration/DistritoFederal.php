@@ -6,7 +6,7 @@ use Brazanation\Documents\DigitCalculator;
 
 class DistritoFederal extends State
 {
-    const LABEL = 'DistritoFederal';
+    const LONG_NAME = 'DistritoFederal';
 
     const REGEX = '/^(\d{2})(\d{6})(\d{3})(\d{2})$/';
 
@@ -16,9 +16,11 @@ class DistritoFederal extends State
 
     const DIGITS_COUNT = 2;
 
+    const SHORT_NAME = 'DF';
+
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

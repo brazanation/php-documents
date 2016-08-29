@@ -43,17 +43,17 @@ class MatoGrossoSulTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [MatoGrossoSul::LABEL, 0],
-            [MatoGrossoSul::LABEL, ''],
-            [MatoGrossoSul::LABEL, null],
+            [MatoGrossoSul::LONG_NAME, 0],
+            [MatoGrossoSul::LONG_NAME, ''],
+            [MatoGrossoSul::LONG_NAME, null],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [MatoGrossoSul::LABEL, 1],
-            [MatoGrossoSul::LABEL, '9987477353930'],
+            [MatoGrossoSul::LONG_NAME, 1],
+            [MatoGrossoSul::LONG_NAME, '9987477353930'],
         ];
     }
 }

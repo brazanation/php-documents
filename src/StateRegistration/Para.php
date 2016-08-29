@@ -6,7 +6,7 @@ use Brazanation\Documents\DigitCalculator;
 
 class Para extends State
 {
-    const LABEL = 'Para';
+    const LONG_NAME = 'Para';
 
     const REGEX = '/^(15)(\d{3})(\d{3})(\d{1})$/';
 
@@ -16,9 +16,11 @@ class Para extends State
 
     const DIGITS_COUNT = 1;
 
+    const SHORT_NAME = 'PA';
+
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

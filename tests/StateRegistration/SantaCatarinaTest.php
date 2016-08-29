@@ -32,15 +32,15 @@ class SantaCatarinaTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [SantaCatarina::LABEL, ''],
+            [SantaCatarina::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [SantaCatarina::LABEL, '1111111111'],
-            [SantaCatarina::LABEL, '00000000021464'],
+            [SantaCatarina::LONG_NAME, '1111111111'],
+            [SantaCatarina::LONG_NAME, '00000000021464'],
         ];
     }
 }

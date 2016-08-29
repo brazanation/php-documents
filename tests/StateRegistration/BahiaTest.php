@@ -36,15 +36,15 @@ class BahiaTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Bahia::LABEL, 0],
+            [Bahia::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Bahia::LABEL, '000000001'],
-            [Bahia::LABEL, '03.012.345-8'],
+            [Bahia::LONG_NAME, '000000001'],
+            [Bahia::LONG_NAME, '03.012.345-8'],
         ];
     }
 }

@@ -121,17 +121,17 @@ class MatoGrossoTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [MatoGrosso::LABEL, 0],
-            [MatoGrosso::LABEL, ''],
-            [MatoGrosso::LABEL, null],
+            [MatoGrosso::LONG_NAME, 0],
+            [MatoGrosso::LONG_NAME, ''],
+            [MatoGrosso::LONG_NAME, null],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [MatoGrosso::LABEL, '11111111111'],
-            [MatoGrosso::LABEL, '99874773539'],
+            [MatoGrosso::LONG_NAME, '11111111111'],
+            [MatoGrosso::LONG_NAME, '99874773539'],
         ];
     }
 }

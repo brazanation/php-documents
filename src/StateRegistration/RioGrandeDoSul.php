@@ -6,7 +6,7 @@ use Brazanation\Documents\DigitCalculator;
 
 class RioGrandeDoSul extends State
 {
-    const LABEL = 'RioGrandeDoSul';
+    const LONG_NAME = 'RioGrandeDoSul';
 
     const REGEX = '/^([0-4])(\d{2})(\d{7})$/';
 
@@ -16,9 +16,11 @@ class RioGrandeDoSul extends State
 
     const DIGITS_COUNT = 1;
 
+    const SHORT_NAME = 'RS';
+
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

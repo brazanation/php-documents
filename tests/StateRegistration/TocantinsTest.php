@@ -35,15 +35,15 @@ class TocantinsTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Tocantins::LABEL, ''],
+            [Tocantins::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Tocantins::LABEL, '1111111111'],
-            [Tocantins::LABEL, '00000000021464'],
+            [Tocantins::LONG_NAME, '1111111111'],
+            [Tocantins::LONG_NAME, '00000000021464'],
         ];
     }
 }

@@ -7,7 +7,9 @@ use Brazanation\Documents\StateRegistration\Pernambuco\Old;
 
 final class Pernambuco implements StateInterface
 {
-    const LABEL = 'Pernambuco';
+    const LONG_NAME = 'Pernambuco';
+
+    const SHORT_NAME = 'PE';
 
     /**
      * @var State

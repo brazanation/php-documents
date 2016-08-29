@@ -31,17 +31,17 @@ class RioDeJaneiroTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [RioDeJaneiro::LABEL, null],
-            [RioDeJaneiro::LABEL, false],
-            [RioDeJaneiro::LABEL, ''],
+            [RioDeJaneiro::LONG_NAME, null],
+            [RioDeJaneiro::LONG_NAME, false],
+            [RioDeJaneiro::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [RioDeJaneiro::LABEL, '11111111'],
-            [RioDeJaneiro::LABEL, '99874773'],
+            [RioDeJaneiro::LONG_NAME, '11111111'],
+            [RioDeJaneiro::LONG_NAME, '99874773'],
         ];
     }
 }

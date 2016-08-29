@@ -3,12 +3,11 @@
 namespace Brazanation\Documents\StateRegistration\SaoPaulo;
 
 use Brazanation\Documents\DigitCalculator;
+use Brazanation\Documents\StateRegistration\SaoPaulo;
 use Brazanation\Documents\StateRegistration\State;
 
 class Urban extends State
 {
-    const LABEL = 'SaoPaulo';
-
     const REGEX = '/^(\d{3})(\d{3})(\d{3})(\d{3})$/';
 
     const FORMAT = '$1.$2.$3.$4';
@@ -19,7 +18,7 @@ class Urban extends State
 
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(SaoPaulo::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

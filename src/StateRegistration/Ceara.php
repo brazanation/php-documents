@@ -6,7 +6,7 @@ use Brazanation\Documents\DigitCalculator;
 
 final class Ceara extends State
 {
-    const LABEL = 'Ceara';
+    const LONG_NAME = 'Ceara';
 
     const REGEX = '/^(\d{2})(\d{3})(\d{3})(\d{1})$/';
 
@@ -16,9 +16,11 @@ final class Ceara extends State
 
     const DIGITS_COUNT = 1;
 
+    const SHORT_NAME = 'CE';
+
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

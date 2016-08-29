@@ -39,15 +39,15 @@ class ParaTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Para::LABEL, null],
+            [Para::LONG_NAME, null],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Para::LABEL, '11111111111'],
-            [Para::LABEL, '99874773539'],
+            [Para::LONG_NAME, '11111111111'],
+            [Para::LONG_NAME, '99874773539'],
         ];
     }
 }

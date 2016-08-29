@@ -6,7 +6,9 @@ use Brazanation\Documents\DigitCalculator;
 
 final class Amazonas extends State
 {
-    const LABEL = 'Amazonas';
+    const LONG_NAME = 'Amazonas';
+
+    const SHORT_NAME = 'AM';
 
     const REGEX = '/^(\d{2})(\d{3})(\d{3})(\d{1})$/';
 
@@ -18,7 +20,7 @@ final class Amazonas extends State
 
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

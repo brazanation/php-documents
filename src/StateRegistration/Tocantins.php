@@ -7,7 +7,9 @@ use Brazanation\Documents\StateRegistration\Tocantins\Nine;
 
 class Tocantins implements StateInterface
 {
-    const LABEL = 'Tocantins';
+    const LONG_NAME = 'Tocantins';
+
+    const SHORT_NAME = 'TO';
 
     /**
      * @var State
@@ -87,6 +89,8 @@ class Tocantins implements StateInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @see http://www.sintegra.gov.br/Cad_Estados/cad_TO.html
      */
     public function calculateDigit($baseNumber)
     {

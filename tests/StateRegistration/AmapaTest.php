@@ -31,15 +31,15 @@ class AmapaTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Amapa::LABEL, 0],
+            [Amapa::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Amapa::LABEL, 1],
-            [Amapa::LABEL, '03.012.345-8'],
+            [Amapa::LONG_NAME, 1],
+            [Amapa::LONG_NAME, '03.012.345-8'],
         ];
     }
 }

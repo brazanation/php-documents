@@ -10,7 +10,7 @@ class AlagoasTest extends DocumentTestCase
 {
     public function createDocument($number)
     {
-        return new StateRegistration($number, new Alagoas());
+        return StateRegistration::AL($number);
     }
 
     public function provideValidNumbers()
@@ -38,15 +38,15 @@ class AlagoasTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Alagoas::LABEL, 0],
+            [Alagoas::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Alagoas::LABEL, 1],
-            [Alagoas::LABEL, '0100482300113'],
+            [Alagoas::LONG_NAME, 1],
+            [Alagoas::LONG_NAME, '0100482300113'],
         ];
     }
 }

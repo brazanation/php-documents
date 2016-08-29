@@ -130,15 +130,15 @@ class ParaibaTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Paraiba::LABEL, null],
+            [Paraiba::LONG_NAME, null],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Paraiba::LABEL, '11111111111'],
-            [Paraiba::LABEL, '99874773539'],
+            [Paraiba::LONG_NAME, '11111111111'],
+            [Paraiba::LONG_NAME, '99874773539'],
         ];
     }
 }

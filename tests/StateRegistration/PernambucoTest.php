@@ -37,15 +37,15 @@ class PernambucoTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Pernambuco::LABEL, null],
+            [Pernambuco::LONG_NAME, null],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Pernambuco::LABEL, '11111111111'],
-            [Pernambuco::LABEL, '99874773539'],
+            [Pernambuco::LONG_NAME, '11111111111'],
+            [Pernambuco::LONG_NAME, '99874773539'],
         ];
     }
 }

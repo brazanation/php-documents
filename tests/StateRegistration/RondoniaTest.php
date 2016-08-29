@@ -57,15 +57,15 @@ class RondoniaTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Rondonia::LABEL, ''],
+            [Rondonia::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Rondonia::LABEL, '1111111111'],
-            [Rondonia::LABEL, '00000000021464'],
+            [Rondonia::LONG_NAME, '1111111111'],
+            [Rondonia::LONG_NAME, '00000000021464'],
         ];
     }
 }

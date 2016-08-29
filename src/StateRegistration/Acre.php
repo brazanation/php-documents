@@ -6,7 +6,9 @@ use Brazanation\Documents\DigitCalculator;
 
 final class Acre extends State
 {
-    const LABEL = 'Acre';
+    const LONG_NAME = 'Acre';
+
+    const SHORT_NAME = 'AC';
 
     const REGEX = '/^(01)(\d{3})(\d{3})(\d{3})(\d{2})$/';
 
@@ -18,7 +20,7 @@ final class Acre extends State
 
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

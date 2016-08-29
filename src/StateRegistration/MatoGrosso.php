@@ -6,7 +6,7 @@ use Brazanation\Documents\DigitCalculator;
 
 class MatoGrosso extends State
 {
-    const LABEL = 'MatoGrosso';
+    const LONG_NAME = 'MatoGrosso';
 
     const REGEX = '/^(\d{8,10})(\d{1})$/';
 
@@ -16,9 +16,11 @@ class MatoGrosso extends State
 
     const DIGITS_COUNT = 1;
 
+    const SHORT_NAME = 'MT';
+
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     public function normalizeNumber($number)

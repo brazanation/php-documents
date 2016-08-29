@@ -40,15 +40,15 @@ class ParanaTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Parana::LABEL, null],
+            [Parana::LONG_NAME, null],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Parana::LABEL, '11111111111'],
-            [Parana::LABEL, '99874773539'],
+            [Parana::LONG_NAME, '11111111111'],
+            [Parana::LONG_NAME, '99874773539'],
         ];
     }
 }

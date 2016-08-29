@@ -32,15 +32,15 @@ class RioGrandeDoSulTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [RioGrandeDoSul::LABEL, ''],
+            [RioGrandeDoSul::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [RioGrandeDoSul::LABEL, '1111111111'],
-            [RioGrandeDoSul::LABEL, '9987477332'],
+            [RioGrandeDoSul::LONG_NAME, '1111111111'],
+            [RioGrandeDoSul::LONG_NAME, '9987477332'],
         ];
     }
 }

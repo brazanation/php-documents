@@ -6,7 +6,7 @@ use Brazanation\Documents\DigitCalculator;
 
 class Piaui extends State
 {
-    const LABEL = 'Piaui';
+    const LONG_NAME = 'Piaui';
 
     const REGEX = '/^(\d{2})(\d{3})(\d{3})(\d{1})$/';
 
@@ -16,15 +16,17 @@ class Piaui extends State
 
     const DIGITS_COUNT = 1;
 
+    const SHORT_NAME = 'PI';
+
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**
      * {@inheritdoc}
      *
-     * @see http://www.sintegra.gov.br/Cad_Estados/cad_PR.html
+     * @see http://www.sintegra.gov.br/Cad_Estados/cad_PI.html
      */
     public function calculateDigit($baseNumber)
     {

@@ -7,7 +7,9 @@ use Brazanation\Documents\StateRegistration\SaoPaulo\Urban;
 
 final class SaoPaulo implements StateInterface
 {
-    const LABEL = 'SaoPaulo';
+    const LONG_NAME = 'SaoPaulo';
+
+    const SHORT_NAME = 'SP';
 
     /**
      * @var State

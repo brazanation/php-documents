@@ -6,7 +6,7 @@ use Brazanation\Documents\DigitCalculator;
 
 class Roraima extends State
 {
-    const LABEL = 'Roraima';
+    const LONG_NAME = 'Roraima';
 
     const REGEX = '/^(24)(\d{6})(\d{1})$/';
 
@@ -16,9 +16,11 @@ class Roraima extends State
 
     const DIGITS_COUNT = 1;
 
+    const SHORT_NAME = 'RR';
+
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

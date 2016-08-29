@@ -3,12 +3,11 @@
 namespace Brazanation\Documents\StateRegistration\Pernambuco;
 
 use Brazanation\Documents\DigitCalculator;
+use Brazanation\Documents\StateRegistration\Pernambuco;
 use Brazanation\Documents\StateRegistration\State;
 
 final class EFisco extends State
 {
-    const LABEL = 'Pernambuco';
-
     const REGEX = '/^(\d{7})(\d{2})$/';
 
     const FORMAT = '$1-$2';
@@ -19,7 +18,7 @@ final class EFisco extends State
 
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(Pernambuco::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**

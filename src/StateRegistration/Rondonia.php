@@ -6,7 +6,7 @@ use Brazanation\Documents\DigitCalculator;
 
 class Rondonia extends State
 {
-    const LABEL = 'Rondonia';
+    const LONG_NAME = 'Rondonia';
 
     const REGEX = '/^(\d{13})(\d{1})$/';
 
@@ -16,9 +16,11 @@ class Rondonia extends State
 
     const DIGITS_COUNT = 1;
 
+    const SHORT_NAME = 'RO';
+
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
     /**
