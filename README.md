@@ -153,6 +153,33 @@ catch (InvalidDocumentException $e){
 }
 ```
 
+### Inscrição Estadual
+
+State Registration
+
+```php
+use Brazanation\Documents\StateRegistration;
+use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
+
+$state = StateRegistration::AC('0100482300112');
+echo $state; // prints 0100482300112
+echo $state->format(); // prints 01.004.823/001-12
+
+// for Commercial São Paulo
+$state = StateRegistration::SP('110.042.490.114');
+echo $state; // prints 110042490114
+echo $state->format(); // prints 110.042.490.114
+
+// for Rural Producer São Paulo
+$state = StateRegistration::SP('P011004243002');
+echo $state; // prints P011004243002
+echo $state->format(); // prints P-01100424.3/002
+
+catch (InvalidDocumentException $e){
+    echo $e->getMessage();
+}
+```
+
 ### License
 
 MIT, hell yeah!

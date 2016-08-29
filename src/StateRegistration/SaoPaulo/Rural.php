@@ -8,7 +8,7 @@ use Brazanation\Documents\StateRegistration\State;
 
 class Rural extends State
 {
-    const REGEX = '/^(\d{8})(\d{1})(\d{3})$/';
+    const REGEX = '/^P(\d{8})(\d{1})(\d{3})$/';
 
     const FORMAT = 'P-$1.$2/$3';
 
@@ -21,9 +21,20 @@ class Rural extends State
         parent::__construct(SaoPaulo::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function normalizeNumber($number)
+    {
+        return 'P' . preg_replace('/[\D]/i', '', $number);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function extractBaseNumber($number)
     {
-        return substr($number, 0, self::LENGTH - 4);
+        return substr($number, 1, self::LENGTH - 4);
     }
 
     /**
@@ -31,7 +42,7 @@ class Rural extends State
      */
     public function extractCheckerDigit($number)
     {
-        return substr($number, self::LENGTH - 4, 1);
+        return substr($number, -4, 1);
     }
 
     /**
