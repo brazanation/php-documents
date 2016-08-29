@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents\StateRegistration;
 
-abstract class State
+abstract class State implements StateInterface
 {
     /**
      * @var string
@@ -48,7 +48,7 @@ abstract class State
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getState()
     {
@@ -56,7 +56,7 @@ abstract class State
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getLength()
     {
@@ -64,7 +64,7 @@ abstract class State
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getRegex()
     {
@@ -72,7 +72,7 @@ abstract class State
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getFormat()
     {
@@ -80,7 +80,7 @@ abstract class State
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getNumberOfDigits()
     {
@@ -88,21 +88,26 @@ abstract class State
     }
 
     /**
-     * @param string $baseNumber
-     *
-     * @return string
-     */
-    abstract public function calculateDigit($baseNumber);
-
-    /**
-     * Normalizes number removing non-digit chars.
-     *
-     * @param string $number
-     *
-     * @return string Returns only numbers.
+     * {@inheritdoc}
      */
     public function normalizeNumber($number)
     {
         return preg_replace('/\D/', '', $number);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function extractBaseNumber($number)
+    {
+        return substr($number, 0, -($this->getNumberOfDigits()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function extractCheckerDigit($number)
+    {
+        return substr($number, -($this->getNumberOfDigits()));
     }
 }

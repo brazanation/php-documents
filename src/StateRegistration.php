@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents;
 
-use Brazanation\Documents\StateRegistration\State;
+use Brazanation\Documents\StateRegistration\StateInterface;
 
 /**
  * Class StateRegistration
@@ -14,21 +14,37 @@ use Brazanation\Documents\StateRegistration\State;
 final class StateRegistration extends AbstractDocument implements DocumentInterface
 {
     /**
-     * @var State
+     * @var StateInterface
      */
     private $state;
 
     /**
      * StateRegistration constructor.
      *
-     * @param string $number
-     * @param State  $state
+     * @param string         $number
+     * @param StateInterface $state
      */
-    public function __construct($number, State $state)
+    public function __construct($number, StateInterface $state)
     {
         $number = $state->normalizeNumber($number);
         $this->state = $state;
         parent::__construct($number, $state->getLength(), $state->getNumberOfDigits(), $state->getState());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function extractBaseNumber($number)
+    {
+        return $this->state->extractBaseNumber($number);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function extractCheckerDigit($number)
+    {
+        return $this->state->extractCheckerDigit($number);
     }
 
     /**
