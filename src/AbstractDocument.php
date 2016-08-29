@@ -76,13 +76,18 @@ abstract class AbstractDocument implements DocumentInterface
      */
     protected function isValid($number)
     {
-        $isRepeated = preg_match("/^{$number[0]}{" . $this->length . '}$/', $number);
+        $baseNumber = $this->extractBaseNumber($number);
 
-        if (strlen($number) != $this->length || $isRepeated) {
+        if (!$baseNumber) {
             return false;
         }
 
-        $baseNumber = $this->extractBaseNumber($number);
+        $isRepeated = preg_match("/^[{$baseNumber[0]}]+$/", $baseNumber);
+
+        if ($isRepeated) {
+            return false;
+        }
+
         $digit = $this->calculateDigit($baseNumber);
 
         return "$digit" === "{$this->digit}";
