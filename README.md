@@ -16,7 +16,7 @@ Install the library using [composer][1]. Add the following to your `composer.jso
 ```json
 {
     "require": {
-        "brazanation/documents": "0.1.*"
+        "brazanation/documents": "0.3.*"
     }
 }
 ```
@@ -30,7 +30,7 @@ $ composer.phar install
 or
 
 ```sh
-$ composer require brazanation/documents 0.1.*
+$ composer require brazanation/documents 0.3.*
 ```
 
 ### CPF (cadastro de pessoas físicas)
@@ -93,9 +93,9 @@ use Brazanation\Documents\NFeAccessKey;
 use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
 try {
-    $pispasep = new NFeAccessKey('52060433009911002506550120000007800267301615');
-    echo $pispasep; // prints 52060433009911002506550120000007800267301615
-    echo $pispasep->format(); // prints 5206 0433 0099 1100 2506 5501 2000 0007 8002 6730 1615
+    $nfeKey = new NFeAccessKey('52060433009911002506550120000007800267301615');
+    echo $nfeKey; // prints 52060433009911002506550120000007800267301615
+    echo $nfeKey->format(); // prints 5206 0433 0099 1100 2506 5501 2000 0007 8002 6730 1615
 catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
