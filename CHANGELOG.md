@@ -1,6 +1,23 @@
 Change Log
 ==========
 
+## [v0.3.0](https://github.com/brazanation/documents/tree/v0.3.0) (2016-08-29)
+[Full Changelog](https://github.com/brazanation/documents/compare/v0.2.0...v0.3.0)
+
+**Implemented enhancements:**
+
+- create State Registration documents with each state rule [\#19](https://github.com/brazanation/documents/pull/19) ([tonicospinelli](https://github.com/tonicospinelli), ([Ferreiramg](https://github.com/Ferreiramg)))
+
+**Fixed bugs:**
+
+**Closed issues:**
+
+- missing State Registration document [\#16](https://github.com/brazanation/documents/issues/16)
+
+**Merged pull requests:**
+
+- State Registration [\#19](https://github.com/brazanation/documents/pull/19)
+
 ## [v0.2.0](https://github.com/brazanation/documents/tree/v0.2.0) (2016-08-25)
 [Full Changelog](https://github.com/brazanation/documents/compare/v0.1.0...v0.2.0)
 
