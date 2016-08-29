@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents\StateRegistration;
 
-interface  StateInterface
+interface StateInterface
 {
     /**
      * @return string
