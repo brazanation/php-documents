@@ -2,29 +2,29 @@
 
 namespace Brazanation\Documents\StateRegistration;
 
-use Brazanation\Documents\DigitCalculator;
+use Brazanation\Documents\StateRegistration\Pernambuco\EFisco;
 use Brazanation\Documents\StateRegistration\Pernambuco\Old;
 
-final class Pernambuco extends State
+final class Pernambuco implements StateInterface
 {
     const LABEL = 'Pernambuco';
-
-    const REGEX = '/^(\d{7})(\d{2})$/';
-
-    const FORMAT = '$1-$2';
-
-    const LENGTH = 9;
-
-    const DIGITS_COUNT = 2;
 
     /**
      * @var State
      */
-    private $oldCalculation;
+    private $calculation;
 
     public function __construct()
     {
-        parent::__construct(self::LABEL, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        $this->calculation = new EFisco();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getState()
+    {
+        return $this->calculation->getState();
     }
 
     /**
@@ -32,14 +32,9 @@ final class Pernambuco extends State
      */
     public function normalizeNumber($number)
     {
-        $number = parent::normalizeNumber($number);
+        $this->defineStrategy($number);
 
-        if (strlen($number) != self::LENGTH) {
-            $this->oldCalculation = new Old(self::LABEL);
-            $number = $this->oldCalculation->normalizeNumber($number);
-        }
-
-        return $number;
+        return $this->calculation->normalizeNumber($number);
     }
 
     /**
@@ -47,11 +42,7 @@ final class Pernambuco extends State
      */
     public function getLength()
     {
-        if ($this->isOldCalculation()) {
-            return $this->oldCalculation->getLength();
-        }
-
-        return parent::getLength();
+        return $this->calculation->getLength();
     }
 
     /**
@@ -59,11 +50,7 @@ final class Pernambuco extends State
      */
     public function getFormat()
     {
-        if ($this->isOldCalculation()) {
-            return $this->oldCalculation->getFormat();
-        }
-
-        return parent::getFormat();
+        return $this->calculation->getFormat();
     }
 
     /**
@@ -71,11 +58,7 @@ final class Pernambuco extends State
      */
     public function getNumberOfDigits()
     {
-        if ($this->isOldCalculation()) {
-            return $this->oldCalculation->getNumberOfDigits();
-        }
-
-        return parent::getNumberOfDigits();
+        return $this->calculation->getNumberOfDigits();
     }
 
     /**
@@ -83,11 +66,7 @@ final class Pernambuco extends State
      */
     public function getRegex()
     {
-        if ($this->isOldCalculation()) {
-            return $this->oldCalculation->getRegex();
-        }
-
-        return parent::getRegex();
+        return $this->calculation->getRegex();
     }
 
     /**
@@ -97,29 +76,35 @@ final class Pernambuco extends State
      */
     public function calculateDigit($baseNumber)
     {
-        if ($this->isOldCalculation()) {
-            return $this->oldCalculation->calculateDigit($baseNumber);
-        }
-
-        $calculator = new DigitCalculator($baseNumber);
-        $calculator->useComplementaryInsteadOfModule();
-        $calculator->replaceWhen('0', 10, 11);
-        $calculator->withModule(DigitCalculator::MODULE_11);
-
-        $firstDigit = $calculator->calculate();
-        $calculator->addDigit($firstDigit);
-        $secondDigit = $calculator->calculate();
-
-        return "{$firstDigit}{$secondDigit}";
+        return $this->calculation->calculateDigit($baseNumber);
     }
 
     /**
-     * Check if to use old calculation.
-     *
-     * @return bool Returns true when number is from old format.
+     * {@inheritdoc}
      */
-    private function isOldCalculation()
+    public function extractBaseNumber($number)
     {
-        return ($this->oldCalculation instanceof State);
+        return $this->calculation->extractBaseNumber($number);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function extractCheckerDigit($number)
+    {
+        return $this->calculation->extractCheckerDigit($number);
+    }
+
+    /**
+     * It will load calculation strategy based on number format.
+     *
+     * @param string $number Number of document.
+     */
+    private function defineStrategy($number)
+    {
+        $number = preg_replace('/\D/', '', $number);
+        if ($this->calculation->getLength() != strlen($number)) {
+            $this->calculation = new Old();
+        }
     }
 }
