@@ -4,15 +4,15 @@ namespace Brazanation\Documents\StateRegistration;
 
 use Brazanation\Documents\DigitCalculator;
 
-class Rondonia extends State
+class Roraima extends State
 {
-    const LABEL = 'Rondonia';
+    const LABEL = 'Roraima';
 
-    const REGEX = '/^(\d{13})(\d{1})$/';
+    const REGEX = '/^(24)(\d{6})(\d{1})$/';
 
-    const FORMAT = '$1-$2';
+    const FORMAT = '$1$2-$3';
 
-    const LENGTH = 14;
+    const LENGTH = 9;
 
     const DIGITS_COUNT = 1;
 
@@ -24,15 +24,13 @@ class Rondonia extends State
     /**
      * {@inheritdoc}
      *
-     * @see http://www.sintegra.gov.br/Cad_Estados/cad_RO.html
+     * @see http://www.sintegra.gov.br/Cad_Estados/cad_RR.html
      */
     public function calculateDigit($baseNumber)
     {
         $calculator = new DigitCalculator($baseNumber);
-        $calculator->useComplementaryInsteadOfModule();
-        $calculator->replaceWhen('0', 10);
-        $calculator->replaceWhen('1', 11);
-        $calculator->withModule(DigitCalculator::MODULE_11);
+        $calculator->withMultipliers([8, 7, 6, 5, 4, 3, 2, 1]);
+        $calculator->withModule(9);
 
         $digit = $calculator->calculate();
 
