@@ -51,7 +51,7 @@ abstract class DocumentTestCase extends \PHPUnit_Framework_TestCase
     {
         $document = $this->createDocument($number);
         $this->assertInstanceOf(DocumentInterface::class, $document);
-        $this->assertEquals(preg_replace('/[^\dX]/i', '', $number), (string) $document);
+        $this->assertEquals(preg_replace('/[^\dXP]/i', '', $number), (string) $document);
     }
 
     /**

@@ -44,9 +44,9 @@ abstract class AbstractDocument implements DocumentInterface
         $this->type = (string) $type;
         $this->numberOfDigits = (int) $numberOfDigits;
         $this->length = (int) $length;
-        $this->digit = substr($number, -($numberOfDigits));
+        $this->digit = $this->extractCheckerDigit($number);
         $this->validate($number);
-        $this->number = substr($number, 0, -($numberOfDigits));
+        $this->number = $number;
     }
 
     /**
@@ -76,13 +76,19 @@ abstract class AbstractDocument implements DocumentInterface
      */
     protected function isValid($number)
     {
-        $isRepeated = preg_match("/^{$number[0]}{" . $this->length . '}$/', $number);
+        $baseNumber = $this->extractBaseNumber($number);
 
-        if (strlen($number) != $this->length || $isRepeated) {
+        if (!$baseNumber) {
             return false;
         }
 
-        $digit = $this->calculateDigit(substr($number, 0, -($this->numberOfDigits)));
+        $isRepeated = preg_match("/^[{$baseNumber[0]}]+$/", $baseNumber);
+
+        if ($isRepeated) {
+            return false;
+        }
+
+        $digit = $this->calculateDigit($baseNumber);
 
         return "$digit" === "{$this->digit}";
     }
@@ -94,6 +100,30 @@ abstract class AbstractDocument implements DocumentInterface
      */
     public function __toString()
     {
-        return "{$this->number}{$this->digit}";
+        return "{$this->number}";
+    }
+
+    /**
+     * Extracts the base number document.
+     *
+     * @param string $number Number of document.
+     *
+     * @return string Returns only base number without checker digit.
+     */
+    protected function extractBaseNumber($number)
+    {
+        return substr($number, 0, -($this->numberOfDigits));
+    }
+
+    /**
+     * Extracts the checker digit from document number.
+     *
+     * @param string $number Number of document.
+     *
+     * @return string Returns only checker digit.
+     */
+    protected function extractCheckerDigit($number)
+    {
+        return substr($number, -($this->numberOfDigits));
     }
 }
