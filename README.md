@@ -174,10 +174,6 @@ echo $state->format(); // prints 110.042.490.114
 $state = StateRegistration::SP('P011004243002');
 echo $state; // prints P011004243002
 echo $state->format(); // prints P-01100424.3/002
-
-catch (InvalidDocumentException $e){
-    echo $e->getMessage();
-}
 ```
 
 ### License
