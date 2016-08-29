@@ -3,7 +3,7 @@
 namespace Brazanation\Documents\StateRegistration;
 
 use Brazanation\Documents\DigitCalculator;
-use StateRegistration\Pernambuco\Old;
+use Brazanation\Documents\StateRegistration\Pernambuco\Old;
 
 final class Pernambuco extends State
 {

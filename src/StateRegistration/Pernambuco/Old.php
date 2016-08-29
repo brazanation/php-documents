@@ -1,6 +1,6 @@
 <?php
 
-namespace StateRegistration\Pernambuco;
+namespace Brazanation\Documents\StateRegistration\Pernambuco;
 
 use Brazanation\Documents\DigitCalculator;
 use Brazanation\Documents\StateRegistration\State;
