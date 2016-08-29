@@ -29,8 +29,8 @@ class Old extends State
      */
     public function calculateDigit($baseNumber)
     {
-        $calculator = new DigitCalculator($baseNumber. '0');
-        $calculator->withMultipliersInterval(1,9);
+        $calculator = new DigitCalculator($baseNumber . '0');
+        $calculator->withMultipliersInterval(1, 9);
         $calculator->useComplementaryInsteadOfModule();
         $calculator->replaceWhen('0', 10);
         $calculator->replaceWhen('1', 11);
