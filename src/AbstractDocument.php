@@ -4,7 +4,7 @@ namespace Brazanation\Documents;
 
 use Brazanation\Documents\Exception\InvalidDocument as InvalidDocumentException;
 
-abstract class AbstractDocument implements DocumentInterface
+abstract class AbstractDocument implements DigitCalculable, Formattable
 {
     /**
      * @var string

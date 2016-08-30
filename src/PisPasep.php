@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents;
 
-final class PisPasep extends AbstractDocument implements DocumentInterface
+final class PisPasep extends AbstractDocument
 {
     const LENGTH = 11;
 

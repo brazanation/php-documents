@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents;
 
-final class Cpf extends AbstractDocument implements DocumentInterface
+final class Cpf extends AbstractDocument
 {
     const LENGTH = 11;
 

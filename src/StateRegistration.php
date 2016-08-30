@@ -64,7 +64,7 @@ use Brazanation\Documents\StateRegistration\Tocantins;
  * @method static StateRegistration SP($number)
  * @method static StateRegistration TO($number)
  */
-final class StateRegistration extends AbstractDocument implements DocumentInterface
+final class StateRegistration extends AbstractDocument
 {
     /**
      * @var StateInterface

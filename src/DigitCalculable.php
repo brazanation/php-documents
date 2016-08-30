@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents;
 
-interface DocumentInterface
+interface DigitCalculable
 {
     /**
      * Calculate check digit from base number.
@@ -12,11 +12,4 @@ interface DocumentInterface
      * @return string Returns the checker digit.
      */
     public function calculateDigit($baseNumber);
-
-    /**
-     * Formats current number.
-     *
-     * @return string Returns formatted number.
-     */
-    public function format();
 }
