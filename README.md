@@ -176,6 +176,18 @@ echo $state; // prints P011004243002
 echo $state->format(); // prints P-01100424.3/002
 ```
 
+### Cartão Nacional de Saúde (SUS)
+
+National Health Card
+
+```php
+use Brazanation\Documents\Cns;
+
+$cns = new Cns('242912018460005')
+echo $state; // prints 242912018460005
+echo $state->format(); // prints 242 9120 1846 0005
+```
+
 ### License
 
 MIT, hell yeah!
