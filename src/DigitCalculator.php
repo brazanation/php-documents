@@ -260,12 +260,12 @@ class DigitCalculator
      *
      * @param int $total A total to be calculated.
      *
-     * @return float Returns a calculated total.
+     * @return int Returns a calculated total.
      */
     private function calculateSingleSum($total)
     {
         if ($this->singleSum) {
-            return ($total / 10) + ($total % 10);
+            return intval(($total / 10) + ($total % 10));
         }
 
         return $total;
