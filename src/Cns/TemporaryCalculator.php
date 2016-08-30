@@ -5,7 +5,7 @@ namespace Brazanation\Documents\Cns;
 use Brazanation\Documents\DigitCalculable;
 use Brazanation\Documents\DigitCalculator;
 
-class Temporary implements DigitCalculable
+class TemporaryCalculator implements DigitCalculable
 {
     /**
      * {@inheritdoc}
