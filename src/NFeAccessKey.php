@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents;
 
-final class NFeAccessKey extends AbstractDocument implements DocumentInterface
+final class NFeAccessKey extends AbstractDocument
 {
     const LABEL = 'NFeAccessKey';
 

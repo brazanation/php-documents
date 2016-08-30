@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents;
 
-final class Voter extends AbstractDocument implements DocumentInterface
+final class Voter extends AbstractDocument
 {
     const LENGTH = 12;
 

@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents;
 
-final class Cnpj extends AbstractDocument implements DocumentInterface
+final class Cnpj extends AbstractDocument
 {
     const LENGTH = 14;
 

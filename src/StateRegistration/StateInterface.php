@@ -2,7 +2,9 @@
 
 namespace Brazanation\Documents\StateRegistration;
 
-interface StateInterface
+use Brazanation\Documents\DigitCalculable;
+
+interface StateInterface extends DigitCalculable
 {
     /**
      * @return string
@@ -28,13 +30,6 @@ interface StateInterface
      * @return int
      */
     public function getNumberOfDigits();
-
-    /**
-     * @param string $baseNumber
-     *
-     * @return string
-     */
-    public function calculateDigit($baseNumber);
 
     /**
      * Normalizes number removing non-digit chars.

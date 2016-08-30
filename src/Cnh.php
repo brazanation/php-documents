@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents;
 
-final class Cnh extends AbstractDocument implements DocumentInterface
+final class Cnh extends AbstractDocument
 {
     const LENGTH = 11;
 

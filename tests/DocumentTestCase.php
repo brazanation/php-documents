@@ -2,7 +2,7 @@
 
 namespace Brazanation\Documents\Tests;
 
-use Brazanation\Documents\DocumentInterface;
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\Exception\InvalidDocument;
 
 abstract class DocumentTestCase extends \PHPUnit_Framework_TestCase
@@ -10,7 +10,7 @@ abstract class DocumentTestCase extends \PHPUnit_Framework_TestCase
     /**
      * @param string $number
      *
-     * @return DocumentInterface
+     * @return AbstractDocument
      */
     abstract public function createDocument($number);
 
@@ -50,7 +50,7 @@ abstract class DocumentTestCase extends \PHPUnit_Framework_TestCase
     final public function testShouldCreateInstance($number)
     {
         $document = $this->createDocument($number);
-        $this->assertInstanceOf(DocumentInterface::class, $document);
+        $this->assertInstanceOf(AbstractDocument::class, $document);
         $this->assertEquals(preg_replace('/[^\dXP]/i', '', $number), (string) $document);
     }
 
