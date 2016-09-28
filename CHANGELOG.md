@@ -1,6 +1,25 @@
 Change Log
 ==========
 
+## [v0.4.0](https://github.com/brazanation/documents/tree/v0.3.0) (2016-09-28)
+[Full Changelog](https://github.com/brazanation/documents/compare/v0.3.0...v0.4.0)
+
+**Implemented enhancements:**
+
+- create CNS and CNS Temporary document [#21](https://github.com/brazanation/documents/pull/21) ([tonicospinelli](https://github.com/tonicospinelli))
+- choose calculator when calculateDigits is called [#21](https://github.com/brazanation/documents/pull/21) ([tonicospinelli](https://github.com/tonicospinelli))
+- segregate DocumentInterface into DigitCalculable and Formattable [#21](https://github.com/brazanation/documents/pull/21) ([tonicospinelli](https://github.com/tonicospinelli))
+
+**Fixed bugs:**
+
+**Closed issues:**
+
+- missing CNS document [\#20](https://github.com/brazanation/documents/issues/16)
+
+**Merged pull requests:**
+
+- CNS document implemented [#21](https://github.com/brazanation/documents/pull/21)
+
 ## [v0.3.0](https://github.com/brazanation/documents/tree/v0.3.0) (2016-08-29)
 [Full Changelog](https://github.com/brazanation/documents/compare/v0.2.0...v0.3.0)
 
