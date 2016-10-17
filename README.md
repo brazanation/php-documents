@@ -84,18 +84,25 @@ catch (InvalidDocumentException $e){
 }
 ```
 
-### Chave NFE (chave da nota fiscal eletrônica)
+### Chave de Acesso Sped (chave da NFe, CTe e MDFe)
 
-NFe Access Key
+Sped Access Key
+
+Available models:
+* NFe
+* NFCe
+* CTe
+* CTeOther
+* MDFe
 
 ```php
-use Brazanation\Documents\NFeAccessKey;
+use Brazanation\Documents\Sped\NFe;
 use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
 try {
-    $nfeKey = new NFeAccessKey('52060433009911002506550120000007800267301615');
-    echo $nfeKey; // prints 52060433009911002506550120000007800267301615
-    echo $nfeKey->format(); // prints 5206 0433 0099 1100 2506 5501 2000 0007 8002 6730 1615
+    $accessKey = new NFe('52060433009911002506550120000007800267301615');
+    echo $accessKey; // prints 52060433009911002506550120000007800267301615
+    echo $accessKey->format(); // prints 5206 0433 0099 1100 2506 5501 2000 0007 8002 6730 1615
 catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
@@ -104,7 +111,7 @@ or generate your number
 
 ```php
 try {
-    $nfeKey = NFeAccessKey::generate(
+    $accessKey = NFe::generate(
         52,
         \DateTime::createFromFormat('ym', '0604'),
         new Cnpj('33009911002506'),
@@ -112,7 +119,7 @@ try {
         780,
         26730161
     );
-    echo $nfeKey; // prints 52060433009911002506550120000007800267301615
+    echo $accessKey; // prints 52060433009911002506550120000007800267301615
 catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
