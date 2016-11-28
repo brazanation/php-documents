@@ -1,6 +1,23 @@
 Change Log
 ==========
 
+## [v0.5.0](https://github.com/brazanation/documents/tree/v0.5.0) (2016-11-28)
+[Full Changelog](https://github.com/brazanation/documents/compare/v0.4.0...v0.5.0)
+
+**Implemented enhancements:**
+
+- create CTe, NFe, NFCe and MDFe documents [#24](https://github.com/brazanation/documents/pull/24) ([tonicospinelli](https://github.com/tonicospinelli))
+
+**Fixed bugs:**
+
+**Closed issues:**
+
+- create specific SPED documents [\#23](https://github.com/brazanation/documents/issues/23)
+
+**Merged pull requests:**
+
+- create specific SPED documents [#24](https://github.com/brazanation/documents/pull/24)
+
 ## [v0.4.0](https://github.com/brazanation/documents/tree/v0.3.0) (2016-09-28)
 [Full Changelog](https://github.com/brazanation/documents/compare/v0.3.0...v0.4.0)
 
