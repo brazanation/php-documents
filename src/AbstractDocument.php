@@ -3,7 +3,19 @@
 namespace Brazanation\Documents;
 
 use Brazanation\Documents\Exception\InvalidDocument as InvalidDocumentException;
+use Brazanation\Documents\Exception\Readonly;
 
+/**
+ * Class AbstractDocument
+ *
+ * @package Brazanation\Documents
+ *
+ * @property string $number
+ * @property string $digit
+ * @property int $length
+ * @property int $numberOfDigits
+ * @property string $type
+ */
 abstract class AbstractDocument implements DigitCalculable, Formattable
 {
     /**
@@ -47,6 +59,16 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
         $this->digit = $this->extractCheckerDigit($number);
         $this->validate($number);
         $this->number = $number;
+    }
+
+    public function __get($name)
+    {
+        return $this->$name;
+    }
+
+    public function __set($name, $value)
+    {
+        throw Readonly::notAllowed(static::class, $name);
     }
 
     /**
