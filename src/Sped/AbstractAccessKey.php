@@ -122,7 +122,7 @@ abstract class AbstractAccessKey extends AbstractDocument
         $baseNumber = "{$state}{$yearMonth}{$cnpj}{$model}{$sequence}{$invoiceNumber}{$emissionMode}{$controlNumber}";
 
         $digit = self::calculateDigitFrom($baseNumber);
-       
+
         $instance = new static("{$baseNumber}{$digit}");
         $instance->generatedAt = $generatedAt;
 
