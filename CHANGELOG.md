@@ -1,6 +1,24 @@
 Change Log
 ==========
 
+## [v0.6.0](https://github.com/brazanation/documents/tree/v0.6.0) (2016-12-09)
+[Full Changelog](https://github.com/brazanation/documents/compare/v0.5.0...v0.6.0)
+
+**Implemented enhancements:**
+
+- create EmissionType and fix digit calculator [#28](https://github.com/brazanation/documents/pull/28) ([tonicospinelli](https://github.com/tonicospinelli))
+
+**Fixed bugs:**
+
+**Closed issues:**
+
+- wrong digit calculator [\#26](https://github.com/brazanation/documents/issues/26)
+
+**Merged pull requests:**
+
+- create EmissionType and fix digit calculator [#28](https://github.com/brazanation/documents/pull/28)
+
+
 ## [v0.5.0](https://github.com/brazanation/documents/tree/v0.5.0) (2016-11-28)
 [Full Changelog](https://github.com/brazanation/documents/compare/v0.4.0...v0.5.0)
 
