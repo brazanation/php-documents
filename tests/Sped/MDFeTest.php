@@ -61,7 +61,7 @@ class MDFeTest extends DocumentTestCase
             new Cnpj('33009911002506'),
             12,
             780,
-            2,    
+            2,
             6730161
         );
         $this->assertEquals(52, $nfeKey->state, 'Failed assert for state');

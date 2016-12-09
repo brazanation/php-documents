@@ -111,7 +111,7 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
         }
 
         $digit = $this->calculateDigit($baseNumber);
-        
+
         return "$digit" === "{$this->digit}";
     }
 

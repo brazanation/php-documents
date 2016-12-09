@@ -38,7 +38,7 @@ abstract class AbstractAccessKey extends AbstractDocument
     protected $model;
 
     protected $sequence;
-    
+
     protected $emissionMode;
 
     protected $invoiceNumber;
@@ -79,10 +79,10 @@ abstract class AbstractAccessKey extends AbstractDocument
 
         $startPosition += 3;
         $this->invoiceNumber = substr($accessKey, $startPosition, 9);
-        
+
         $startPosition += 9;
         $this->emissionMode = substr($accessKey, $startPosition, 1);
-        
+
         $startPosition += 1;
         $this->controlNumber = substr($accessKey, $startPosition, 8);
 
