@@ -3,5 +3,5 @@
 /phpunit.xml
 /build
 /.idea/
-/nbproject/private/
+/nbproject
 /local
