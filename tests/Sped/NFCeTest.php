@@ -3,6 +3,7 @@
 namespace Brazanation\Documents\Tests\Sped;
 
 use Brazanation\Documents\Cnpj;
+use Brazanation\Documents\Sped\EmissionType;
 use Brazanation\Documents\Sped\NFCe;
 use Brazanation\Documents\Tests\DocumentTestCase;
 
@@ -16,14 +17,14 @@ class NFCeTest extends DocumentTestCase
     public function provideValidNumbers()
     {
         return [
-            ['52060433009911002506650120000007800267301618'],
+            ['52060433009911002506650120000007802067301610'],
         ];
     }
 
     public function provideValidNumbersAndExpectedFormat()
     {
         return [
-            ['52060433009911002506550120000007800267301615', '5206 0433 0099 1100 2506 5501 2000 0007 8002 6730 1615'],
+            ['52060433009911002506650120000007802067301610', '5206 0433 0099 1100 2506 6501 2000 0007 8020 6730 1610'],
         ];
     }
 
@@ -52,6 +53,13 @@ class NFCeTest extends DocumentTestCase
         ];
     }
 
+    public function provideInvalidEmissionType()
+    {
+        return [
+            [NFCe::LABEL, '52060433009911002506550120000007801267301613'],
+        ];
+    }
+
     public function testGenerateAValidNumber()
     {
         $generatedAt = \DateTime::createFromFormat('ymd H:i:s', '060401 00:00:00');
@@ -61,15 +69,18 @@ class NFCeTest extends DocumentTestCase
             new Cnpj('33009911002506'),
             12,
             780,
-            26730161
+            EmissionType::contingencyOnSafetyForm(),
+            6730161
         );
+
         $this->assertEquals(52, $nfeKey->state, 'Failed assert for state');
         $this->assertEquals($generatedAt, $nfeKey->generatedAt, 'Failed assert for generatedAt');
         $this->assertEquals('33009911002506', "{$nfeKey->cnpj}", 'Failed assert for CNPJ');
         $this->assertEquals('65', "{$nfeKey->model}", 'Failed assert for model');
-        $this->assertEquals('000000012', $nfeKey->sequence, 'Failed assert for sequence');
+        $this->assertEquals('012', $nfeKey->sequence, 'Failed assert for sequence');
         $this->assertEquals('000000780', $nfeKey->invoiceNumber, 'Failed assert for invoice number');
-        $this->assertEquals('26730161', $nfeKey->controlNumber, 'Failed assert for digit');
-        $this->assertEquals('52060433009911002506650120000007800267301618', "{$nfeKey}");
+        $this->assertEquals(EmissionType::CONTINGENCY_ON_SAFETY_FORM, "{$nfeKey->emissionType}", 'Failed assert for emission type');
+        $this->assertEquals('006730161', $nfeKey->controlNumber, 'Failed assert for digit');
+        $this->assertEquals('52060433009911002506650120000007802067301610', "{$nfeKey}");
     }
 }
