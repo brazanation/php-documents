@@ -62,7 +62,8 @@ class NFeTest extends DocumentTestCase
             new Cnpj('33009911002506'),
             12,
             780,
-            26730161
+            2,
+            6730161
         );
         $this->assertEquals(52, $nfeKey->state, 'Failed assert for state');
         $this->assertEquals($generatedAt, $nfeKey->generatedAt, 'Failed assert for generatedAt');
@@ -70,7 +71,8 @@ class NFeTest extends DocumentTestCase
         $this->assertEquals('55', "{$nfeKey->model}", 'Failed assert for model');
         $this->assertEquals('000000012', $nfeKey->sequence, 'Failed assert for sequence');
         $this->assertEquals('000000780', $nfeKey->invoiceNumber, 'Failed assert for invoice number');
-        $this->assertEquals('26730161', $nfeKey->controlNumber, 'Failed assert for digit');
-        $this->assertEquals('52060433009911002506550120000007800267301615', "{$nfeKey}");
+        $this->assertEquals('2', $nfeKey->emissionMode, 'Failed assert for emission mode number');
+        $this->assertEquals('06730161', $nfeKey->controlNumber, 'Failed assert for digit');
+        $this->assertEquals('52060433009911002506550120000007802067301618', "{$nfeKey}");
     }
 }

@@ -39,6 +39,8 @@ abstract class AbstractAccessKey extends AbstractDocument
 
     protected $sequence;
 
+    protected $emissionMode;
+
     protected $invoiceNumber;
 
     protected $controlNumber;
@@ -61,7 +63,10 @@ abstract class AbstractAccessKey extends AbstractDocument
         $this->state = substr($accessKey, $startPosition, 2);
 
         $startPosition += 2;
-        $this->generatedAt = \DateTime::createFromFormat('ymd H:i:s', substr($accessKey, $startPosition, 4) . '01 00:00:00');
+        $this->generatedAt = \DateTime::createFromFormat(
+            'ymd H:i:s',
+            substr($accessKey, $startPosition, 4) . '01 00:00:00'
+        );
 
         $startPosition += 4;
         $this->cnpj = new Cnpj(substr($accessKey, $startPosition, 14));
@@ -76,9 +81,12 @@ abstract class AbstractAccessKey extends AbstractDocument
         $this->invoiceNumber = substr($accessKey, $startPosition, 9);
 
         $startPosition += 9;
-        $this->controlNumber = substr($accessKey, $startPosition, 9);
+        $this->emissionMode = substr($accessKey, $startPosition, 1);
 
-        $startPosition += 9;
+        $startPosition += 1;
+        $this->controlNumber = substr($accessKey, $startPosition, 8);
+
+        $startPosition += 8;
         $this->digit = substr($accessKey, $startPosition, 1);
     }
 
@@ -91,6 +99,7 @@ abstract class AbstractAccessKey extends AbstractDocument
      * @param Model     $model         Document model.
      * @param int       $sequence      Invoice sequence.
      * @param int       $invoiceNumber Invoice number.
+     * @param int       $emissionMode  Normal or contingency modes
      * @param int       $controlNumber Control number.
      *
      * @return AbstractAccessKey
@@ -102,14 +111,15 @@ abstract class AbstractAccessKey extends AbstractDocument
         Model $model,
         $sequence,
         $invoiceNumber,
+        $emissionMode,
         $controlNumber
     ) {
         $yearMonth = $generatedAt->format('ym');
         $sequence = str_pad($sequence, 3, 0, STR_PAD_LEFT);
         $invoiceNumber = str_pad($invoiceNumber, 9, 0, STR_PAD_LEFT);
-        $controlNumber = str_pad($controlNumber, 9, 0, STR_PAD_LEFT);
-
-        $baseNumber = "{$state}{$yearMonth}{$cnpj}{$model}{$sequence}{$invoiceNumber}{$controlNumber}";
+        $controlNumber = str_pad($controlNumber, 8, 0, STR_PAD_LEFT);
+        $emissionMode = substr($emissionMode, 0, 1);
+        $baseNumber = "{$state}{$yearMonth}{$cnpj}{$model}{$sequence}{$invoiceNumber}{$emissionMode}{$controlNumber}";
 
         $digit = self::calculateDigitFrom($baseNumber);
 
@@ -147,6 +157,7 @@ abstract class AbstractAccessKey extends AbstractDocument
     public static function calculateDigitFrom($baseNumber)
     {
         $calculator = new DigitCalculator($baseNumber);
+        $calculator->replaceWhen(0, 11);
         $calculator->useComplementaryInsteadOfModule();
         $calculator->withModule(DigitCalculator::MODULE_11);
         $digit = $calculator->calculate();
