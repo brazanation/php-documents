@@ -5,19 +5,21 @@ namespace Brazanation\Documents\Sped;
 use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\Cnpj;
 use Brazanation\Documents\DigitCalculator;
+use Brazanation\Documents\Sped\Exception\DocumentModel;
 
 /**
  * Class SpedAccessKey
  *
  * @package Brazanation\Documents
  *
- * @property int       $state
- * @property \DateTime $generatedAt
- * @property Cnpj      $cnpj
- * @property int       $model
- * @property int       $sequence
- * @property int       $invoiceNumber
- * @property int       $controlNumber
+ * @property int          $state
+ * @property \DateTime    $generatedAt
+ * @property Cnpj         $cnpj
+ * @property Model        $model
+ * @property int          $sequence
+ * @property int          $invoiceNumber
+ * @property EmissionType $emissionType
+ * @property int          $controlNumber
  */
 abstract class AbstractAccessKey extends AbstractDocument
 {
@@ -29,18 +31,44 @@ abstract class AbstractAccessKey extends AbstractDocument
 
     const MASK = '$1 ';
 
+    /**
+     * @var int
+     */
     protected $state;
 
+    /**
+     * @var \DateTime
+     */
     protected $generatedAt;
 
+    /**
+     * @var Cnpj
+     */
     protected $cnpj;
 
+    /**
+     * @var Model
+     */
     protected $model;
 
+    /**
+     * @var string
+     */
     protected $sequence;
 
+    /**
+     * @var string
+     */
     protected $invoiceNumber;
 
+    /**
+     * @var EmissionType
+     */
+    protected $emissionType;
+
+    /**
+     * @var string
+     */
     protected $controlNumber;
 
     /**
@@ -52,7 +80,21 @@ abstract class AbstractAccessKey extends AbstractDocument
     {
         $accessKey = preg_replace('/\D/', '', $accessKey);
         parent::__construct($accessKey, static::LENGTH, 1, static::LABEL);
+        $this->validateModel($accessKey);
         $this->loadFromKey($accessKey);
+    }
+
+    /**
+     * @return Model
+     */
+    abstract protected function defaultModel();
+
+    protected function validateModel($accessKey)
+    {
+        $model = new Model(substr($accessKey, 20, 2));
+        if (!$this->defaultModel()->equalsTo($model)) {
+            throw DocumentModel::invalid($accessKey, static::LABEL);
+        }
     }
 
     private function loadFromKey($accessKey)
@@ -76,22 +118,26 @@ abstract class AbstractAccessKey extends AbstractDocument
         $this->invoiceNumber = substr($accessKey, $startPosition, 9);
 
         $startPosition += 9;
-        $this->controlNumber = substr($accessKey, $startPosition, 9);
+        $this->emissionType = new EmissionType(substr($accessKey, $startPosition, 1));
 
-        $startPosition += 9;
+        $startPosition += 1;
+        $this->controlNumber = substr($accessKey, $startPosition, 8);
+
+        $startPosition += 8;
         $this->digit = substr($accessKey, $startPosition, 1);
     }
 
     /**
      * Generates a valid Sped Access Key.
      *
-     * @param int       $state         IBGE state code.
-     * @param \DateTime $generatedAt   Year and month when invoice was created.
-     * @param Cnpj      $cnpj          Cnpj from issuer.
-     * @param Model     $model         Document model.
-     * @param int       $sequence      Invoice sequence.
-     * @param int       $invoiceNumber Invoice number.
-     * @param int       $controlNumber Control number.
+     * @param int          $state         IBGE state code.
+     * @param \DateTime    $generatedAt   Year and month when invoice was created.
+     * @param Cnpj         $cnpj          Cnpj from issuer.
+     * @param Model        $model         Document model.
+     * @param int          $sequence      Invoice sequence.
+     * @param int          $invoiceNumber Invoice number.
+     * @param EmissionType $emissionType  Emission Type.
+     * @param int          $controlNumber Control number.
      *
      * @return AbstractAccessKey
      */
@@ -102,14 +148,15 @@ abstract class AbstractAccessKey extends AbstractDocument
         Model $model,
         $sequence,
         $invoiceNumber,
+        EmissionType $emissionType,
         $controlNumber
     ) {
         $yearMonth = $generatedAt->format('ym');
         $sequence = str_pad($sequence, 3, 0, STR_PAD_LEFT);
         $invoiceNumber = str_pad($invoiceNumber, 9, 0, STR_PAD_LEFT);
-        $controlNumber = str_pad($controlNumber, 9, 0, STR_PAD_LEFT);
+        $controlNumber = str_pad($controlNumber, 8, 0, STR_PAD_LEFT);
 
-        $baseNumber = "{$state}{$yearMonth}{$cnpj}{$model}{$sequence}{$invoiceNumber}{$controlNumber}";
+        $baseNumber = "{$state}{$yearMonth}{$cnpj}{$model}{$sequence}{$invoiceNumber}{$emissionType}{$controlNumber}";
 
         $digit = self::calculateDigitFrom($baseNumber);
 
@@ -149,6 +196,7 @@ abstract class AbstractAccessKey extends AbstractDocument
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();
         $calculator->withModule(DigitCalculator::MODULE_11);
+        $calculator->replaceWhen('0', 10, 11);
         $digit = $calculator->calculate();
 
         return "{$digit}";

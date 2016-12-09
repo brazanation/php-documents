@@ -3,10 +3,11 @@
 namespace Brazanation\Documents\Tests\Sped;
 
 use Brazanation\Documents\Cnpj;
+use Brazanation\Documents\Sped\EmissionType;
 use Brazanation\Documents\Sped\MDFe;
-use Brazanation\Documents\Tests\DocumentTestCase;
+use Brazanation\Documents\Sped\Model;
 
-class MDFeTest extends DocumentTestCase
+class MDFeTest extends TestCase
 {
     public function createDocument($number)
     {
@@ -16,14 +17,14 @@ class MDFeTest extends DocumentTestCase
     public function provideValidNumbers()
     {
         return [
-            ['52060433009911002506580120000007800267301616'],
+            ['52060433009911002506580120000007801267301614'],
         ];
     }
 
     public function provideValidNumbersAndExpectedFormat()
     {
         return [
-            ['52060433009911002506550120000007800267301615', '5206 0433 0099 1100 2506 5501 2000 0007 8002 6730 1615'],
+            ['52060433009911002506580120000007801267301614', '5206 0433 0099 1100 2506 5801 2000 0007 8012 6730 1614'],
         ];
     }
 
@@ -52,6 +53,13 @@ class MDFeTest extends DocumentTestCase
         ];
     }
 
+    public function provideInvalidEmissionType()
+    {
+        return [
+            [MDFe::LABEL, '52060433009911002506550120000007801267301613'],
+        ];
+    }
+
     public function testGenerateAValidNumber()
     {
         $generatedAt = \DateTime::createFromFormat('ymd H:i:s', '060401 00:00:00');
@@ -61,15 +69,17 @@ class MDFeTest extends DocumentTestCase
             new Cnpj('33009911002506'),
             12,
             780,
+            EmissionType::normal(),
             26730161
         );
         $this->assertEquals(52, $nfeKey->state, 'Failed assert for state');
         $this->assertEquals($generatedAt, $nfeKey->generatedAt, 'Failed assert for generatedAt');
         $this->assertEquals('33009911002506', "{$nfeKey->cnpj}", 'Failed assert for CNPJ');
-        $this->assertEquals('58', "{$nfeKey->model}", 'Failed assert for model');
+        $this->assertEquals(Model::TYPE_MDFE, "{$nfeKey->model}", 'Failed assert for model');
         $this->assertEquals('000000012', $nfeKey->sequence, 'Failed assert for sequence');
-        $this->assertEquals('000000780', $nfeKey->invoiceNumber, 'Failed assert for invoice number');
+        $this->assertEquals('00000780', $nfeKey->invoiceNumber, 'Failed assert for invoice number');
+        $this->assertEquals(EmissionType::NORMAL, "{$nfeKey->emissionType}", 'Failed assert for emission type');
         $this->assertEquals('26730161', $nfeKey->controlNumber, 'Failed assert for digit');
-        $this->assertEquals('52060433009911002506580120000007800267301616', "{$nfeKey}");
+        $this->assertEquals('52060433009911002506580120000007801267301614', "{$nfeKey}");
     }
 }
