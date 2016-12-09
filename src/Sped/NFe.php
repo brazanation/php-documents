@@ -16,6 +16,7 @@ final class NFe extends AbstractAccessKey
      * @param Cnpj      $cnpj          Cnpj from issuer.
      * @param int       $sequence      Invoice sequence.
      * @param int       $invoiceNumber Invoice number.
+     * @param int       $emissionMode  Normal or contingency modes
      * @param int       $controlNumber Control number.
      *
      * @return NFe
@@ -26,6 +27,7 @@ final class NFe extends AbstractAccessKey
         Cnpj $cnpj,
         $sequence,
         $invoiceNumber,
+        $emissionMode,
         $controlNumber
     ) {
         $accessKey = self::generateKey(
@@ -35,6 +37,7 @@ final class NFe extends AbstractAccessKey
             Model::NFe(),
             $sequence,
             $invoiceNumber,
+            $emissionMode,
             $controlNumber
         );
 

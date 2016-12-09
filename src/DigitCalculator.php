@@ -251,7 +251,7 @@ class DigitCalculator
         if ($this->additional) {
             $digit = $this->module - $digit;
         }
-
+        
         return $digit;
     }
 
