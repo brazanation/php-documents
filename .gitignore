@@ -1,5 +1,5 @@
-/vendor/
+/vendor
 /composer.lock
 /phpunit.xml
 /build
-/.idea/
+/.idea
