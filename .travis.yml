@@ -11,4 +11,7 @@ before_script:
   - "composer install --no-interaction"
 
 script:
-  - "./vendor/bin/phpunit -c phpunit.xml.dist"
+  - "./vendor/bin/phpunit -c phpunit.xml.dist  --coverage-clover=clover.xml"
+
+after_script:
+  - "php vendor/bin/codacycoverage clover clover.xml"
