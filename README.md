@@ -193,8 +193,20 @@ National Health Card
 use Brazanation\Documents\Cns;
 
 $cns = new Cns('242912018460005')
-echo $state; // prints 242912018460005
-echo $state->format(); // prints 242 9120 1846 0005
+echo $cns; // prints 242912018460005
+echo $cns->format(); // prints 242 9120 1846 0005
+```
+
+### Renavam (Registro Nacional de Veículos Automotores)
+
+National Registry of Motor Vehicles
+
+```php
+use Brazanation\Documents\Renavam;
+
+$renavam = new Renavam('61855253306')
+echo $renavam; // prints 61855253306
+echo $renavam->format(); // prints 6185.525330-6
 ```
 
 ### License

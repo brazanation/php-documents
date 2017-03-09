@@ -72,6 +72,11 @@ class DigitCalculator
     private $replacements;
 
     /**
+     * @var int
+     */
+    private $sumMultiplier;
+
+    /**
      * Creates object to be filled with fluent interface and store a numeric section into
      * a list of digits. It is required because the numeric section could be so bigger than a integer number supports.
      *
@@ -85,6 +90,7 @@ class DigitCalculator
 
         $this->withMultipliersInterval(2, 9);
         $this->withModule(static::MODULE_11);
+        $this->multiplySumBy(1);
     }
 
     /**
@@ -216,6 +222,8 @@ class DigitCalculator
             $position = $this->nextMultiplier($position);
         }
 
+        $sum = $this->calculateSumMultiplier($sum);
+
         $result = $sum % $this->module;
 
         $result = $this->calculateAdditionalDigit($result);
@@ -302,5 +310,31 @@ class DigitCalculator
         $this->number = new \ArrayObject($numbers);
 
         return $this;
+    }
+
+    /**
+     * Defines the multiplier factor after calculate the sum of digits.
+     *
+     * @param int $multiplier A integer to multiply the sum result.
+     *
+     * @return DigitCalculator
+     */
+    public function multiplySumBy($multiplier)
+    {
+        $this->sumMultiplier = $multiplier;
+
+        return $this;
+    }
+
+    /**
+     * Multiplies the sum result with defined multiplier factor.
+     *
+     * @param int $sum The result of calculation from digits.
+     *
+     * @return int
+     */
+    private function calculateSumMultiplier($sum)
+    {
+        return $this->sumMultiplier * $sum;
     }
 }
