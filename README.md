@@ -1,10 +1,10 @@
 Brazanation Documents
 =====================
 
-[![Build Status](https://travis-ci.org/brazanation/documents.svg?branch=master)](https://travis-ci.org/brazanation/documents)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/brazanation/documents/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/brazanation/documents/?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0bdf934bc4224a9fb9d51dc9162fb000)](https://www.codacy.com/app/tonicospinelli/documents?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=brazanation/documents&amp;utm_campaign=Badge_Grade)
-[![Code Coverage](https://scrutinizer-ci.com/g/brazanation/documents/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/brazanation/documents/?branch=master)
+[![Build Status](https://travis-ci.org/brazanation/php-documents.svg?branch=master)](https://travis-ci.org/brazanation/php-documents)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0bdf934bc4224a9fb9d51dc9162fb000)](https://www.codacy.com/app/tonicospinelli/php-documents?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=brazanation/php-documents&amp;utm_campaign=Badge_Grade)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/brazanation/php-documents/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/brazanation/php-documents/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/brazanation/php-documents/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/brazanation/php-documents/?branch=master)
 [![StyleCI](https://styleci.io/repos/66179431/shield)](https://styleci.io/repos/66179431)
 
 A PHP library to provide Brazilian Documents safer, easier and fun!
