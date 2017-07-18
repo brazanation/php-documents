@@ -1,6 +1,26 @@
 Change Log
 ==========
 
+## [v0.7.0](https://github.com/brazanation/documents/tree/v0.7.0) (2017-06-13)
+[Full Changelog](https://github.com/brazanation/documents/compare/v0.6.0...v0.7.0)
+
+**Implemented enhancements:**
+
+- add codacy badge [#30](https://github.com/brazanation/documents/pull/30) ([tonicospinelli](https://github.com/tonicospinelli))
+- create Renavam document [#32](https://github.com/brazanation/documents/pull/32) ([tonicospinelli](https://github.com/tonicospinelli))
+
+**Fixed bugs:**
+
+**Closed issues:**
+
+- create Renavam Document [#31](https://github.com/brazanation/php-documents/issues/31)
+
+**Merged pull requests:**
+
+- add codacy badge [#30](https://github.com/brazanation/documents/pull/30)
+- create EmissionType and fix digit calculator [#32](https://github.com/brazanation/documents/pull/32)
+
+
 ## [v0.6.0](https://github.com/brazanation/documents/tree/v0.6.0) (2016-12-09)
 [Full Changelog](https://github.com/brazanation/documents/compare/v0.5.0...v0.6.0)
 
