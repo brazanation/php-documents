@@ -25,7 +25,10 @@ final class Renavam extends AbstractDocument
     }
 
     /**
+     * Pad left a number to length(11) with 0(ZERO)
+     *
      * @param string $number
+     *
      * @return string
      */
     private function padNumber($number)
