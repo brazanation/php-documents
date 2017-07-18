@@ -20,8 +20,24 @@ final class Renavam extends AbstractDocument
     public function __construct($renavam)
     {
         $renavam = preg_replace('/\D/', '', $renavam);
-        $renavam = str_pad($renavam, self::LENGTH, 0, STR_PAD_LEFT);
+        $renavam = $this->padNumber($renavam);
         parent::__construct($renavam, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
+    }
+
+    /**
+     * Pad left a number to length(11) with 0(ZERO)
+     *
+     * @param string $number
+     *
+     * @return string
+     */
+    private function padNumber($number)
+    {
+        if (empty($number)) {
+            return '';
+        }
+
+        return str_pad($number, self::LENGTH, 0, STR_PAD_LEFT);
     }
 
     /**

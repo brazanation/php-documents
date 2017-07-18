@@ -29,7 +29,10 @@ class RenavamTest extends DocumentTestCase
 
     public function provideEmptyData()
     {
-        return [];
+        return [
+            [Renavam::LABEL, ''],
+            [Renavam::LABEL, null],
+        ];
     }
 
     public function provideInvalidNumber()
