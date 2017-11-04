@@ -4,8 +4,9 @@ namespace Brazanation\Documents\Tests;
 
 use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\Exception\InvalidDocument;
+use PHPUnit\Framework\TestCase;
 
-abstract class DocumentTestCase extends \PHPUnit_Framework_TestCase
+abstract class DocumentTestCase extends TestCase
 {
     /**
      * @param string $number
