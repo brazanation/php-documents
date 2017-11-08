@@ -3,8 +3,9 @@
 namespace Brazanation\Documents\Tests;
 
 use Brazanation\Documents\DigitCalculator;
+use PHPUnit\Framework\TestCase;
 
-class DigitCalculatorTest extends \PHPUnit_Framework_TestCase
+class DigitCalculatorTest extends TestCase
 {
     /**
      * @param string $number
