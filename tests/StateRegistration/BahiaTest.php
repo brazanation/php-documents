@@ -22,6 +22,7 @@ class BahiaTest extends DocumentTestCase
             ['0635718-30'],
             ['770288-84'],
             ['077.028.884'],
+            ['085456408']
         ];
     }
 
