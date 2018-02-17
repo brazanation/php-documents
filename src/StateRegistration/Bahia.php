@@ -3,6 +3,7 @@
 namespace Brazanation\Documents\StateRegistration;
 
 use Brazanation\Documents\DigitCalculator;
+use function in_array;
 
 final class Bahia extends State
 {
@@ -60,7 +61,7 @@ final class Bahia extends State
         if (strlen($baseNumber) == 6) {
             $charToCheck = substr($baseNumber, 0, 1);
         }
-        if (6 <= $charToCheck && $charToCheck <= 9) {
+        if (in_array($charToCheck, [6,7,9])) {
             return DigitCalculator::MODULE_11;
         }
 
