@@ -1,6 +1,26 @@
 Change Log
 ==========
 
+## [v0.7.1](https://github.com/brazanation/documents/tree/v0.7.1) (2018-02-17)
+[Full Changelog](https://github.com/brazanation/documents/compare/v0.7.0...v0.7.1)
+
+**Implemented enhancements:**
+
+- Updated to PHPUnit 6 [#34](https://github.com/brazanation/documents/pull/34) ([carusogabriel](https://github.com/carusogabriel))
+
+**Fixed bugs:**
+
+- Choose Module for Bahia State Registration [#37](https://github.com/brazanation/documents/pull/37) ([thalfm](https://github.com/thalfm))
+
+**Closed issues:**
+
+- Erro no método discoverModule da classe Bahia [#36](https://github.com/brazanation/php-documents/issues/36)
+
+**Merged pull requests:**
+
+- Updated to PHPUnit 6 [#34](https://github.com/brazanation/documents/pull/34) ([carusogabriel](https://github.com/carusogabriel))
+- Choose Module for Bahia State Registration [#37](https://github.com/brazanation/documents/pull/37) ([thalfm](https://github.com/thalfm))
+
 ## [v0.7.0](https://github.com/brazanation/documents/tree/v0.7.0) (2017-07-18)
 [Full Changelog](https://github.com/brazanation/documents/compare/v0.6.0...v0.7.0)
 
