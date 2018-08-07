@@ -46,7 +46,7 @@ try {
     $cpf = new Cpf('06843273173');
     echo $cpf; // prints 06843273173
     echo $cpf->format(); // prints 068.432.731-73
-catch (InvalidDocumentException $e){
+}catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
 ```
@@ -63,7 +63,7 @@ try {
     $cnpj = new Cnpj('99999090910270');
     echo $cnpj; // prints 99999090910270
     echo $cnpj->format(); // prints 99.999.090/9102-70
-catch (InvalidDocumentException $e){
+}catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
 ```
@@ -80,7 +80,7 @@ try {
     $cnh = new Cnh('83592802666');
     echo $cnh; // prints 83592802666
     echo $cnh->format(); // prints 83592802666
-catch (InvalidDocumentException $e){
+}catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
 ```
@@ -104,7 +104,7 @@ try {
     $accessKey = new NFe('52060433009911002506550120000007801267301613');
     echo $accessKey; // prints 52060433009911002506550120000007801267301613
     echo $accessKey->format(); // prints 5206 0433 0099 1100 2506 5501 2000 0007 8012 6730 1613
-catch (InvalidDocumentException $e){
+}catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
 ```
@@ -122,7 +122,7 @@ try {
         26730161
     );
     echo $accessKey; // prints 52060433009911002506550120000007801267301613
-catch (InvalidDocumentException $e){
+}catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
 ```
@@ -139,7 +139,7 @@ try {
     $pispasep = new PisPasep('51.82312.94-92');
     echo $pispasep; // prints 51823129492
     echo $pispasep->format(); // prints 51.82312.94-92
-catch (InvalidDocumentException $e){
+}catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
 ```
@@ -157,7 +157,7 @@ try {
     echo $voter; // prints 106644440302
     echo $voter->getSection(); // prints 0020
     echo $voter->getZone(); // prints 042
-catch (InvalidDocumentException $e){
+}catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
 ```
