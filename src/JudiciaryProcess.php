@@ -22,10 +22,8 @@ final class JudiciaryProcess extends AbstractDocument
     
     public function format()
     {
-        if (strlen($this->number) < 20) {
-            $this->number = str_pad($this->number, 20, '0', STR_PAD_RIGHT);
-        }
-        return preg_replace(self::REGEX, '$1-$2.$3.$4.$5.$6', "{$this}");
+        $number = str_pad($this->number, 20, '0', STR_PAD_RIGHT);
+        return preg_replace(self::REGEX, '$1-$2.$3.$4.$5.$6', "{$number}");
     }
     
     protected function extractCheckerDigit($number)
@@ -35,7 +33,6 @@ final class JudiciaryProcess extends AbstractDocument
     
     protected function extractBaseNumber($number)
     {
-        //remove DD and add double zeros at the end
         return str_pad(substr($number, 0, 7).substr($number, 9, strlen($number)-1), 20, '0', STR_PAD_RIGHT);
     }
     

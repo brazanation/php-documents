@@ -209,6 +209,20 @@ echo $renavam; // prints 61855253306
 echo $renavam->format(); // prints 6185.525330-6
 ```
 
+### Processos Judiciais
+
+Numbers of legal proceedings related to Judiciary assessments
+
+```php
+use Brazanation\Documents\JudiciaryProcess;
+
+$procjud = new JudiciaryProcess('0048032982009809');
+echo $procjud; //prints  0048032982009809
+echo $procjud->format(); //prints  0048032.98.2009.8.09.0000
+
+```
+
+
 ### License
 
 MIT, hell yeah!
