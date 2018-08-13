@@ -2,8 +2,6 @@ preset: PSR2
 
 risky: false
 
-linting: true
-
 enabled:
     - no_extra_consecutive_blank_lines
     - no_unused_imports
