@@ -46,4 +46,3 @@ class JudiciaryProcessTest extends DocumentTestCase
         ];
     }
 }
-  
