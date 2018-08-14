@@ -5,6 +5,8 @@ namespace Brazanation\Documents;
 /**
  * Formats and validates the numbers of legal proceedings
  * related to Judiciary assessments
+ * This numbers are used in some SPED projects like EfdReinf and eSocial, from
+ * Braziliam IRS (Receita Federal)
  */
 final class JudiciaryProcess extends AbstractDocument
 {
@@ -22,7 +24,7 @@ final class JudiciaryProcess extends AbstractDocument
     
     public function format()
     {
-        $number = str_pad($this->number, 20, '0', STR_PAD_RIGHT);
+        $number = str_pad($this->number, self::LENGTH, '0', STR_PAD_RIGHT);
         return preg_replace(self::REGEX, '$1-$2.$3.$4.$5.$6', "{$number}");
     }
     
@@ -33,7 +35,8 @@ final class JudiciaryProcess extends AbstractDocument
     
     protected function extractBaseNumber($number)
     {
-        return str_pad(substr($number, 0, 7).substr($number, 9, strlen($number)-1), 20, '0', STR_PAD_RIGHT);
+        return str_pad(substr($number, 0, 7)
+            . substr($number, 9, strlen($number)-1), self::LENGTH, '0', STR_PAD_RIGHT);
     }
     
     /**
