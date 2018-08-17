@@ -11,6 +11,11 @@ class VoterTest extends DocumentTestCase
         return new Voter($number, null, null);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return Voter::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

@@ -11,6 +11,11 @@ class PisPasepTest extends DocumentTestCase
         return new PisPasep($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return PisPasep::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

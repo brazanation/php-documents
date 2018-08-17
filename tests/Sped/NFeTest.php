@@ -14,6 +14,11 @@ class NFeTest extends DocumentTestCase
         return new NFe($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return NFe::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

@@ -13,6 +13,11 @@ class BahiaTest extends DocumentTestCase
         return new StateRegistration($number, new Bahia());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Bahia::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

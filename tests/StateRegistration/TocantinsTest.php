@@ -13,6 +13,11 @@ class TocantinsTest extends DocumentTestCase
         return new StateRegistration($number, new Tocantins());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Tocantins::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

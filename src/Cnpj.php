@@ -10,6 +10,8 @@ final class Cnpj extends AbstractDocument
 
     const REGEX = '/^([\d]{2})([\d]{3})([\d]{3})([\d]{4})([\d]{2})$/';
 
+    const NUMBER_OF_DIGITS = 2;
+
     /**
      * Cnpj constructor.
      *
@@ -18,7 +20,12 @@ final class Cnpj extends AbstractDocument
     public function __construct($cnpj)
     {
         $cnpj = preg_replace('/\D/', '', $cnpj);
-        parent::__construct($cnpj, self::LENGTH, 2, self::LABEL);
+        parent::__construct($cnpj, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
+    }
+
+    public static function createFromString($number)
+    {
+        return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
     /**

@@ -13,6 +13,11 @@ class SergipeTest extends DocumentTestCase
         return new StateRegistration($number, new Sergipe());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Sergipe::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

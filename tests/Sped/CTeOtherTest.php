@@ -14,6 +14,11 @@ class CTeOtherTest extends DocumentTestCase
         return new CTeOther($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return CTeOther::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

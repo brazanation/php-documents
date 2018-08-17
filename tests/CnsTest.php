@@ -11,6 +11,11 @@ class CnsTest extends DocumentTestCase
         return new Cns($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return Cns::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

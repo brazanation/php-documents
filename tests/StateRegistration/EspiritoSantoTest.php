@@ -13,6 +13,11 @@ class EspiritoSantoTest extends DocumentTestCase
         return new StateRegistration($number, new EspiritoSanto());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, EspiritoSanto::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

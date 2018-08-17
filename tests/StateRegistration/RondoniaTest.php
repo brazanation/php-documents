@@ -13,6 +13,11 @@ class RondoniaTest extends DocumentTestCase
         return new StateRegistration($number, new Rondonia());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Rondonia::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

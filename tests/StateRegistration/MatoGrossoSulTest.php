@@ -13,6 +13,11 @@ class MatoGrossoSulTest extends DocumentTestCase
         return new StateRegistration($number, new MatoGrossoSul());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, MatoGrossoSul::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

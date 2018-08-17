@@ -14,6 +14,11 @@ class NFCeTest extends DocumentTestCase
         return new NFCe($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return NFCe::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

@@ -13,6 +13,11 @@ class GoiasTest extends DocumentTestCase
         return new StateRegistration($number, new Goias());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Goias::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

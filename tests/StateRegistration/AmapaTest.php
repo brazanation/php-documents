@@ -13,6 +13,11 @@ class AmapaTest extends DocumentTestCase
         return new StateRegistration($number, new Amapa());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Amapa::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

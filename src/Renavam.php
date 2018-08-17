@@ -24,6 +24,11 @@ final class Renavam extends AbstractDocument
         parent::__construct($renavam, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
+    public static function createFromString($number)
+    {
+        return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
+    }
+
     /**
      * Pad left a number to length(11) with 0(ZERO)
      *

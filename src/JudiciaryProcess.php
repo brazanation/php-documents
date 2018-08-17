@@ -22,6 +22,8 @@ final class JudiciaryProcess extends AbstractDocument
 
     const REGEX = '/^([\d]{7})([\d]{2})([\d]{4})([\d]{1})([\d]{2})([\d]{0,4})$/';
 
+    const NUMBER_OF_DIGITS = 2;
+
     /**
      * Identify sequential number of process by origin unit.
      *
@@ -61,7 +63,12 @@ final class JudiciaryProcess extends AbstractDocument
     {
         $number = preg_replace('/\D/', '', $number);
         $this->extractNumbers($number);
-        parent::__construct($number, self::LENGTH, 2, self::LABEL);
+        parent::__construct($number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
+    }
+
+    public static function createFromString($number)
+    {
+        return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
     /**

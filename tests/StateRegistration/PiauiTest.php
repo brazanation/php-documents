@@ -13,6 +13,11 @@ class PiauiTest extends DocumentTestCase
         return new StateRegistration($number, new Piaui());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Piaui::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

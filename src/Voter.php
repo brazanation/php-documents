@@ -8,6 +8,8 @@ final class Voter extends AbstractDocument
 
     const LABEL = 'Voter';
 
+    const NUMBER_OF_DIGITS = 2;
+
     private $section;
 
     private $zone;
@@ -22,10 +24,15 @@ final class Voter extends AbstractDocument
     public function __construct($number, $section = null, $zone = null)
     {
         $number = preg_replace('/\D/', '', $number);
-        parent::__construct($number, self::LENGTH, 2, self::LABEL);
+        parent::__construct($number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
 
         $this->section = str_pad($section, 4, '0', STR_PAD_LEFT);
         $this->zone = str_pad($zone, 3, '0', STR_PAD_LEFT);
+    }
+
+    public static function createFromString($number, $section = null, $zone = null)
+    {
+        return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
     /**

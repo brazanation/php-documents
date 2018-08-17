@@ -14,13 +14,13 @@ final class Maranhao extends State
 
     const LENGTH = 9;
 
-    const DIGITS_COUNT = 1;
+    const NUMBER_OF_DIGITS = 1;
 
     const SHORT_NAME = 'MA';
 
     public function __construct()
     {
-        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::NUMBER_OF_DIGITS, self::REGEX, self::FORMAT);
     }
 
     /**

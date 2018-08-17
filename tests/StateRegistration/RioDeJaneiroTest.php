@@ -13,6 +13,11 @@ class RioDeJaneiroTest extends DocumentTestCase
         return new StateRegistration($number, new RioDeJaneiro());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, RioDeJaneiro::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

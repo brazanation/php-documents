@@ -13,6 +13,11 @@ class AlagoasTest extends DocumentTestCase
         return StateRegistration::AL($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Alagoas::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

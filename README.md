@@ -17,7 +17,7 @@ Install the library using [composer][1]. Add the following to your `composer.jso
 ```json
 {
     "require": {
-        "brazanation/documents": "0.7.*"
+        "brazanation/documents": "0.8.*"
     }
 }
 ```
@@ -31,7 +31,7 @@ $ composer.phar install
 or
 
 ```sh
-$ composer require brazanation/documents 0.7.*
+$ composer require brazanation/documents 0.8.*
 ```
 
 ### CPF (cadastro de pessoas físicas)
@@ -40,13 +40,25 @@ Registration of individuals or Tax Identification
 
 ```php
 use Brazanation\Documents\Cpf;
+
+$document = Cpf::createFromString('06843273173');
+if (false === $cpf) {
+   echo "Not Valid";
+}
+echo $document; // prints 06843273173
+echo $document->format(); // prints 068.432.731-73
+
+```
+or
+```php
+use Brazanation\Documents\Cpf;
 use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
 try {
-    $cpf = new Cpf('06843273173');
-    echo $cpf; // prints 06843273173
-    echo $cpf->format(); // prints 068.432.731-73
-}catch (InvalidDocumentException $e){
+    $document = new Cpf('06843273173');
+    echo $document; // prints 06843273173
+    echo $document->format(); // prints 068.432.731-73
+} catch (InvalidDocumentException $e) {
     echo $e->getMessage();
 }
 ```
@@ -57,15 +69,14 @@ Company Identification or National Register of Legal Entities
 
 ```php
 use Brazanation\Documents\Cnpj;
-use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
-try {
-    $cnpj = new Cnpj('99999090910270');
-    echo $cnpj; // prints 99999090910270
-    echo $cnpj->format(); // prints 99.999.090/9102-70
-}catch (InvalidDocumentException $e){
-    echo $e->getMessage();
+$document = Cnpj::createFromString('99999090910270');
+
+if (false === $document) {
+   echo "Not Valid";
 }
+echo $document; // prints 99999090910270
+echo $document->format(); // prints 99.999.090/9102-70
 ```
 
 ### CNH (carteira nacional de habilitação)
@@ -74,15 +85,14 @@ National Driving License
 
 ```php
 use Brazanation\Documents\Cnh;
-use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
-try {
-    $cnh = new Cnh('83592802666');
-    echo $cnh; // prints 83592802666
-    echo $cnh->format(); // prints 83592802666
-}catch (InvalidDocumentException $e){
-    echo $e->getMessage();
+$document = Cnh::createFromString('83592802666');
+
+if (false === $document) {
+   echo "Not Valid";
 }
+echo $cnh; // prints 83592802666
+echo $cnh->format(); // prints 83592802666
 ```
 
 ### Chave de Acesso Sped (chave da NFe, CTe e MDFe)
@@ -98,15 +108,14 @@ Available models:
 
 ```php
 use Brazanation\Documents\Sped\NFe;
-use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
-try {
-    $accessKey = new NFe('52060433009911002506550120000007801267301613');
-    echo $accessKey; // prints 52060433009911002506550120000007801267301613
-    echo $accessKey->format(); // prints 5206 0433 0099 1100 2506 5501 2000 0007 8012 6730 1613
-}catch (InvalidDocumentException $e){
-    echo $e->getMessage();
+$document = NFe::createFromString('52060433009911002506550120000007801267301613');
+
+if (false === $document) {
+   echo "Not Valid";
 }
+echo $document; // prints 52060433009911002506550120000007801267301613
+echo $document->format(); // prints 5206 0433 0099 1100 2506 5501 2000 0007 8012 6730 1613
 ```
 or generate your number
 
@@ -133,15 +142,15 @@ Social Integration Program and Training Program of the Heritage of Public Servan
 
 ```php
 use Brazanation\Documents\PisPasep;
-use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
-try {
-    $pispasep = new PisPasep('51.82312.94-92');
-    echo $pispasep; // prints 51823129492
-    echo $pispasep->format(); // prints 51.82312.94-92
-}catch (InvalidDocumentException $e){
-    echo $e->getMessage();
+$document = PisPasep::createFromString('51.82312.94-92');
+
+if (false === $document) {
+   echo "Not Valid";
 }
+
+echo $document; // prints 51823129492
+echo $document->format(); // prints 51.82312.94-92
 ```
 
 ### Título de Eleitor
@@ -150,16 +159,16 @@ Voter Registration
 
 ```php
 use Brazanation\Documents\Voter;
-use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
-try {
-    $voter = new Voter('106644440302', 20, 42);
-    echo $voter; // prints 106644440302
-    echo $voter->getSection(); // prints 0020
-    echo $voter->getZone(); // prints 042
-}catch (InvalidDocumentException $e){
-    echo $e->getMessage();
+$document = Voter::createFromString('106644440302', 20, 42);
+
+if (false === $document) {
+   echo "Not Valid";
 }
+
+echo $document; // prints 106644440302
+echo $document->getSection(); // prints 0020
+echo $document->getZone(); // prints 042
 ```
 
 ### Inscrição Estadual
@@ -168,11 +177,6 @@ State Registration
 
 ```php
 use Brazanation\Documents\StateRegistration;
-use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
-
-$state = StateRegistration::AC('0100482300112');
-echo $state; // prints 0100482300112
-echo $state->format(); // prints 01.004.823/001-12
 
 // for Commercial São Paulo
 $state = StateRegistration::SP('110.042.490.114');
@@ -184,6 +188,17 @@ $state = StateRegistration::SP('P011004243002');
 echo $state; // prints P011004243002
 echo $state->format(); // prints P-01100424.3/002
 ```
+or
+```php
+use Brazanation\Documents\StateRegistration;
+
+$document = StateRegistration::createFromString('P011004243002', 'SP');
+
+if (false === $document) {
+   echo "Not Valid";
+}
+
+```
 
 ### Cartão Nacional de Saúde (SUS)
 
@@ -192,9 +207,14 @@ National Health Card
 ```php
 use Brazanation\Documents\Cns;
 
-$cns = new Cns('242912018460005')
-echo $cns; // prints 242912018460005
-echo $cns->format(); // prints 242 9120 1846 0005
+$document = Cns::createFromString('242912018460005');
+
+if (false === $document) {
+   echo "Not Valid";
+}
+
+echo $document; // prints 242912018460005
+echo $document->format(); // prints 242 9120 1846 0005
 ```
 
 ### Renavam (Registro Nacional de Veículos Automotores)
@@ -204,9 +224,14 @@ National Registry of Motor Vehicles
 ```php
 use Brazanation\Documents\Renavam;
 
-$renavam = new Renavam('61855253306')
-echo $renavam; // prints 61855253306
-echo $renavam->format(); // prints 6185.525330-6
+$document = Renavam::createFromString('61855253306');
+
+if (false === $document) {
+   echo "Not Valid";
+}
+
+echo $document; // prints 61855253306
+echo $document->format(); // prints 6185.525330-6
 ```
 
 ### Processos Judiciais
@@ -216,9 +241,14 @@ Numbers of legal proceedings related to Judiciary assessments
 ```php
 use Brazanation\Documents\JudiciaryProcess;
 
-$procjud = new JudiciaryProcess('0048032982009809');
-echo $procjud; //prints  0048032982009809
-echo $procjud->format(); //prints  0048032.98.2009.8.09.0000
+$document = JudiciaryProcess::createFromString('0048032982009809');
+
+if (false === $document) {
+   echo "Not Valid";
+}
+
+echo $document; //prints  0048032982009809
+echo $document->format(); //prints  0048032.98.2009.8.09.0000
 
 ```
 

@@ -2,9 +2,6 @@
 
 namespace Brazanation\Documents;
 
-use Brazanation\Documents\Exception\InvalidDocument as InvalidDocumentException;
-use Brazanation\Documents\Exception\Readonly;
-
 /**
  * Class AbstractDocument
  *
@@ -46,10 +43,10 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
     /**
      * AbstractDocument constructor.
      *
-     * @param string $number         Numeric section with checker digit.
-     * @param int    $length         Max length of document.
-     * @param int    $numberOfDigits Max length of checker digits.
-     * @param string $type           Document name/type.
+     * @param string $number Numeric section with checker digit.
+     * @param int $length Max length of document.
+     * @param int $numberOfDigits Max length of checker digits.
+     * @param string $type Document name/type.
      */
     public function __construct($number, $length, $numberOfDigits, $type)
     {
@@ -57,7 +54,7 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
         $this->numberOfDigits = (int) $numberOfDigits;
         $this->length = (int) $length;
         $this->digit = $this->extractCheckerDigit($number);
-        $this->validate($number);
+        $this->assert($number);
         $this->number = $number;
     }
 
@@ -68,7 +65,45 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
 
     public function __set($name, $value)
     {
-        throw Readonly::notAllowed(static::class, $name);
+        throw Exception\Readonly::notAllowed(static::class, $name);
+    }
+
+    /**
+     * Create a Document object from given number.
+     *
+     * @param string $number Numeric section with checker digit.
+     *
+     * @return AbstractDocument|boolean Returns a new Document instance or FALSE on failure.
+     */
+    abstract public static function createFromString($number);
+
+    /**
+     * Try to create a Document object from given number.
+     *
+     * @param string $number Numeric section with checker digit.
+     * @param int $length Max length of document.
+     * @param int $numberOfDigits Max length of checker digits.
+     * @param string $type Document name/type.
+     *
+     * @return AbstractDocument|boolean Returns a new Document instance or FALSE on failure.
+     */
+    protected static function tryCreateFromString($class, $number, $length, $numberOfDigits, $type)
+    {
+        try {
+            return new $class($number, $length, $numberOfDigits, $type);
+        } catch (Exception\InvalidDocument $exception) {
+            return false;
+        }
+    }
+
+    /**
+     * Handle number to string.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return "{$this->number}";
     }
 
     /**
@@ -76,16 +111,16 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      *
      * @param string $number Numeric section with checker digit.
      *
-     * @throws InvalidDocumentException when number is empty
-     * @throws InvalidDocumentException when number is not valid
+     * @throws Exception\InvalidDocument when number is empty
+     * @throws Exception\InvalidDocument when number is not valid
      */
-    protected function validate($number)
+    protected function assert($number)
     {
         if (empty($number)) {
-            throw InvalidDocumentException::notEmpty($this->type);
+            throw Exception\InvalidDocument::notEmpty($this->type);
         }
         if (!$this->isValid($number)) {
-            throw InvalidDocumentException::isNotValid($this->type, $number);
+            throw Exception\InvalidDocument::isNotValid($this->type, $number);
         }
     }
 
@@ -113,16 +148,6 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
         $digit = $this->calculateDigit($baseNumber);
 
         return "$digit" === "{$this->digit}";
-    }
-
-    /**
-     * Handle number to string.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return "{$this->number}";
     }
 
     /**
