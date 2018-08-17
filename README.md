@@ -42,7 +42,7 @@ Registration of individuals or Tax Identification
 use Brazanation\Documents\Cpf;
 
 $document = Cpf::createFromString('06843273173');
-if (false === $cpf) {
+if (false === $document) {
    echo "Not Valid";
 }
 echo $document; // prints 06843273173
@@ -91,8 +91,8 @@ $document = Cnh::createFromString('83592802666');
 if (false === $document) {
    echo "Not Valid";
 }
-echo $cnh; // prints 83592802666
-echo $cnh->format(); // prints 83592802666
+echo $document; // prints 83592802666
+echo $document->format(); // prints 83592802666
 ```
 
 ### Chave de Acesso Sped (chave da NFe, CTe e MDFe)
