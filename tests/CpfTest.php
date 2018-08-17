@@ -11,6 +11,11 @@ class CpfTest extends DocumentTestCase
         return new Cpf($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return Cpf::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

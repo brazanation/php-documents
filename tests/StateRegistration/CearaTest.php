@@ -13,6 +13,11 @@ class CearaTest extends DocumentTestCase
         return new StateRegistration($number, new Ceara());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Ceara::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

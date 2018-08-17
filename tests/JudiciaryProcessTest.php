@@ -11,6 +11,11 @@ class JudiciaryProcessTest extends DocumentTestCase
         return new JudiciaryProcess($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return JudiciaryProcess::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

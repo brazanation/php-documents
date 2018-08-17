@@ -18,7 +18,7 @@ class RioGrandeDoNorte extends State
 
     const LENGTH = 10;
 
-    const DIGITS_COUNT = 1;
+    const NUMBER_OF_DIGITS = 1;
 
     const SHORT_NAME = 'RN';
 
@@ -42,7 +42,7 @@ class RioGrandeDoNorte extends State
         $this->length = self::LENGTH;
         $this->format = self::FORMAT;
         $this->regex = self::REGEX;
-        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::NUMBER_OF_DIGITS, self::REGEX, self::FORMAT);
     }
 
     /**

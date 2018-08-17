@@ -14,6 +14,11 @@ class CTeTest extends DocumentTestCase
         return new CTe($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return CTe::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

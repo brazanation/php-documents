@@ -13,6 +13,11 @@ class AmazonasTest extends DocumentTestCase
         return new StateRegistration($number, new Amazonas());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Amazonas::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

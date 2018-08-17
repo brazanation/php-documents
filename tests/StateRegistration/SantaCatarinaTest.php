@@ -13,6 +13,11 @@ class SantaCatarinaTest extends DocumentTestCase
         return new StateRegistration($number, new SantaCatarina());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, SantaCatarina::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

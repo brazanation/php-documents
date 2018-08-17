@@ -11,6 +11,11 @@ class RenavamTest extends DocumentTestCase
         return new Renavam($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return Renavam::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

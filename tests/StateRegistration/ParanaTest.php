@@ -13,6 +13,11 @@ class ParanaTest extends DocumentTestCase
         return new StateRegistration($number, new Parana());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Parana::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

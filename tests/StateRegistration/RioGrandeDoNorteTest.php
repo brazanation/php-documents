@@ -13,6 +13,11 @@ class RioGrandeDoNorteTest extends DocumentTestCase
         return new StateRegistration($number, new RioGrandeDoNorte());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, RioGrandeDoNorte::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

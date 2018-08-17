@@ -13,6 +13,11 @@ class ParaibaTest extends DocumentTestCase
         return new StateRegistration($number, new Paraiba());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Paraiba::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

@@ -13,6 +13,11 @@ class RoraimaTest extends DocumentTestCase
         return new StateRegistration($number, new Roraima());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Roraima::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

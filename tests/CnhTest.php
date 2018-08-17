@@ -11,6 +11,11 @@ class CnhTest extends DocumentTestCase
         return new Cnh($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return Cnh::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

@@ -14,13 +14,13 @@ class Parana extends State
 
     const LENGTH = 10;
 
-    const DIGITS_COUNT = 2;
+    const NUMBER_OF_DIGITS = 2;
 
     const SHORT_NAME = 'PR';
 
     public function __construct()
     {
-        parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
+        parent::__construct(self::LONG_NAME, self::LENGTH, self::NUMBER_OF_DIGITS, self::REGEX, self::FORMAT);
     }
 
     /**

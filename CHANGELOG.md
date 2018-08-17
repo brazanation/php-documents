@@ -1,6 +1,26 @@
 Change Log
 ==========
 
+## [v0.8.0](https://github.com/brazanation/documents/tree/v0.8.0) (2018-02-17)
+[Full Changelog](https://github.com/brazanation/documents/compare/v0.7.1...v0.8.0)
+
+**Implemented enhancements:**
+
+- Add Judiciary Process document [#38](https://github.com/brazanation/documents/pull/38) ([robmachado](https://github.com/robmachado))
+- Detail how Judiciary Process number is composed [#41](https://github.com/brazanation/documents/pull/41) ([tonicospinelli](https://github.com/tonicospinelli))
+
+**Fixed bugs:**
+
+- Fix StyleCI configuration [#40](https://github.com/brazanation/documents/pull/40) ([tonicospinelli](https://github.com/tonicospinelli))
+
+**Closed issues:**
+
+**Merged pull requests:**
+
+- Add Judiciary Process document [#38](https://github.com/brazanation/documents/pull/38) ([robmachado](https://github.com/robmachado))
+- Fix StyleCI configuration [#40](https://github.com/brazanation/documents/pull/40) ([tonicospinelli](https://github.com/tonicospinelli))
+- Detail how Judiciary Process number is composed [#41](https://github.com/brazanation/documents/pull/41) ([tonicospinelli](https://github.com/tonicospinelli))
+
 ## [v0.7.1](https://github.com/brazanation/documents/tree/v0.7.1) (2018-02-17)
 [Full Changelog](https://github.com/brazanation/documents/compare/v0.7.0...v0.7.1)
 

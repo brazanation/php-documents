@@ -13,6 +13,11 @@ class MinasGeraisTest extends DocumentTestCase
         return new StateRegistration($number, new MG());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, MG::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

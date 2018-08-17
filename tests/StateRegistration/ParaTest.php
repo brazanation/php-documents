@@ -13,6 +13,11 @@ class ParaTest extends DocumentTestCase
         return new StateRegistration($number, new Para());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Para::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

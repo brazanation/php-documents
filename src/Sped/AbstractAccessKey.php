@@ -23,13 +23,15 @@ use Brazanation\Documents\Sped\Exception\DocumentModel;
  */
 abstract class AbstractAccessKey extends AbstractDocument
 {
+    const NUMBER_OF_DIGITS = 1;
+
     const LABEL = 'SpedAccessKey';
 
     const LENGTH = 44;
 
-    const REGEX = '/([\d]{4})/';
-
     const MASK = '$1 ';
+
+    const REGEX = '/([\d]{4})/';
 
     /**
      * @var int
@@ -79,9 +81,14 @@ abstract class AbstractAccessKey extends AbstractDocument
     public function __construct($accessKey)
     {
         $accessKey = preg_replace('/\D/', '', $accessKey);
-        parent::__construct($accessKey, static::LENGTH, 1, static::LABEL);
+        parent::__construct($accessKey, static::LENGTH, static::NUMBER_OF_DIGITS, static::LABEL);
         $this->validateModel($accessKey);
         $this->loadFromKey($accessKey);
+    }
+
+    public static function createFromString($number)
+    {
+        return parent::tryCreateFromString(static::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
     /**

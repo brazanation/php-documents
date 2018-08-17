@@ -13,6 +13,11 @@ class MaranhaoTest extends DocumentTestCase
         return new StateRegistration($number, new Maranhao());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Maranhao::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

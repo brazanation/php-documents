@@ -10,6 +10,8 @@ final class Cnh extends AbstractDocument
 
     const REGEX = '/^([\d]{3})([\d]{3})([\d]{4})([\d]{1})$/';
 
+    const NUMBER_OF_DIGITS = 2;
+
     /**
      * Cnh constructor.
      *
@@ -18,7 +20,12 @@ final class Cnh extends AbstractDocument
     public function __construct($cnh)
     {
         $cnh = preg_replace('/\D/', '', $cnh);
-        parent::__construct($cnh, self::LENGTH, 2, self::LABEL);
+        parent::__construct($cnh, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
+    }
+
+    public static function createFromString($number)
+    {
+        return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
     /**

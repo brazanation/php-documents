@@ -13,6 +13,11 @@ class PernambucoTest extends DocumentTestCase
         return new StateRegistration($number, new Pernambuco());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Pernambuco::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

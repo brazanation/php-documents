@@ -15,7 +15,7 @@ final class Cns extends AbstractDocument
 
     const FORMAT = '$1 $2 $3 $4';
 
-    const DIGIT_COUNT = 1;
+    const NUMBER_OF_DIGITS = 1;
 
     /**
      * CNS constructor.
@@ -25,7 +25,12 @@ final class Cns extends AbstractDocument
     public function __construct($number)
     {
         $number = preg_replace('/\D/', '', $number);
-        parent::__construct($number, self::LENGTH, self::DIGIT_COUNT, self::LABEL);
+        parent::__construct($number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
+    }
+
+    public static function createFromString($number)
+    {
+        return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
     /**

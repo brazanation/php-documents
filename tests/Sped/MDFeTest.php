@@ -14,6 +14,11 @@ class MDFeTest extends TestCase
         return new MDFe($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return MDFe::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

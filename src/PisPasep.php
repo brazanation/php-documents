@@ -10,6 +10,8 @@ final class PisPasep extends AbstractDocument
 
     const REGEX = '/^([\d]{3})([\d]{5})([\d]{2})([\d]{1})$/';
 
+    const NUMBER_OF_DIGITS = 1;
+
     /**
      * PisPasep constructor.
      *
@@ -18,7 +20,12 @@ final class PisPasep extends AbstractDocument
     public function __construct($number)
     {
         $number = preg_replace('/\D/', '', $number);
-        parent::__construct($number, self::LENGTH, 1, self::LABEL);
+        parent::__construct($number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
+    }
+
+    public static function createFromString($number)
+    {
+        return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
     /**

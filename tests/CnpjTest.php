@@ -11,6 +11,11 @@ class CnpjTest extends DocumentTestCase
         return new Cnpj($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return Cnpj::createFromString($number);
+    }
+
     public function provideValidNumbers()
     {
         return [

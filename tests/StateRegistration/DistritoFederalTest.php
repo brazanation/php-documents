@@ -13,6 +13,11 @@ class DistritoFederalTest extends DocumentTestCase
         return new StateRegistration($number, new DF());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, DF::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

@@ -13,6 +13,11 @@ class SaoPauloTest extends DocumentTestCase
         return new StateRegistration($number, new SaoPaulo());
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, SaoPaulo::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

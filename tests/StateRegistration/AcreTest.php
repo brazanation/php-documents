@@ -13,6 +13,11 @@ class AcreTest extends DocumentTestCase
         return StateRegistration::AC($number);
     }
 
+    public function createDocumentFromString($number)
+    {
+        return StateRegistration::createFromString($number, Acre::SHORT_NAME);
+    }
+
     public function provideValidNumbers()
     {
         return [

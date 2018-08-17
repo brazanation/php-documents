@@ -7,7 +7,6 @@ enabled:
     - no_unused_imports
     - no_whitespace_in_blank_lines
     - ordered_imports
-    - phpdoc_align
     - phpdoc_separation
     - return
     - short_array_syntax

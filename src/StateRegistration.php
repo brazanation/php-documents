@@ -2,35 +2,6 @@
 
 namespace Brazanation\Documents;
 
-use Brazanation\Documents\StateRegistration\Acre;
-use Brazanation\Documents\StateRegistration\Alagoas;
-use Brazanation\Documents\StateRegistration\Amapa;
-use Brazanation\Documents\StateRegistration\Amazonas;
-use Brazanation\Documents\StateRegistration\Bahia;
-use Brazanation\Documents\StateRegistration\Ceara;
-use Brazanation\Documents\StateRegistration\DistritoFederal;
-use Brazanation\Documents\StateRegistration\EspiritoSanto;
-use Brazanation\Documents\StateRegistration\Goias;
-use Brazanation\Documents\StateRegistration\Maranhao;
-use Brazanation\Documents\StateRegistration\MatoGrosso;
-use Brazanation\Documents\StateRegistration\MatoGrossoSul;
-use Brazanation\Documents\StateRegistration\MinasGerais;
-use Brazanation\Documents\StateRegistration\Para;
-use Brazanation\Documents\StateRegistration\Paraiba;
-use Brazanation\Documents\StateRegistration\Parana;
-use Brazanation\Documents\StateRegistration\Pernambuco;
-use Brazanation\Documents\StateRegistration\Piaui;
-use Brazanation\Documents\StateRegistration\RioDeJaneiro;
-use Brazanation\Documents\StateRegistration\RioGrandeDoNorte;
-use Brazanation\Documents\StateRegistration\RioGrandeDoSul;
-use Brazanation\Documents\StateRegistration\Rondonia;
-use Brazanation\Documents\StateRegistration\Roraima;
-use Brazanation\Documents\StateRegistration\SantaCatarina;
-use Brazanation\Documents\StateRegistration\SaoPaulo;
-use Brazanation\Documents\StateRegistration\Sergipe;
-use Brazanation\Documents\StateRegistration\StateInterface;
-use Brazanation\Documents\StateRegistration\Tocantins;
-
 /**
  * Class StateRegistration
  *
@@ -67,7 +38,7 @@ use Brazanation\Documents\StateRegistration\Tocantins;
 final class StateRegistration extends AbstractDocument
 {
     /**
-     * @var StateInterface
+     * @var StateRegistration\StateInterface
      */
     private $state;
 
@@ -75,42 +46,42 @@ final class StateRegistration extends AbstractDocument
      * @var array
      */
     private static $availableStates = [
-        Acre::SHORT_NAME => Acre::class,
-        Alagoas::SHORT_NAME => Alagoas::class,
-        Amapa::SHORT_NAME => Amapa::class,
-        Amazonas::SHORT_NAME => Amazonas::class,
-        Bahia::SHORT_NAME => Bahia::class,
-        Ceara::SHORT_NAME => Ceara::class,
-        DistritoFederal::SHORT_NAME => DistritoFederal::class,
-        EspiritoSanto::SHORT_NAME => EspiritoSanto::class,
-        Goias::SHORT_NAME => Goias::class,
-        Maranhao::SHORT_NAME => Maranhao::class,
-        MatoGrosso::SHORT_NAME => MatoGrosso::class,
-        MatoGrossoSul::SHORT_NAME => MatoGrossoSul::class,
-        MinasGerais::SHORT_NAME => MinasGerais::class,
-        Para::SHORT_NAME => Para::class,
-        Paraiba::SHORT_NAME => Paraiba::class,
-        Parana::SHORT_NAME => Parana::class,
-        Pernambuco::SHORT_NAME => Pernambuco::class,
-        Piaui::SHORT_NAME => Piaui::class,
-        RioDeJaneiro::SHORT_NAME => RioDeJaneiro::class,
-        RioGrandeDoNorte::SHORT_NAME => RioGrandeDoNorte::class,
-        RioGrandeDoSul::SHORT_NAME => RioGrandeDoSul::class,
-        Rondonia::SHORT_NAME => Rondonia::class,
-        Roraima::SHORT_NAME => Roraima::class,
-        SantaCatarina::SHORT_NAME => SantaCatarina::class,
-        SaoPaulo::SHORT_NAME => SaoPaulo::class,
-        Sergipe::SHORT_NAME => Sergipe::class,
-        Tocantins::SHORT_NAME => Tocantins::class,
+        StateRegistration\Acre::SHORT_NAME => StateRegistration\Acre::class,
+        StateRegistration\Alagoas::SHORT_NAME => StateRegistration\Alagoas::class,
+        StateRegistration\Amapa::SHORT_NAME => StateRegistration\Amapa::class,
+        StateRegistration\Amazonas::SHORT_NAME => StateRegistration\Amazonas::class,
+        StateRegistration\Bahia::SHORT_NAME => StateRegistration\Bahia::class,
+        StateRegistration\Ceara::SHORT_NAME => StateRegistration\Ceara::class,
+        StateRegistration\DistritoFederal::SHORT_NAME => StateRegistration\DistritoFederal::class,
+        StateRegistration\EspiritoSanto::SHORT_NAME => StateRegistration\EspiritoSanto::class,
+        StateRegistration\Goias::SHORT_NAME => StateRegistration\Goias::class,
+        StateRegistration\Maranhao::SHORT_NAME => StateRegistration\Maranhao::class,
+        StateRegistration\MatoGrosso::SHORT_NAME => StateRegistration\MatoGrosso::class,
+        StateRegistration\MatoGrossoSul::SHORT_NAME => StateRegistration\MatoGrossoSul::class,
+        StateRegistration\MinasGerais::SHORT_NAME => StateRegistration\MinasGerais::class,
+        StateRegistration\Para::SHORT_NAME => StateRegistration\Para::class,
+        StateRegistration\Paraiba::SHORT_NAME => StateRegistration\Paraiba::class,
+        StateRegistration\Parana::SHORT_NAME => StateRegistration\Parana::class,
+        StateRegistration\Pernambuco::SHORT_NAME => StateRegistration\Pernambuco::class,
+        StateRegistration\Piaui::SHORT_NAME => StateRegistration\Piaui::class,
+        StateRegistration\RioDeJaneiro::SHORT_NAME => StateRegistration\RioDeJaneiro::class,
+        StateRegistration\RioGrandeDoNorte::SHORT_NAME => StateRegistration\RioGrandeDoNorte::class,
+        StateRegistration\RioGrandeDoSul::SHORT_NAME => StateRegistration\RioGrandeDoSul::class,
+        StateRegistration\Rondonia::SHORT_NAME => StateRegistration\Rondonia::class,
+        StateRegistration\Roraima::SHORT_NAME => StateRegistration\Roraima::class,
+        StateRegistration\SantaCatarina::SHORT_NAME => StateRegistration\SantaCatarina::class,
+        StateRegistration\SaoPaulo::SHORT_NAME => StateRegistration\SaoPaulo::class,
+        StateRegistration\Sergipe::SHORT_NAME => StateRegistration\Sergipe::class,
+        StateRegistration\Tocantins::SHORT_NAME => StateRegistration\Tocantins::class,
     ];
 
     /**
      * StateRegistration constructor.
      *
-     * @param string         $number
-     * @param StateInterface $state
+     * @param string $number
+     * @param StateRegistration\StateInterface $state
      */
-    public function __construct($number, StateInterface $state)
+    public function __construct($number, StateRegistration\StateInterface $state)
     {
         $number = $state->normalizeNumber($number);
         $this->state = $state;
@@ -118,17 +89,36 @@ final class StateRegistration extends AbstractDocument
     }
 
     /**
+     * Try to create a StateRegistration object from given number and state short name.
+     *
+     * @param string $number Document number to be parsed.
+     * @param string $state State short name.
+     *
+     * @return AbstractDocument|boolean Returns a new Document instance or FALSE on failure.
+     */
+    public static function createFromString($number, $state = '')
+    {
+        try {
+            return static::$state($number);
+        } catch (Exception\InvalidDocument $exception) {
+            return false;
+        }
+    }
+
+    /**
      * @param string $name
-     * @param array  $arguments
+     * @param array $arguments
      *
      * @return StateRegistration
+     *
+     * @throws \ReflectionException
      */
     public static function __callStatic($name, $arguments)
     {
         $class = self::$availableStates[$name];
         $reflection = new \ReflectionClass($class);
 
-        /** @var StateInterface $state */
+        /** @var StateRegistration\StateInterface $state */
         $state = $reflection->newInstanceArgs();
 
         return new self($arguments[0], $state);
