@@ -2,21 +2,22 @@
 
 namespace Brazanation\Documents\Tests;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\Cpf;
 
 class CpfTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new Cpf($number);
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return Cpf::createFromString($number);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['06843273173'],
@@ -24,7 +25,7 @@ class CpfTest extends DocumentTestCase
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['06843273173', '068.432.731-73'],
@@ -32,7 +33,7 @@ class CpfTest extends DocumentTestCase
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [Cpf::LABEL, ''],
@@ -41,7 +42,7 @@ class CpfTest extends DocumentTestCase
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [Cpf::LABEL, 1],

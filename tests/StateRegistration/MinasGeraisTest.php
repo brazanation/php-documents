@@ -2,23 +2,24 @@
 
 namespace Brazanation\Documents\Tests\StateRegistration;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\StateRegistration;
 use Brazanation\Documents\StateRegistration\MinasGerais as MG;
 use Brazanation\Documents\Tests\DocumentTestCase;
 
 class MinasGeraisTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new StateRegistration($number, new MG());
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return StateRegistration::createFromString($number, MG::SHORT_NAME);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['062.307.904/0081'],
@@ -28,7 +29,7 @@ class MinasGeraisTest extends DocumentTestCase
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['2080189746429', '208.018.974/6429'],
@@ -36,7 +37,7 @@ class MinasGeraisTest extends DocumentTestCase
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [MG::LONG_NAME, 0],
@@ -45,7 +46,7 @@ class MinasGeraisTest extends DocumentTestCase
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [MG::LONG_NAME, 1],

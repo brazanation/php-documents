@@ -2,23 +2,24 @@
 
 namespace Brazanation\Documents\Tests\StateRegistration;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\StateRegistration;
 use Brazanation\Documents\StateRegistration\Bahia;
 use Brazanation\Documents\Tests\DocumentTestCase;
 
 class BahiaTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new StateRegistration($number, new Bahia());
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return StateRegistration::createFromString($number, Bahia::SHORT_NAME);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['123456-63'],
@@ -37,7 +38,7 @@ class BahiaTest extends DocumentTestCase
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['123456-63', '0123456-63'],
@@ -45,14 +46,14 @@ class BahiaTest extends DocumentTestCase
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [Bahia::LONG_NAME, 0],
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [Bahia::LONG_NAME, '000000001'],

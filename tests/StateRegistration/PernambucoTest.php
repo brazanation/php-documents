@@ -2,23 +2,24 @@
 
 namespace Brazanation\Documents\Tests\StateRegistration;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\StateRegistration;
 use Brazanation\Documents\StateRegistration\Pernambuco;
 use Brazanation\Documents\Tests\DocumentTestCase;
 
 class PernambucoTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new StateRegistration($number, new Pernambuco());
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return StateRegistration::createFromString($number, Pernambuco::SHORT_NAME);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['18.1.001.0000004-9'],
@@ -31,7 +32,7 @@ class PernambucoTest extends DocumentTestCase
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['18100100000049', '18.1.001.0000004-9'],
@@ -39,14 +40,14 @@ class PernambucoTest extends DocumentTestCase
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [Pernambuco::LONG_NAME, null],
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [Pernambuco::LONG_NAME, '11111111111'],

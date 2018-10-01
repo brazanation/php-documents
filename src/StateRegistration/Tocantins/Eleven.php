@@ -24,7 +24,7 @@ class Eleven extends State
     /**
      * {@inheritdoc}
      */
-    public function extractBaseNumber($number)
+    public function extractBaseNumber(string $number) : string
     {
         $baseNumber = parent::extractBaseNumber($number);
 
@@ -36,7 +36,7 @@ class Eleven extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_TO.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();
@@ -56,7 +56,7 @@ class Eleven extends State
      *
      * @return string Returns base number without fixed digits.
      */
-    private function removeFixedDigits($baseNumber)
+    private function removeFixedDigits(string $baseNumber) : string
     {
         return substr($baseNumber, 0, 2) . substr($baseNumber, 4);
     }

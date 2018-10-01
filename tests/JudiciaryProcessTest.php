@@ -2,21 +2,22 @@
 
 namespace Brazanation\Documents\Tests;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\JudiciaryProcess;
 
 class JudiciaryProcessTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new JudiciaryProcess($number);
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return JudiciaryProcess::createFromString($number);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['0048032.98.2009.8.09'],
@@ -24,7 +25,7 @@ class JudiciaryProcessTest extends DocumentTestCase
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['0048032982009809', '0048032-98.2009.8.09.0000'],
@@ -32,7 +33,7 @@ class JudiciaryProcessTest extends DocumentTestCase
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [JudiciaryProcess::LABEL, ''],
@@ -41,7 +42,7 @@ class JudiciaryProcessTest extends DocumentTestCase
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [JudiciaryProcess::LABEL, 1],

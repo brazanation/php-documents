@@ -8,7 +8,7 @@ final class NFe extends AbstractAccessKey
 {
     const LABEL = 'NFe';
 
-    protected function defaultModel()
+    protected function defaultModel() : Model
     {
         return Model::NFe();
     }
@@ -27,14 +27,14 @@ final class NFe extends AbstractAccessKey
      * @return NFe
      */
     public static function generate(
-        $state,
+        int $state,
         \DateTime $generatedAt,
         Cnpj $cnpj,
-        $sequence,
-        $invoiceNumber,
+        int $sequence,
+        int $invoiceNumber,
         EmissionType $emissionType,
-        $controlNumber
-    ) {
+        int $controlNumber
+    ) : AbstractAccessKey {
         $accessKey = self::generateKey(
             $state,
             $generatedAt,

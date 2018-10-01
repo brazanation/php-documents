@@ -10,7 +10,7 @@ class TemporaryCalculator implements DigitCalculable
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliersInterval(1, 15);

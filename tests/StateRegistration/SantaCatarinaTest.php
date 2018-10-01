@@ -2,23 +2,24 @@
 
 namespace Brazanation\Documents\Tests\StateRegistration;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\StateRegistration;
 use Brazanation\Documents\StateRegistration\SantaCatarina;
 use Brazanation\Documents\Tests\DocumentTestCase;
 
 class SantaCatarinaTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new StateRegistration($number, new SantaCatarina());
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return StateRegistration::createFromString($number, SantaCatarina::SHORT_NAME);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['251040852'],
@@ -27,21 +28,21 @@ class SantaCatarinaTest extends DocumentTestCase
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['251040852','251.040.852'],
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [SantaCatarina::LONG_NAME, ''],
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [SantaCatarina::LONG_NAME, '1111111111'],

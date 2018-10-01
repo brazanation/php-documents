@@ -31,50 +31,50 @@ class Model
      *
      * @param int $model
      */
-    public function __construct($model)
+    public function __construct(int $model)
     {
         $this->validate($model);
-        $this->model = (int) $model;
+        $this->model = $model;
     }
 
-    private function validate($model)
+    private function validate(int $model)
     {
         if (!in_array($model, $this->allowed)) {
             throw InvalidModel::notAllowed($model);
         }
     }
 
-    public static function NFe()
+    public static function NFe() : Model
     {
         return new self(self::TYPE_NFE);
     }
 
-    public static function NFCe()
+    public static function NFCe() : Model
     {
         return new self(self::TYPE_NFCE);
     }
 
-    public static function CTe()
+    public static function CTe() : Model
     {
         return new self(self::TYPE_CTE);
     }
 
-    public static function CTeOther()
+    public static function CTeOther() : Model
     {
         return new self(self::TYPE_CTE_OTHER);
     }
 
-    public static function MDFe()
+    public static function MDFe() : Model
     {
         return new self(self::TYPE_MDFE);
     }
 
-    public function equalsTo(Model $model)
+    public function equalsTo(Model $model) : bool
     {
         return $this->model === $model->model;
     }
 
-    public function __toString()
+    public function __toString() : string
     {
         return "{$this->model}";
     }

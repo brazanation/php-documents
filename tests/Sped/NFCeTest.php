@@ -2,6 +2,7 @@
 
 namespace Brazanation\Documents\Tests\Sped;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\Cnpj;
 use Brazanation\Documents\Sped\EmissionType;
 use Brazanation\Documents\Sped\NFCe;
@@ -9,31 +10,31 @@ use Brazanation\Documents\Tests\DocumentTestCase;
 
 class NFCeTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new NFCe($number);
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return NFCe::createFromString($number);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['52060433009911002506650120000007802067301610'],
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['52060433009911002506650120000007802067301610', '5206 0433 0099 1100 2506 6501 2000 0007 8020 6730 1610'],
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [NFCe::LABEL, ''],
@@ -42,7 +43,7 @@ class NFCeTest extends DocumentTestCase
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [NFCe::LABEL, str_pad('1', 44, 1)],
@@ -58,7 +59,7 @@ class NFCeTest extends DocumentTestCase
         ];
     }
 
-    public function provideInvalidEmissionType()
+    public function provideInvalidEmissionType() : array
     {
         return [
             [NFCe::LABEL, '52060433009911002506550120000007801267301613'],

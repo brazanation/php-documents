@@ -21,7 +21,7 @@ final class Voter extends AbstractDocument
      * @param string $section [optional]
      * @param string $zone    [optional]
      */
-    public function __construct($number, $section = null, $zone = null)
+    public function __construct(string $number, string $section = null, string $zone = null)
     {
         $number = preg_replace('/\D/', '', $number);
         parent::__construct($number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
@@ -30,7 +30,7 @@ final class Voter extends AbstractDocument
         $this->zone = str_pad($zone, 3, '0', STR_PAD_LEFT);
     }
 
-    public static function createFromString($number, $section = null, $zone = null)
+    public static function createFromString(string $number, string $section = null, string $zone = null)
     {
         return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
@@ -40,7 +40,7 @@ final class Voter extends AbstractDocument
      *
      * @return string Returns section.
      */
-    public function getSection()
+    public function getSection() : string
     {
         return $this->section;
     }
@@ -50,7 +50,7 @@ final class Voter extends AbstractDocument
      *
      * @return string Returns zone.
      */
-    public function getZone()
+    public function getZone() : string
     {
         return $this->zone;
     }
@@ -60,7 +60,7 @@ final class Voter extends AbstractDocument
      *
      * @return string Returns only numbers.
      */
-    public function format()
+    public function format() : string
     {
         return "{$this}";
     }
@@ -68,7 +68,7 @@ final class Voter extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $firstDigit = $this->calculateFirstDigit($baseNumber);
         $secondDigit = $this->calculateSecondDigit("{$baseNumber}{$firstDigit}");
@@ -83,7 +83,7 @@ final class Voter extends AbstractDocument
      *
      * @return string Returns the checker digit.
      */
-    private function calculateFirstDigit($baseNumber)
+    private function calculateFirstDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator(substr($baseNumber, 0, -2));
         $calculator->withMultipliers([9, 8, 7, 6, 5, 4, 3, 2]);
@@ -100,7 +100,7 @@ final class Voter extends AbstractDocument
      *
      * @return string Returns the checker digit.
      */
-    private function calculateSecondDigit($baseNumber)
+    private function calculateSecondDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator(substr($baseNumber, -3));
         $calculator->withMultipliers([9, 8, 7]);

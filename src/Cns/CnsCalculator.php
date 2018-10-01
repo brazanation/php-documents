@@ -10,7 +10,7 @@ final class CnsCalculator implements DigitCalculable
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $pis = substr($baseNumber, 0, 11);
 

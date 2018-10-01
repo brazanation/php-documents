@@ -26,7 +26,7 @@ class Urban extends State
      *
      * No extract any digit
      */
-    public function extractBaseNumber($number)
+    public function extractBaseNumber(string $number) : string
     {
         return $number;
     }
@@ -34,7 +34,7 @@ class Urban extends State
     /**
      * {@inheritdoc}
      */
-    public function extractCheckerDigit($number)
+    public function extractCheckerDigit(string $number) : string
     {
         return substr($number, self::LENGTH - 4, 1) . substr($number, -1);
     }
@@ -44,7 +44,7 @@ class Urban extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_SP.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $firstBaseNumber = substr($baseNumber, 0, 8);
 
@@ -57,7 +57,7 @@ class Urban extends State
         return "{$firstDigit}{$secondDigit}";
     }
 
-    private function calculateFirstDigit($baseNumber)
+    private function calculateFirstDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliers([10, 8, 7, 6, 5, 4, 3, 1]);
@@ -69,7 +69,7 @@ class Urban extends State
         return "{$digit}";
     }
 
-    private function calculateSecondDigit($baseNumber)
+    private function calculateSecondDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliersInterval(2, 10);

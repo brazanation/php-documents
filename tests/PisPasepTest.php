@@ -2,21 +2,22 @@
 
 namespace Brazanation\Documents\Tests;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\PisPasep;
 
 class PisPasepTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new PisPasep($number);
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return PisPasep::createFromString($number);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['51823129491'],
@@ -24,7 +25,7 @@ class PisPasepTest extends DocumentTestCase
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['51823129491', '518.23129.49-1'],
@@ -32,7 +33,7 @@ class PisPasepTest extends DocumentTestCase
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [PisPasep::LABEL, ''],
@@ -41,7 +42,7 @@ class PisPasepTest extends DocumentTestCase
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [PisPasep::LABEL, 1],

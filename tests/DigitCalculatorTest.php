@@ -60,7 +60,7 @@ class DigitCalculatorTest extends TestCase
         $this->assertEquals($digit, $calculator->calculate());
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['3999100100001200000351202000003910476618602', '3'],

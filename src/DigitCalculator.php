@@ -82,7 +82,7 @@ class DigitCalculator
      *
      * @param string $number Base numeric section to be calculate your digit.
      */
-    public function __construct($number)
+    public function __construct(string $number)
     {
         $this->number = new \ArrayObject(str_split(strrev($number)));
         $this->multipliers = new \ArrayObject();
@@ -107,7 +107,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function withMultipliersInterval($start, $end)
+    public function withMultipliersInterval(int $start, int $end) : DigitCalculator
     {
         $multipliers = [];
         for ($i = $start; $i <= $end; ++$i) {
@@ -127,7 +127,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function withMultipliers(array $multipliers)
+    public function withMultipliers(array $multipliers) : DigitCalculator
     {
         $multipliers = array_map(function ($multiplier) {
             if (!assert(is_int($multiplier))) {
@@ -149,7 +149,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function useComplementaryInsteadOfModule()
+    public function useComplementaryInsteadOfModule() : DigitCalculator
     {
         $this->additional = true;
 
@@ -166,7 +166,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function replaceWhen($replaceTo, ...$integers)
+    public function replaceWhen(string $replaceTo, ...$integers) : DigitCalculator
     {
         foreach ($integers as $integer) {
             $this->replacements->offsetSet($integer, $replaceTo);
@@ -184,7 +184,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function withModule($module)
+    public function withModule(int $module) : DigitCalculator
     {
         $this->module = $module;
 
@@ -199,7 +199,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function singleSum()
+    public function singleSum() : DigitCalculator
     {
         $this->singleSum = true;
 
@@ -211,7 +211,7 @@ class DigitCalculator
      *
      * @return string Returns a single calculated digit.
      */
-    public function calculate()
+    public function calculate() : string
     {
         $sum = 0;
         $position = 0;
@@ -238,7 +238,7 @@ class DigitCalculator
      *
      * @return string Returns digit replaced if it has been mapped, otherwise returns given digit.
      */
-    private function replaceDigit($digit)
+    private function replaceDigit(string $digit) : string
     {
         if ($this->replacements->offsetExists($digit)) {
             return $this->replacements->offsetGet($digit);
@@ -254,7 +254,7 @@ class DigitCalculator
      *
      * @return int Returns calculated digit.
      */
-    private function calculateAdditionalDigit($digit)
+    private function calculateAdditionalDigit(string $digit) : int
     {
         if ($this->additional) {
             $digit = $this->module - $digit;
@@ -270,7 +270,7 @@ class DigitCalculator
      *
      * @return int Returns a calculated total.
      */
-    private function calculateSingleSum($total)
+    private function calculateSingleSum(int $total) : int
     {
         if ($this->singleSum) {
             return intval(($total / 10) + ($total % 10));
@@ -286,7 +286,7 @@ class DigitCalculator
      *
      * @return int Returns next position or zero (0) when it is greater than number of defined multipliers.
      */
-    private function nextMultiplier($position)
+    private function nextMultiplier(int $position) : int
     {
         ++$position;
         if ($position == $this->multipliers->count()) {
@@ -303,7 +303,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function addDigit($digit)
+    public function addDigit(string $digit) : DigitCalculator
     {
         $numbers = $this->number->getArrayCopy();
         array_unshift($numbers, $digit);
@@ -319,7 +319,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function multiplySumBy($multiplier)
+    public function multiplySumBy(int $multiplier) : DigitCalculator
     {
         $this->sumMultiplier = $multiplier;
 
@@ -333,7 +333,7 @@ class DigitCalculator
      *
      * @return int
      */
-    private function calculateSumMultiplier($sum)
+    private function calculateSumMultiplier(int $sum) : int
     {
         return $this->sumMultiplier * $sum;
     }

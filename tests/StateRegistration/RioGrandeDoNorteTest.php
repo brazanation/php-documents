@@ -2,23 +2,24 @@
 
 namespace Brazanation\Documents\Tests\StateRegistration;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\StateRegistration;
 use Brazanation\Documents\StateRegistration\RioGrandeDoNorte;
 use Brazanation\Documents\Tests\DocumentTestCase;
 
 class RioGrandeDoNorteTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new StateRegistration($number, new RioGrandeDoNorte());
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return StateRegistration::createFromString($number, RioGrandeDoNorte::SHORT_NAME);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['20.040.040-1'],
@@ -32,7 +33,7 @@ class RioGrandeDoNorteTest extends DocumentTestCase
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['200400401', '20.040.040-1'],
@@ -41,14 +42,14 @@ class RioGrandeDoNorteTest extends DocumentTestCase
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [RioGrandeDoNorte::LONG_NAME, ''],
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [RioGrandeDoNorte::LONG_NAME, '11111111'],

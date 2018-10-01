@@ -48,7 +48,7 @@ class RioGrandeDoNorte extends State
     /**
      * {@inheritdoc}
      */
-    public function normalizeNumber($number)
+    public function normalizeNumber(string $number) : string
     {
         $number = parent::normalizeNumber($number);
 
@@ -57,12 +57,12 @@ class RioGrandeDoNorte extends State
         return $number;
     }
 
-    public function getFormat()
+    public function getFormat() : string
     {
         return $this->format;
     }
 
-    public function getLength()
+    public function getLength() : int
     {
         return $this->length;
     }
@@ -70,7 +70,7 @@ class RioGrandeDoNorte extends State
     /**
      * @return string
      */
-    public function getRegex()
+    public function getRegex() : string
     {
         return $this->regex;
     }
@@ -80,7 +80,7 @@ class RioGrandeDoNorte extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_RN.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();
@@ -96,7 +96,7 @@ class RioGrandeDoNorte extends State
     /**
      * @param string $number
      */
-    private function applyForNineDigits($number)
+    private function applyForNineDigits(string $number)
     {
         if (strlen($number) != self::LENGTH) {
             $this->format = self::FORMAT_FOR_NINE_NUMBERS;

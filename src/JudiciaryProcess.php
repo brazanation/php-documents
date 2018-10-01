@@ -59,14 +59,14 @@ final class JudiciaryProcess extends AbstractDocument
      */
     private $origin;
 
-    public function __construct($number)
+    public function __construct(string $number)
     {
         $number = preg_replace('/\D/', '', $number);
         $this->extractNumbers($number);
         parent::__construct($number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
-    public static function createFromString($number)
+    public static function createFromString(string $number)
     {
         return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
@@ -76,7 +76,7 @@ final class JudiciaryProcess extends AbstractDocument
      *
      * @param string $number
      */
-    private function extractNumbers($number)
+    private function extractNumbers(string $number)
     {
         $number = str_pad($number, self::LENGTH, '0', STR_PAD_RIGHT);
 
@@ -88,19 +88,19 @@ final class JudiciaryProcess extends AbstractDocument
         $this->origin = $matches[6];
     }
 
-    public function format()
+    public function format() : string
     {
         $number = str_pad($this->number, self::LENGTH, '0', STR_PAD_RIGHT);
 
         return preg_replace(self::REGEX, '$1-$2.$3.$4.$5.$6', "{$number}");
     }
 
-    protected function extractCheckerDigit($number)
+    protected function extractCheckerDigit(string $number) : string
     {
         return substr($number, 7, 2);
     }
 
-    protected function extractBaseNumber($number)
+    protected function extractBaseNumber(string $number) : string
     {
         return "{$this->sequentialNumber}{$this->year}{$this->judiciary}{$this->court}{$this->origin}";
     }
@@ -116,7 +116,7 @@ final class JudiciaryProcess extends AbstractDocument
      *
      * @return string
      */
-    public function calculateDigit($input)
+    public function calculateDigit(string $input) : string
     {
         $remainderNumber = intval($this->sequentialNumber) % 97;
 

@@ -34,7 +34,7 @@ final class Goias extends State
      *
      * @return Goias
      */
-    private function setCurrentDigit($digit)
+    private function setCurrentDigit(string $digit)
     {
         $this->digit = $digit;
 
@@ -46,7 +46,7 @@ final class Goias extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_GO.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $digitToReplace = $this->discoverDigitToReplace(intval($baseNumber));
 
@@ -74,7 +74,7 @@ final class Goias extends State
      *
      * @return bool Returns true if number is magic, otherwise false.
      */
-    private function isMagicNumber($number)
+    private function isMagicNumber(string $number) : bool
     {
         return $number == '11094402';
     }
@@ -86,7 +86,7 @@ final class Goias extends State
      *
      * @return string
      */
-    private function fixedDigitForMagicNumber($digit)
+    private function fixedDigitForMagicNumber(string $digit) : string
     {
         if ($digit == $this->digit && $digit == '0') {
             return '0';
@@ -95,7 +95,7 @@ final class Goias extends State
         return '1';
     }
 
-    private function discoverDigitToReplace($number)
+    private function discoverDigitToReplace(string $number) : string
     {
         $digitToReplace = '0';
         if ((10103105 <= $number) && ($number <= 10119997)) {
@@ -105,7 +105,7 @@ final class Goias extends State
         return $digitToReplace;
     }
 
-    public function normalizeNumber($number)
+    public function normalizeNumber(string $number) : string
     {
         $number = parent::normalizeNumber($number);
         $this->setCurrentDigit(substr($number, -($this->getNumberOfDigits())));
