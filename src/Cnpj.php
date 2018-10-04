@@ -17,13 +17,13 @@ final class Cnpj extends AbstractDocument
      *
      * @param string $cnpj Only accept numbers
      */
-    public function __construct($cnpj)
+    public function __construct(string $cnpj)
     {
         $cnpj = preg_replace('/\D/', '', $cnpj);
         parent::__construct($cnpj, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
-    public static function createFromString($number)
+    public static function createFromString(string $number)
     {
         return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
@@ -31,7 +31,7 @@ final class Cnpj extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function format()
+    public function format() : string
     {
         return preg_replace(self::REGEX, '$1.$2.$3/$4-$5', "{$this}");
     }
@@ -39,7 +39,7 @@ final class Cnpj extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();

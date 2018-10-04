@@ -81,7 +81,7 @@ final class StateRegistration extends AbstractDocument
      * @param string $number
      * @param StateRegistration\StateInterface $state
      */
-    public function __construct($number, StateRegistration\StateInterface $state)
+    public function __construct(string $number, StateRegistration\StateInterface $state)
     {
         $number = $state->normalizeNumber($number);
         $this->state = $state;
@@ -96,7 +96,7 @@ final class StateRegistration extends AbstractDocument
      *
      * @return AbstractDocument|boolean Returns a new Document instance or FALSE on failure.
      */
-    public static function createFromString($number, $state = '')
+    public static function createFromString(string $number, string $state = '')
     {
         try {
             return static::$state($number);
@@ -113,7 +113,7 @@ final class StateRegistration extends AbstractDocument
      *
      * @throws \ReflectionException
      */
-    public static function __callStatic($name, $arguments)
+    public static function __callStatic(string $name, array $arguments)
     {
         $class = self::$availableStates[$name];
         $reflection = new \ReflectionClass($class);
@@ -127,7 +127,7 @@ final class StateRegistration extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    protected function extractBaseNumber($number)
+    protected function extractBaseNumber(string $number) : string
     {
         return $this->state->extractBaseNumber($number);
     }
@@ -135,7 +135,7 @@ final class StateRegistration extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    protected function extractCheckerDigit($number)
+    protected function extractCheckerDigit(string $number) : string
     {
         return $this->state->extractCheckerDigit($number);
     }
@@ -145,7 +145,7 @@ final class StateRegistration extends AbstractDocument
      *
      * @return string Returns only numbers.
      */
-    public function format()
+    public function format() : string
     {
         return preg_replace($this->state->getRegex(), $this->state->getFormat(), "{$this}");
     }
@@ -153,7 +153,7 @@ final class StateRegistration extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $digit = $this->state->calculateDigit($baseNumber);
 

@@ -28,7 +28,7 @@ class Roraima extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_RR.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliers([8, 7, 6, 5, 4, 3, 2, 1]);

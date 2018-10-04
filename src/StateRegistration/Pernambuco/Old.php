@@ -26,7 +26,7 @@ class Old extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_PE.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber . '0');
         $calculator->withMultipliersInterval(1, 9);

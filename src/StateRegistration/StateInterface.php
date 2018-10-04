@@ -9,27 +9,27 @@ interface StateInterface extends DigitCalculable
     /**
      * @return string
      */
-    public function getState();
+    public function getState() : string;
 
     /**
      * @return int
      */
-    public function getLength();
+    public function getLength() : int;
 
     /**
      * @return string
      */
-    public function getRegex();
+    public function getRegex() : string;
 
     /**
      * @return string
      */
-    public function getFormat();
+    public function getFormat() : string;
 
     /**
      * @return int
      */
-    public function getNumberOfDigits();
+    public function getNumberOfDigits() : int;
 
     /**
      * Normalizes number removing non-digit chars.
@@ -38,7 +38,7 @@ interface StateInterface extends DigitCalculable
      *
      * @return string Returns only numbers.
      */
-    public function normalizeNumber($number);
+    public function normalizeNumber(string $number) : string;
 
     /**
      * Extracts base number from document number.
@@ -47,7 +47,7 @@ interface StateInterface extends DigitCalculable
      *
      * @return string Returns only base number without checker digit.
      */
-    public function extractBaseNumber($number);
+    public function extractBaseNumber(string $number) : string;
 
     /**
      * Extracts the checker digit from document number.
@@ -56,5 +56,5 @@ interface StateInterface extends DigitCalculable
      *
      * @return string Returns only checker digit.
      */
-    public function extractCheckerDigit($number);
+    public function extractCheckerDigit(string $number) : string;
 }

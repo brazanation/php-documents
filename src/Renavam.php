@@ -17,14 +17,14 @@ final class Renavam extends AbstractDocument
      *
      * @param string $renavam Only accept numbers
      */
-    public function __construct($renavam)
+    public function __construct(string $renavam)
     {
         $renavam = preg_replace('/\D/', '', $renavam);
         $renavam = $this->padNumber($renavam);
         parent::__construct($renavam, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
-    public static function createFromString($number)
+    public static function createFromString(string $number)
     {
         return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
@@ -36,7 +36,7 @@ final class Renavam extends AbstractDocument
      *
      * @return string
      */
-    private function padNumber($number)
+    private function padNumber(string $number) : string
     {
         if (empty($number)) {
             return '';
@@ -48,7 +48,7 @@ final class Renavam extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function format()
+    public function format() : string
     {
         return preg_replace(self::REGEX, '$1.$2-$3', "{$this}");
     }
@@ -56,7 +56,7 @@ final class Renavam extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         //$calculator->withMultipliers([3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);

@@ -38,7 +38,7 @@ abstract class State implements StateInterface
      * @param string $regex
      * @param string $format
      */
-    public function __construct($state, $length, $numberOfDigits, $regex, $format)
+    public function __construct(string $state, int $length, int $numberOfDigits, string $regex, string $format)
     {
         $this->state = $state;
         $this->length = $length;
@@ -50,7 +50,7 @@ abstract class State implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getState()
+    public function getState() : string
     {
         return $this->state;
     }
@@ -58,7 +58,7 @@ abstract class State implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getLength()
+    public function getLength() : int
     {
         return $this->length;
     }
@@ -66,7 +66,7 @@ abstract class State implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getRegex()
+    public function getRegex() : string
     {
         return $this->regex;
     }
@@ -74,7 +74,7 @@ abstract class State implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormat()
+    public function getFormat() : string
     {
         return $this->format;
     }
@@ -82,7 +82,7 @@ abstract class State implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getNumberOfDigits()
+    public function getNumberOfDigits() : int
     {
         return $this->numberOfDigits;
     }
@@ -90,7 +90,7 @@ abstract class State implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function normalizeNumber($number)
+    public function normalizeNumber(string $number) : string
     {
         return preg_replace('/\D/', '', $number);
     }
@@ -98,7 +98,7 @@ abstract class State implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function extractBaseNumber($number)
+    public function extractBaseNumber(string $number) : string
     {
         return substr($number, 0, -($this->getNumberOfDigits()));
     }
@@ -106,7 +106,7 @@ abstract class State implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function extractCheckerDigit($number)
+    public function extractCheckerDigit(string $number) : string
     {
         return substr($number, -($this->getNumberOfDigits()));
     }

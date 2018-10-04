@@ -17,7 +17,7 @@ Install the library using [composer][1]. Add the following to your `composer.jso
 ```json
 {
     "require": {
-        "brazanation/documents": "1.0.*"
+        "brazanation/documents": "2.0.*"
     }
 }
 ```
@@ -31,7 +31,7 @@ $ composer.phar install
 or
 
 ```sh
-$ composer require brazanation/documents 1.0.*
+$ composer require brazanation/documents 2.0.*
 ```
 
 ### CPF (cadastro de pessoas físicas)

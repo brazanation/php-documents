@@ -9,5 +9,5 @@ interface Formattable
      *
      * @return string Returns formatted number.
      */
-    public function format();
+    public function format() : string ;
 }

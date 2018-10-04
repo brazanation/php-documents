@@ -26,7 +26,7 @@ class Nine extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_TO.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();

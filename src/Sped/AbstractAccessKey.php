@@ -78,7 +78,7 @@ abstract class AbstractAccessKey extends AbstractDocument
      *
      * @param $accessKey
      */
-    public function __construct($accessKey)
+    public function __construct(string $accessKey)
     {
         $accessKey = preg_replace('/\D/', '', $accessKey);
         parent::__construct($accessKey, static::LENGTH, static::NUMBER_OF_DIGITS, static::LABEL);
@@ -86,7 +86,7 @@ abstract class AbstractAccessKey extends AbstractDocument
         $this->loadFromKey($accessKey);
     }
 
-    public static function createFromString($number)
+    public static function createFromString(string $number)
     {
         return parent::tryCreateFromString(static::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
@@ -94,9 +94,9 @@ abstract class AbstractAccessKey extends AbstractDocument
     /**
      * @return Model
      */
-    abstract protected function defaultModel();
+    abstract protected function defaultModel() : Model;
 
-    protected function validateModel($accessKey)
+    protected function validateModel(string $accessKey)
     {
         $model = new Model(substr($accessKey, 20, 2));
         if (!$this->defaultModel()->equalsTo($model)) {
@@ -104,7 +104,7 @@ abstract class AbstractAccessKey extends AbstractDocument
         }
     }
 
-    private function loadFromKey($accessKey)
+    private function loadFromKey(string $accessKey)
     {
         $startPosition = 0;
         $this->state = substr($accessKey, $startPosition, 2);
@@ -149,15 +149,15 @@ abstract class AbstractAccessKey extends AbstractDocument
      * @return AbstractAccessKey
      */
     protected static function generateKey(
-        $state,
+        int $state,
         \DateTime $generatedAt,
         Cnpj $cnpj,
         Model $model,
-        $sequence,
-        $invoiceNumber,
+        int $sequence,
+        int $invoiceNumber,
         EmissionType $emissionType,
-        $controlNumber
-    ) {
+        int $controlNumber
+    ) : AbstractAccessKey {
         $yearMonth = $generatedAt->format('ym');
         $sequence = str_pad($sequence, 3, 0, STR_PAD_LEFT);
         $invoiceNumber = str_pad($invoiceNumber, 9, 0, STR_PAD_LEFT);
@@ -176,7 +176,7 @@ abstract class AbstractAccessKey extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function format()
+    public function format() : string
     {
         return trim(preg_replace(self::REGEX, self::MASK, "{$this}"));
     }
@@ -184,7 +184,7 @@ abstract class AbstractAccessKey extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         return self::calculateDigitFrom($baseNumber);
     }
@@ -198,7 +198,7 @@ abstract class AbstractAccessKey extends AbstractDocument
      *
      * @return string
      */
-    public static function calculateDigitFrom($baseNumber)
+    public static function calculateDigitFrom(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();

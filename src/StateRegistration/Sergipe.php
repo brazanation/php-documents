@@ -28,7 +28,7 @@ class Sergipe extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_SE.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();

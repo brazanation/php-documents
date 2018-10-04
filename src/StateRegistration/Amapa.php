@@ -28,7 +28,7 @@ final class Amapa extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_AP.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $number = intval($baseNumber);
         $lastDigit = $this->discoverLastDigit($number);
@@ -53,7 +53,7 @@ final class Amapa extends State
      *
      * @return string
      */
-    private function discoverLastDigit($number)
+    private function discoverLastDigit(int $number) : string
     {
         $lastDigit = '0';
         if ($this->isBetweenFirstSlice($number)) {
@@ -69,11 +69,11 @@ final class Amapa extends State
     /**
      * Discover digit to be replaced based on number threshold.
      *
-     * @param $number
+     * @param int $number
      *
      * @return string
      */
-    private function discoverDigitToReplace($number)
+    private function discoverDigitToReplace(int $number) : string
     {
         $replaceDigit = '0';
         if ($this->isBetweenSecondSlice($number)) {
@@ -90,7 +90,7 @@ final class Amapa extends State
      *
      * @return bool
      */
-    private function isBetweenFirstSlice($number)
+    private function isBetweenFirstSlice(int $number) : bool
     {
         return (3000001 <= $number && $number <= 3017000);
     }
@@ -102,7 +102,7 @@ final class Amapa extends State
      *
      * @return bool
      */
-    private function isBetweenSecondSlice($number)
+    private function isBetweenSecondSlice(int $number) : bool
     {
         return (3017001 <= $number && $number <= 3019022);
     }

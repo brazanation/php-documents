@@ -17,13 +17,13 @@ final class PisPasep extends AbstractDocument
      *
      * @param $number
      */
-    public function __construct($number)
+    public function __construct(string $number)
     {
         $number = preg_replace('/\D/', '', $number);
         parent::__construct($number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
-    public static function createFromString($number)
+    public static function createFromString(string $number)
     {
         return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
@@ -31,7 +31,7 @@ final class PisPasep extends AbstractDocument
     /**
      * @return string Returns formatted number, such as: 00.00000.00-0
      */
-    public function format()
+    public function format() : string
     {
         return preg_replace(self::REGEX, '$1.$2.$3-$4', "{$this}");
     }
@@ -39,7 +39,7 @@ final class PisPasep extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliersInterval(2, 9);

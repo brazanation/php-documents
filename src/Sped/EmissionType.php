@@ -37,55 +37,55 @@ class EmissionType
      *
      * @param int $type
      */
-    public function __construct($type)
+    public function __construct(int $type)
     {
         $this->validate($type);
-        $this->type = (int) $type;
+        $this->type = $type;
     }
 
-    private function validate($type)
+    private function validate(int $type)
     {
         if (!in_array($type, $this->allowed)) {
             throw InvalidEmissionType::notAllowed($type);
         }
     }
 
-    public static function normal()
+    public static function normal() : EmissionType
     {
         return new self(self::NORMAL);
     }
 
-    public static function contingencyDpec()
+    public static function contingencyDpec() : EmissionType
     {
         return new self(self::CONTINGENCY_DPEC);
     }
 
-    public static function contingencySVCRS()
+    public static function contingencySVCRS() : EmissionType
     {
         return new self(self::CONTINGENCY_SVCRS);
     }
 
-    public static function contingencySVCAN()
+    public static function contingencySVCAN() : EmissionType
     {
         return new self(self::CONTINGENCY_SVCAN);
     }
 
-    public static function contingencySCAN()
+    public static function contingencySCAN() : EmissionType
     {
         return new self(self::CONTINGENCY_SCAN);
     }
 
-    public static function contingencyOnSafetyForm()
+    public static function contingencyOnSafetyForm() : EmissionType
     {
         return new self(self::CONTINGENCY_ON_SAFETY_FORM);
     }
 
-    public static function contingencyOnSafetyFormFSDA()
+    public static function contingencyOnSafetyFormFSDA() : EmissionType
     {
         return new self(self::CONTINGENCY_ON_SAFETY_FORM_FSDA);
     }
 
-    public function __toString()
+    public function __toString() : string
     {
         return "{$this->type}";
     }

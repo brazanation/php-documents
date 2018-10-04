@@ -2,21 +2,22 @@
 
 namespace Brazanation\Documents\Tests;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\Cns;
 
 class CnsTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new Cns($number);
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return Cns::createFromString($number);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['242912018460005'],
@@ -30,14 +31,14 @@ class CnsTest extends DocumentTestCase
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['242912018460005', '242 9120 1846 0005'],
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [Cns::LABEL, ''],
@@ -46,7 +47,7 @@ class CnsTest extends DocumentTestCase
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [Cns::LABEL, 1],

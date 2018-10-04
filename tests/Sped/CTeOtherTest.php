@@ -2,6 +2,7 @@
 
 namespace Brazanation\Documents\Tests\Sped;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\Cnpj;
 use Brazanation\Documents\Sped\CTeOther;
 use Brazanation\Documents\Sped\EmissionType;
@@ -9,31 +10,31 @@ use Brazanation\Documents\Tests\DocumentTestCase;
 
 class CTeOtherTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new CTeOther($number);
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return CTeOther::createFromString($number);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['52060433009911002506670120000007801267301613'],
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['52060433009911002506670120000007801267301613', '5206 0433 0099 1100 2506 6701 2000 0007 8012 6730 1613'],
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [CTeOther::LABEL, ''],
@@ -42,7 +43,7 @@ class CTeOtherTest extends DocumentTestCase
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [CTeOther::LABEL, str_pad('1', 44, 1)],
@@ -58,7 +59,7 @@ class CTeOtherTest extends DocumentTestCase
         ];
     }
 
-    public function provideInvalidEmissionType()
+    public function provideInvalidEmissionType() : array
     {
         return [
             [CTeOther::LABEL, '52060433009911002506550120000007801267301613'],

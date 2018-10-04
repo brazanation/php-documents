@@ -48,22 +48,26 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      * @param int $numberOfDigits Max length of checker digits.
      * @param string $type Document name/type.
      */
-    public function __construct($number, $length, $numberOfDigits, $type)
-    {
-        $this->type = (string) $type;
-        $this->numberOfDigits = (int) $numberOfDigits;
-        $this->length = (int) $length;
+    public function __construct(
+        string $number,
+        int $length,
+        int $numberOfDigits,
+        string $type
+    ) {
+        $this->type = $type;
+        $this->numberOfDigits = $numberOfDigits;
+        $this->length = $length;
         $this->digit = $this->extractCheckerDigit($number);
         $this->assert($number);
         $this->number = $number;
     }
 
-    public function __get($name)
+    public function __get(string $name)
     {
         return $this->$name;
     }
 
-    public function __set($name, $value)
+    public function __set(string $name, string $value)
     {
         throw Exception\Readonly::notAllowed(static::class, $name);
     }
@@ -75,7 +79,7 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      *
      * @return AbstractDocument|boolean Returns a new Document instance or FALSE on failure.
      */
-    abstract public static function createFromString($number);
+    abstract public static function createFromString(string $number);
 
     /**
      * Try to create a Document object from given number.
@@ -87,8 +91,13 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      *
      * @return AbstractDocument|boolean Returns a new Document instance or FALSE on failure.
      */
-    protected static function tryCreateFromString($class, $number, $length, $numberOfDigits, $type)
-    {
+    protected static function tryCreateFromString(
+        string $class,
+        string $number,
+        int $length,
+        int $numberOfDigits,
+        string $type
+    ) {
         try {
             return new $class($number, $length, $numberOfDigits, $type);
         } catch (Exception\InvalidDocument $exception) {
@@ -101,7 +110,7 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return "{$this->number}";
     }
@@ -114,7 +123,7 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      * @throws Exception\InvalidDocument when number is empty
      * @throws Exception\InvalidDocument when number is not valid
      */
-    protected function assert($number)
+    protected function assert(string $number)
     {
         if (empty($number)) {
             throw Exception\InvalidDocument::notEmpty($this->type);
@@ -131,7 +140,7 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      *
      * @return bool Returns true if it is a valid number, otherwise false.
      */
-    protected function isValid($number)
+    protected function isValid(string $number) : bool
     {
         $baseNumber = $this->extractBaseNumber($number);
 
@@ -157,7 +166,7 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      *
      * @return string Returns only base number without checker digit.
      */
-    protected function extractBaseNumber($number)
+    protected function extractBaseNumber(string $number) : string
     {
         return substr($number, 0, -($this->numberOfDigits));
     }
@@ -169,7 +178,7 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      *
      * @return string Returns only checker digit.
      */
-    protected function extractCheckerDigit($number)
+    protected function extractCheckerDigit(string $number) : string
     {
         return substr($number, -($this->numberOfDigits));
     }

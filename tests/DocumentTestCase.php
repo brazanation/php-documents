@@ -13,49 +13,49 @@ abstract class DocumentTestCase extends TestCase
      *
      * @return AbstractDocument
      */
-    abstract public function createDocument($number);
+    abstract public function createDocument(string $number) : AbstractDocument;
 
     /**
      * @param string $number
      *
      * @return AbstractDocument|boolean
      */
-    abstract public function createDocumentFromString($number);
+    abstract public function createDocumentFromString(string $number);
 
     /**
      * Provides a list of valid numbers
      *
      * @return array
      */
-    abstract public function provideValidNumbers();
+    abstract public function provideValidNumbers() : array;
 
     /**
      * Provides a list of valid numbers and its formats.
      *
      * @return array
      */
-    abstract public function provideValidNumbersAndExpectedFormat();
+    abstract public function provideValidNumbersAndExpectedFormat() : array;
 
     /**
      * Provides a empty data
      *
      * @return array
      */
-    abstract public function provideEmptyData();
+    abstract public function provideEmptyData() : array;
 
     /**
      * Provides a list of invalid numbers
      *
      * @return array
      */
-    abstract public function provideInvalidNumber();
+    abstract public function provideInvalidNumber() : array;
 
     /**
      * @param string $number
      *
      * @dataProvider provideValidNumbers
      */
-    final public function testShouldCreateInstance($number)
+    final public function testShouldCreateInstance(string $number)
     {
         $document = $this->createDocument($number);
         $this->assertInstanceOf(AbstractDocument::class, $document);
@@ -67,7 +67,7 @@ abstract class DocumentTestCase extends TestCase
      *
      * @dataProvider provideValidNumbers
      */
-    final public function testShouldCreateInstanceFromString($number)
+    final public function testShouldCreateInstanceFromString(string $number)
     {
         $document = $this->createDocumentFromString($number);
         $this->assertInstanceOf(AbstractDocument::class, $document);
@@ -80,7 +80,7 @@ abstract class DocumentTestCase extends TestCase
      *
      * @dataProvider provideValidNumbersAndExpectedFormat
      */
-    final public function testShouldFormatDocument($number, $expectedFormat)
+    final public function testShouldFormatDocument(string $number, string $expectedFormat)
     {
         $document = $this->createDocument($number);
         $this->assertEquals($expectedFormat, $document->format());
@@ -92,35 +92,10 @@ abstract class DocumentTestCase extends TestCase
      *
      * @dataProvider provideValidNumbersAndExpectedFormat
      */
-    final public function testShouldFormatDocumentFromString($number, $expectedFormat)
+    final public function testShouldFormatDocumentFromString(string $number, string $expectedFormat)
     {
         $document = $this->createDocumentFromString($number);
         $this->assertEquals($expectedFormat, $document->format());
-    }
-
-    /**
-     * @param string $documentType
-     * @param string $number
-     *
-     * @dataProvider provideEmptyData
-     */
-    final public function testShouldThrowExceptionForEmptyData($documentType, $number)
-    {
-        $this->expectException(InvalidDocument::class);
-        $this->expectExceptionMessage("The {$documentType} must not be empty");
-        $this->createDocument($number);
-    }
-
-    /**
-     * @param string $documentType
-     * @param string $number
-     *
-     * @dataProvider provideEmptyData
-     */
-    final public function testShouldReturnsFalseForEmptyData($documentType, $number)
-    {
-        $document = $this->createDocumentFromString($number);
-        $this->assertFalse($document, "Failed asserting that {$documentType} is not valid");
     }
 
     /**
@@ -129,7 +104,7 @@ abstract class DocumentTestCase extends TestCase
      *
      * @dataProvider provideInvalidNumber
      */
-    public function testShouldThrowExceptionForInvalidNumbers($documentType, $number)
+    public function testShouldThrowExceptionForInvalidNumbers(string $documentType, string $number)
     {
         $numberSanitized = preg_replace('/[^\dX]/i', '', $number);
         $this->expectException(InvalidDocument::class);
@@ -143,7 +118,7 @@ abstract class DocumentTestCase extends TestCase
      *
      * @dataProvider provideInvalidNumber
      */
-    public function testShouldReturnsFalseForInvalidNumbers($documentType, $number)
+    public function testShouldReturnsFalseForInvalidNumbers(string $documentType, string $number)
     {
         $document = $this->createDocumentFromString($number);
         $this->assertFalse($document, "Failed asserting that {$documentType} is not valid");

@@ -11,5 +11,5 @@ interface DigitCalculable
      *
      * @return string Returns the checker digit.
      */
-    public function calculateDigit($baseNumber);
+    public function calculateDigit(string $baseNumber) : string;
 }

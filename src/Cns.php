@@ -22,13 +22,13 @@ final class Cns extends AbstractDocument
      *
      * @param string $number
      */
-    public function __construct($number)
+    public function __construct(string $number)
     {
         $number = preg_replace('/\D/', '', $number);
         parent::__construct($number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
-    public static function createFromString($number)
+    public static function createFromString(string $number)
     {
         return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
@@ -36,7 +36,7 @@ final class Cns extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function format()
+    public function format() : string
     {
         return preg_replace(self::REGEX, self::FORMAT, "{$this}");
     }
@@ -49,7 +49,7 @@ final class Cns extends AbstractDocument
      * For numbers starting with 7, 8 or 9 will use TemporaryCalculator,
      * otherwise CnsCalculator.
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new CnsCalculator();
 

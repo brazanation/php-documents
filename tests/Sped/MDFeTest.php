@@ -2,6 +2,7 @@
 
 namespace Brazanation\Documents\Tests\Sped;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\Cnpj;
 use Brazanation\Documents\Sped\EmissionType;
 use Brazanation\Documents\Sped\MDFe;
@@ -9,31 +10,31 @@ use Brazanation\Documents\Sped\Model;
 
 class MDFeTest extends TestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new MDFe($number);
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return MDFe::createFromString($number);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             ['52060433009911002506580120000007801267301614'],
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['52060433009911002506580120000007801267301614', '5206 0433 0099 1100 2506 5801 2000 0007 8012 6730 1614'],
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [MDFe::LABEL, ''],
@@ -42,7 +43,7 @@ class MDFeTest extends TestCase
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [MDFe::LABEL, str_pad('1', 44, 1)],
@@ -58,7 +59,7 @@ class MDFeTest extends TestCase
         ];
     }
 
-    public function provideInvalidEmissionType()
+    public function provideInvalidEmissionType() : array
     {
         return [
             [MDFe::LABEL, '52060433009911002506550120000007801267301613'],

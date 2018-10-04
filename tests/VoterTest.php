@@ -2,21 +2,22 @@
 
 namespace Brazanation\Documents\Tests;
 
+use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\Voter;
 
 class VoterTest extends DocumentTestCase
 {
-    public function createDocument($number)
+    public function createDocument(string $number) : AbstractDocument
     {
         return new Voter($number, null, null);
     }
 
-    public function createDocumentFromString($number)
+    public function createDocumentFromString(string $number)
     {
         return Voter::createFromString($number);
     }
 
-    public function provideValidNumbers()
+    public function provideValidNumbers() : array
     {
         return [
             'GO' => ['247003181023'],
@@ -28,14 +29,14 @@ class VoterTest extends DocumentTestCase
         ];
     }
 
-    public function provideValidNumbersAndExpectedFormat()
+    public function provideValidNumbersAndExpectedFormat() : array
     {
         return [
             ['106644440302', '106644440302'],
         ];
     }
 
-    public function provideEmptyData()
+    public function provideEmptyData() : array
     {
         return [
             [Voter::LABEL, ''],
@@ -44,7 +45,7 @@ class VoterTest extends DocumentTestCase
         ];
     }
 
-    public function provideInvalidNumber()
+    public function provideInvalidNumber() : array
     {
         return [
             [Voter::LABEL, 1],

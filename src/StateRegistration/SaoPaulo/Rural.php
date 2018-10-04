@@ -24,7 +24,7 @@ class Rural extends State
     /**
      * {@inheritdoc}
      */
-    public function normalizeNumber($number)
+    public function normalizeNumber(string $number) : string
     {
         return 'P' . preg_replace('/[\D]/i', '', $number);
     }
@@ -32,7 +32,7 @@ class Rural extends State
     /**
      * {@inheritdoc}
      */
-    public function extractBaseNumber($number)
+    public function extractBaseNumber(string $number) : string
     {
         return substr($number, 1, self::LENGTH - 4);
     }
@@ -40,7 +40,7 @@ class Rural extends State
     /**
      * {@inheritdoc}
      */
-    public function extractCheckerDigit($number)
+    public function extractCheckerDigit(string $number) : string
     {
         return substr($number, -4, 1);
     }
@@ -50,7 +50,7 @@ class Rural extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_SP.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliers([10, 8, 7, 6, 5, 4, 3, 1]);

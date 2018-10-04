@@ -8,7 +8,7 @@ final class CTe extends AbstractAccessKey
 {
     const LABEL = 'CTe';
 
-    protected function defaultModel()
+    protected function defaultModel() : Model
     {
         return Model::CTe();
     }
@@ -27,14 +27,14 @@ final class CTe extends AbstractAccessKey
      * @return NFe
      */
     public static function generate(
-        $state,
+        int $state,
         \DateTime $generatedAt,
         Cnpj $cnpj,
-        $sequence,
-        $invoiceNumber,
+        int $sequence,
+        int $invoiceNumber,
         EmissionType $emissionType,
-        $controlNumber
-    ) {
+        int $controlNumber
+    ) : AbstractAccessKey {
         $accessKey = self::generateKey(
             $state,
             $generatedAt,

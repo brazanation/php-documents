@@ -17,13 +17,13 @@ final class Cnh extends AbstractDocument
      *
      * @param string $cnh Only accept numbers
      */
-    public function __construct($cnh)
+    public function __construct(string $cnh)
     {
         $cnh = preg_replace('/\D/', '', $cnh);
         parent::__construct($cnh, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
 
-    public static function createFromString($number)
+    public static function createFromString(string $number)
     {
         return parent::tryCreateFromString(self::class, $number, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
@@ -31,7 +31,7 @@ final class Cnh extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         $firstDigit = $this->calculateFirstDigit($baseNumber);
         $secondDigit = $this->calculateSecondDigit($baseNumber);
@@ -42,7 +42,7 @@ final class Cnh extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function format()
+    public function format() : string
     {
         return "{$this}";
     }
@@ -54,7 +54,7 @@ final class Cnh extends AbstractDocument
      *
      * @return string Returns a calculated checker digit.
      */
-    private function calculateFirstDigit($baseNumber)
+    private function calculateFirstDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliersInterval(1, 9);
@@ -72,7 +72,7 @@ final class Cnh extends AbstractDocument
      *
      * @return string Returns a calculated checker digit.
      */
-    private function calculateSecondDigit($baseNumber)
+    private function calculateSecondDigit(string $baseNumber) : string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliers([9, 8, 7, 6, 5, 4, 3, 2, 1]);

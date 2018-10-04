@@ -24,7 +24,7 @@ class Tocantins implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getState()
+    public function getState() : string
     {
         return $this->calculation->getState();
     }
@@ -32,7 +32,7 @@ class Tocantins implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getLength()
+    public function getLength() : int
     {
         return $this->calculation->getLength();
     }
@@ -40,7 +40,7 @@ class Tocantins implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getRegex()
+    public function getRegex() : string
     {
         return $this->calculation->getRegex();
     }
@@ -48,7 +48,7 @@ class Tocantins implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormat()
+    public function getFormat() : string
     {
         return $this->calculation->getFormat();
     }
@@ -56,7 +56,7 @@ class Tocantins implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getNumberOfDigits()
+    public function getNumberOfDigits() : int
     {
         return $this->calculation->getNumberOfDigits();
     }
@@ -64,7 +64,7 @@ class Tocantins implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function normalizeNumber($number)
+    public function normalizeNumber(string $number) : string
     {
         $this->defineStrategy($number);
 
@@ -74,7 +74,7 @@ class Tocantins implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function extractBaseNumber($number)
+    public function extractBaseNumber(string $number) : string
     {
         return $this->calculation->extractBaseNumber($number);
     }
@@ -82,7 +82,7 @@ class Tocantins implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function extractCheckerDigit($number)
+    public function extractCheckerDigit(string $number) : string
     {
         return $this->calculation->extractCheckerDigit($number);
     }
@@ -92,7 +92,7 @@ class Tocantins implements StateInterface
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_TO.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit(string $baseNumber) : string
     {
         return $this->calculation->calculateDigit($baseNumber);
     }
@@ -102,7 +102,7 @@ class Tocantins implements StateInterface
      *
      * @param string $number Number of document.
      */
-    private function defineStrategy($number)
+    private function defineStrategy(string $number)
     {
         $number = preg_replace('/\D/', '', $number);
         if (strlen($number) == 9) {
