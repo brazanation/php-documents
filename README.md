@@ -143,14 +143,14 @@ Social Integration Program and Training Program of the Heritage of Public Servan
 ```php
 use Brazanation\Documents\PisPasep;
 
-$document = PisPasep::createFromString('51.82312.94-92');
+$document = PisPasep::createFromString('518.23129.49-1');
 
 if (false === $document) {
    echo "Not Valid";
 }
 
-echo $document; // prints 51823129492
-echo $document->format(); // prints 51.82312.94-92
+echo $document; // prints 51823129491
+echo $document->format(); // prints 518.23129.49-1
 ```
 
 ### Título de Eleitor
