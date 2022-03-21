@@ -37,15 +37,12 @@ class JudiciaryProcessTest extends DocumentTestCase
     {
         return [
             [JudiciaryProcess::LABEL, ''],
-            [JudiciaryProcess::LABEL, null],
-            [JudiciaryProcess::LABEL, 0],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [JudiciaryProcess::LABEL, 1],
             [JudiciaryProcess::LABEL, '11111111111111'],
             [JudiciaryProcess::LABEL, '00111222100099'],
             [JudiciaryProcess::LABEL, '00.111.222/1000-99'],

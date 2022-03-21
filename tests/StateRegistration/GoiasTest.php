@@ -38,7 +38,7 @@ class GoiasTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
-            [Goias::LONG_NAME, 0],
+            [Goias::LONG_NAME, ''],
         ];
     }
 

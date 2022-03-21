@@ -39,6 +39,7 @@ class SaoPauloTest extends DocumentTestCase
     {
         return [
             [SaoPaulo::LONG_NAME, ''],
+            [SaoPaulo::LONG_NAME, null],
         ];
     }
 

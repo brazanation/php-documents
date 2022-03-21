@@ -38,6 +38,7 @@ class SantaCatarinaTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
+            [SantaCatarina::LONG_NAME, null],
             [SantaCatarina::LONG_NAME, ''],
         ];
     }

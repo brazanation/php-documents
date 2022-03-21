@@ -22,17 +22,17 @@ class BahiaTest extends DocumentTestCase
     public function provideValidNumbers() : array
     {
         return [
-            ['123456-63'],
+            ['0123456-63'],
             ['1000003-06'],
             ['1057652-04'],
             ['0635718-30'],
-            ['770288-84'],
+            ['0770288-84'],
             ['077.028.884'],
             ['085456408'],
-            ['78215597'],
-            ['75467384'],
-            ['45564835'],
-            ['01314209'],
+            ['078215597'],
+            ['075467384'],
+            ['045564835'],
+            ['001314209'],
             ['111568918'],
             ['039681030']
         ];
@@ -49,7 +49,7 @@ class BahiaTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
-            [Bahia::LONG_NAME, 0],
+            [Bahia::LONG_NAME, ''],
         ];
     }
 

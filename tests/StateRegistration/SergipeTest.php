@@ -37,6 +37,7 @@ class SergipeTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
+            [Sergipe::LONG_NAME, null],
             [Sergipe::LONG_NAME, ''],
         ];
     }

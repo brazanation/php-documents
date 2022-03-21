@@ -39,6 +39,7 @@ class PiauiTest extends DocumentTestCase
     {
         return [
             [Piaui::LONG_NAME, null],
+            [Piaui::LONG_NAME, ''],
         ];
     }
 

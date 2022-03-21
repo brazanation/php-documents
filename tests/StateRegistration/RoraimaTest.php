@@ -47,6 +47,7 @@ class RoraimaTest extends DocumentTestCase
     {
         return [
             [Roraima::LONG_NAME, ''],
+            [Roraima::LONG_NAME, null],
         ];
     }
 

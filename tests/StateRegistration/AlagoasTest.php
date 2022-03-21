@@ -44,14 +44,14 @@ class AlagoasTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
-            [Alagoas::LONG_NAME, 0],
+            [Alagoas::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [Alagoas::LONG_NAME, 1],
+            [Alagoas::LONG_NAME, '1'],
             [Alagoas::LONG_NAME, '0100482300113'],
         ];
     }

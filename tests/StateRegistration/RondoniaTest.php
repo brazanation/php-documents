@@ -64,6 +64,7 @@ class RondoniaTest extends DocumentTestCase
     {
         return [
             [Rondonia::LONG_NAME, ''],
+            [Rondonia::LONG_NAME, null],
         ];
     }
 

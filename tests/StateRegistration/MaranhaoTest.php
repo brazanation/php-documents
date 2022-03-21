@@ -37,7 +37,7 @@ class MaranhaoTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
-            [Maranhao::LONG_NAME, 0],
+            [Maranhao::LONG_NAME, ''],
         ];
     }
 

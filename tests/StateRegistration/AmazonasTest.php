@@ -40,14 +40,14 @@ class AmazonasTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
-            [Amazonas::LONG_NAME, 0],
+            [Amazonas::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [Amazonas::LONG_NAME, 1],
+            [Amazonas::LONG_NAME, '1'],
             [Amazonas::LONG_NAME, '03.012.345-8'],
         ];
     }

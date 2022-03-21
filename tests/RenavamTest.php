@@ -37,7 +37,6 @@ class RenavamTest extends DocumentTestCase
     {
         return [
             [Renavam::LABEL, ''],
-            [Renavam::LABEL, null],
         ];
     }
 

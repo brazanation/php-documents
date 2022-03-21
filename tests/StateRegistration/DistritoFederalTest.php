@@ -42,15 +42,13 @@ class DistritoFederalTest extends DocumentTestCase
     {
         return [
             [DF::LONG_NAME, ''],
-            [DF::LONG_NAME, null],
-            [DF::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [DF::LONG_NAME, 1],
+            [DF::LONG_NAME, '1'],
             [DF::LONG_NAME, '0756855600125'],
         ];
     }

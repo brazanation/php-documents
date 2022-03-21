@@ -36,15 +36,12 @@ class CnhTest extends DocumentTestCase
     {
         return [
             [Cnh::LABEL, ''],
-            [Cnh::LABEL, null],
-            [Cnh::LABEL, 0],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [Cnh::LABEL, 1],
             [Cnh::LABEL, '11111111111'],
             [Cnh::LABEL, '06843273172'],
         ];

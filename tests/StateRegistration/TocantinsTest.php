@@ -42,6 +42,7 @@ class TocantinsTest extends DocumentTestCase
     {
         return [
             [Tocantins::LONG_NAME, ''],
+            [Tocantins::LONG_NAME, null],
         ];
     }
 

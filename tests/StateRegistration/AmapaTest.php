@@ -37,14 +37,14 @@ class AmapaTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
-            [Amapa::LONG_NAME, 0],
+            [Amapa::LONG_NAME, ''],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [Amapa::LONG_NAME, 1],
+            [Amapa::LONG_NAME, '1'],
             [Amapa::LONG_NAME, '03.012.345-8'],
         ];
     }

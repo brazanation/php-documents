@@ -30,7 +30,7 @@ final class Amapa extends State
      */
     public function calculateDigit(string $baseNumber) : string
     {
-        $number = intval($baseNumber);
+        $number = (int) $baseNumber;
         $lastDigit = $this->discoverLastDigit($number);
         $digitToReplace = $this->discoverDigitToReplace($number);
 
