@@ -42,7 +42,7 @@ class EspiritoSantoTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
-            [EspiritoSanto::LONG_NAME, 0],
+            [EspiritoSanto::LONG_NAME, ''],
         ];
     }
 

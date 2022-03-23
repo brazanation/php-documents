@@ -40,7 +40,7 @@ class CearaTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
-            [Ceara::LONG_NAME, 0],
+            [Ceara::LONG_NAME, ''],
         ];
     }
 

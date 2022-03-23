@@ -40,7 +40,6 @@ class MinasGeraisTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
-            [MG::LONG_NAME, 0],
             [MG::LONG_NAME, ''],
             [MG::LONG_NAME, null],
         ];
@@ -49,7 +48,7 @@ class MinasGeraisTest extends DocumentTestCase
     public function provideInvalidNumber() : array
     {
         return [
-            [MG::LONG_NAME, 1],
+            [MG::LONG_NAME, '1'],
             [MG::LONG_NAME, '9987477353930'],
         ];
     }

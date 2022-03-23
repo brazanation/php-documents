@@ -44,6 +44,7 @@ class PernambucoTest extends DocumentTestCase
     {
         return [
             [Pernambuco::LONG_NAME, null],
+            [Pernambuco::LONG_NAME, ''],
         ];
     }
 

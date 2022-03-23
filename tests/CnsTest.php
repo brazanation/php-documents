@@ -42,15 +42,12 @@ class CnsTest extends DocumentTestCase
     {
         return [
             [Cns::LABEL, ''],
-            [Cns::LABEL, null],
-            [Cns::LABEL, 0],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [Cns::LABEL, 1],
             [Cns::LABEL, '123123232323'],
             [Cns::LABEL, '861238979874'],
         ];

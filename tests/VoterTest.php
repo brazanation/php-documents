@@ -40,15 +40,12 @@ class VoterTest extends DocumentTestCase
     {
         return [
             [Voter::LABEL, ''],
-            [Voter::LABEL, null],
-            [Voter::LABEL, 0],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [Voter::LABEL, 1],
             [Voter::LABEL, '123123232323'],
             [Voter::LABEL, '861238979874'],
         ];

@@ -46,6 +46,7 @@ class ParaTest extends DocumentTestCase
     {
         return [
             [Para::LONG_NAME, null],
+            [Para::LONG_NAME, ''],
         ];
     }
 

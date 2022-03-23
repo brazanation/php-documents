@@ -24,20 +24,29 @@ tools:
 
 build:
     dependencies:
-        before:
-            - "sudo composer self-update"
         override:
             - "composer install --no-interaction --prefer-dist"
-    tests:
-        override:
-            -
-                command: './vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=clover.xml'
-                coverage:
-                    file: 'clover.xml'
-                    format: 'php-clover'
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
+
+        coverage:
+            environment:
+                php:
+                    ini:
+                        "xdebug.mode": coverage
+            tests:
+                override:
+                    -
+                        command: './vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=clover.xml'
+                        coverage:
+                            file: 'clover.xml'
+                            format: 'php-clover'
     environment:
         php:
-            version: 7.0.8
+            version: 8
         mysql: false
         postgresql: false
         redis: false

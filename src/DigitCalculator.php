@@ -273,7 +273,7 @@ class DigitCalculator
     private function calculateSingleSum(int $total) : int
     {
         if ($this->singleSum) {
-            return intval(($total / 10) + ($total % 10));
+            return (int) (($total / 10) + ($total % 10));
         }
 
         return $total;

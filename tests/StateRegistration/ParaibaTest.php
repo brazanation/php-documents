@@ -137,6 +137,7 @@ class ParaibaTest extends DocumentTestCase
     {
         return [
             [Paraiba::LONG_NAME, null],
+            [Paraiba::LONG_NAME, ''],
         ];
     }
 

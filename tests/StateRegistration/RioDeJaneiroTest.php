@@ -37,9 +37,8 @@ class RioDeJaneiroTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
-            [RioDeJaneiro::LONG_NAME, null],
-            [RioDeJaneiro::LONG_NAME, false],
             [RioDeJaneiro::LONG_NAME, ''],
+            [RioDeJaneiro::LONG_NAME, null],
         ];
     }
 

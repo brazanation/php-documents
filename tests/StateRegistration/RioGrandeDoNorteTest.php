@@ -46,6 +46,7 @@ class RioGrandeDoNorteTest extends DocumentTestCase
     {
         return [
             [RioGrandeDoNorte::LONG_NAME, ''],
+            [RioGrandeDoNorte::LONG_NAME, null],
         ];
     }
 

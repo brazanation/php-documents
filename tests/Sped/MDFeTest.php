@@ -82,8 +82,8 @@ class MDFeTest extends TestCase
         $this->assertEquals($generatedAt, $nfeKey->generatedAt, 'Failed assert for generatedAt');
         $this->assertEquals('33009911002506', "{$nfeKey->cnpj}", 'Failed assert for CNPJ');
         $this->assertEquals(Model::TYPE_MDFE, "{$nfeKey->model}", 'Failed assert for model');
-        $this->assertEquals('000000012', $nfeKey->sequence, 'Failed assert for sequence');
-        $this->assertEquals('00000780', $nfeKey->invoiceNumber, 'Failed assert for invoice number');
+        $this->assertEquals('012', $nfeKey->sequence, 'Failed assert for sequence');
+        $this->assertEquals('000000780', $nfeKey->invoiceNumber, 'Failed assert for invoice number');
         $this->assertEquals(EmissionType::NORMAL, "{$nfeKey->emissionType}", 'Failed assert for emission type');
         $this->assertEquals('26730161', $nfeKey->controlNumber, 'Failed assert for digit');
         $this->assertEquals('52060433009911002506580120000007801267301614', "{$nfeKey}");

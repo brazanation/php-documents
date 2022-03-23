@@ -86,7 +86,7 @@ class NFCeTest extends DocumentTestCase
         $this->assertEquals('012', $nfeKey->sequence, 'Failed assert for sequence');
         $this->assertEquals('000000780', $nfeKey->invoiceNumber, 'Failed assert for invoice number');
         $this->assertEquals(EmissionType::CONTINGENCY_ON_SAFETY_FORM, "{$nfeKey->emissionType}", 'Failed assert for emission type');
-        $this->assertEquals('006730161', $nfeKey->controlNumber, 'Failed assert for digit');
+        $this->assertEquals('06730161', $nfeKey->controlNumber, 'Failed assert for digit');
         $this->assertEquals('52060433009911002506650120000007802067301610', "{$nfeKey}");
     }
 }

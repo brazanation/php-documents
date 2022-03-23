@@ -37,15 +37,12 @@ class CpfTest extends DocumentTestCase
     {
         return [
             [Cpf::LABEL, ''],
-            [Cpf::LABEL, null],
-            [Cpf::LABEL, 0],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [Cpf::LABEL, 1],
             [Cpf::LABEL, '11111111111'],
             [Cpf::LABEL, '06843273172'],
             [Cpf::LABEL, '068.432.731-72'],

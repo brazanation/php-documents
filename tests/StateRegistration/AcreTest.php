@@ -37,15 +37,12 @@ class AcreTest extends DocumentTestCase
     {
         return [
             [Acre::LONG_NAME, ''],
-            [Acre::LONG_NAME, null],
-            [Acre::LONG_NAME, 0],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [Acre::LONG_NAME, 1],
             [Acre::LONG_NAME, '0100482300113'],
         ];
     }

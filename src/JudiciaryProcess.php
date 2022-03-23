@@ -118,11 +118,11 @@ final class JudiciaryProcess extends AbstractDocument
      */
     public function calculateDigit(string $input) : string
     {
-        $remainderNumber = intval($this->sequentialNumber) % 97;
+        $remainderNumber = (int) $this->sequentialNumber % 97;
 
         $judiciaryNumber = "{$remainderNumber}{$this->year}{$this->judiciary}{$this->court}";
 
-        $remainderJudiciary = intval($judiciaryNumber) % 97;
+        $remainderJudiciary = (int) $judiciaryNumber % 97;
         $originNumber = "{$remainderJudiciary}{$this->origin}00";
 
         $remainder = (float) $originNumber % 97;

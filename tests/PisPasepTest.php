@@ -37,15 +37,12 @@ class PisPasepTest extends DocumentTestCase
     {
         return [
             [PisPasep::LABEL, ''],
-            [PisPasep::LABEL, null],
-            [PisPasep::LABEL, 0],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [PisPasep::LABEL, 1],
             [PisPasep::LABEL, '11111111111'],
             [PisPasep::LABEL, '51823129492'],
             [PisPasep::LABEL, '51.82312.94-92'],

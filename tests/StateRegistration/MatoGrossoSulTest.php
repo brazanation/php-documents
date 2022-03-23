@@ -49,7 +49,6 @@ class MatoGrossoSulTest extends DocumentTestCase
     public function provideEmptyData() : array
     {
         return [
-            [MatoGrossoSul::LONG_NAME, 0],
             [MatoGrossoSul::LONG_NAME, ''],
             [MatoGrossoSul::LONG_NAME, null],
         ];
@@ -58,7 +57,7 @@ class MatoGrossoSulTest extends DocumentTestCase
     public function provideInvalidNumber() : array
     {
         return [
-            [MatoGrossoSul::LONG_NAME, 1],
+            [MatoGrossoSul::LONG_NAME, '1'],
             [MatoGrossoSul::LONG_NAME, '9987477353930'],
         ];
     }

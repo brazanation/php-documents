@@ -37,15 +37,12 @@ class CnpjTest extends DocumentTestCase
     {
         return [
             [Cnpj::LABEL, ''],
-            [Cnpj::LABEL, null],
-            [Cnpj::LABEL, 0],
         ];
     }
 
     public function provideInvalidNumber() : array
     {
         return [
-            [Cnpj::LABEL, 1],
             [Cnpj::LABEL, '11111111111111'],
             [Cnpj::LABEL, '00111222100099'],
             [Cnpj::LABEL, '00.111.222/1000-99'],

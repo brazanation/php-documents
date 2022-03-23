@@ -48,7 +48,7 @@ final class Goias extends State
      */
     public function calculateDigit(string $baseNumber) : string
     {
-        $digitToReplace = $this->discoverDigitToReplace(intval($baseNumber));
+        $digitToReplace = $this->discoverDigitToReplace((int) $baseNumber);
 
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();
