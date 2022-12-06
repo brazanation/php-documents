@@ -4,6 +4,7 @@ namespace Brazanation\Documents\Sped;
 
 use Brazanation\Documents\AbstractDocument;
 use Brazanation\Documents\Cnpj;
+use Brazanation\Documents\Cpf;
 use Brazanation\Documents\DigitCalculator;
 use Brazanation\Documents\Sped\Exception\DocumentModel;
 
@@ -112,8 +113,14 @@ abstract class AbstractAccessKey extends AbstractDocument
         $startPosition += 2;
         $this->generatedAt = \DateTime::createFromFormat('ymd H:i:s', substr($accessKey, $startPosition, 4) . '01 00:00:00');
 
+        //a chave pode conter um CNPJ ou um CPF (de produtor rural)
         $startPosition += 4;
-        $this->cnpj = new Cnpj(substr($accessKey, $startPosition, 14));
+        $doc = substr($accessKey, $startPosition, 14);
+        if (substr($doc, 0, 3) === '000') {
+            $this->cnpj = new Cpf(substr($doc, -11));
+        } else {
+            $this->cnpj = new Cnpj($doc);
+        }
 
         $startPosition += 14;
         $this->model = new Model(substr($accessKey, $startPosition, 2));
