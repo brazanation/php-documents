@@ -116,11 +116,7 @@ abstract class AbstractAccessKey extends AbstractDocument
         //a chave pode conter um CNPJ ou um CPF (de produtor rural)
         $startPosition += 4;
         $doc = substr($accessKey, $startPosition, 14);
-        if (substr($doc, 0, 3) === '000') {
-            $this->cnpj = new Cpf(substr($doc, -11));
-        } else {
-            $this->cnpj = new Cnpj($doc);
-        }
+        (substr($doc, 0, 3) === '000') ? $this->cnpj = new Cpf(substr($doc, -11)) : $this->cnpj = new Cnpj($doc);
 
         $startPosition += 14;
         $this->model = new Model(substr($accessKey, $startPosition, 2));
