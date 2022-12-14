@@ -48,6 +48,7 @@ class Suframa extends AbstractDocument
         $calculator->withModule(DigitCalculator::MODULE_11);
         $firstDigit = $calculator->calculate();
         $calculator->addDigit($firstDigit);
+
         return "{$firstDigit}";
     }
 
@@ -70,6 +71,7 @@ class Suframa extends AbstractDocument
             return false;
         }
         $digit = $this->calculateDigit($baseNumber);
+
         return "$digit" === "{$this->digit}";
     }
 }
