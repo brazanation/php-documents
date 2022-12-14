@@ -74,5 +74,4 @@ class Suframa extends AbstractDocument
 
         return "$digit" === "{$this->digit}";
     }
-
 }
