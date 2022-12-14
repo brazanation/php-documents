@@ -31,7 +31,7 @@ class Suframa extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function format() : string
+    public function format(): string
     {
         return preg_replace(self::REGEX, '$1.$2.$3', "{$this}");
     }
@@ -39,10 +39,10 @@ class Suframa extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit(string $baseNumber) : string
+    public function calculateDigit(string $baseNumber): string
     {
         $calculator = new DigitCalculator($baseNumber);
-        $calculator->withMultipliers([9,8,7,6,5,4,3,2]);
+        $calculator->withMultipliers([9, 8, 7, 6, 5, 4, 3, 2]);
         $calculator->useComplementaryInsteadOfModule();
         $calculator->replaceWhen('0', 10, 11);
         $calculator->withModule(DigitCalculator::MODULE_11);
@@ -52,7 +52,7 @@ class Suframa extends AbstractDocument
         return "{$firstDigit}";
     }
 
-    protected function isValid(string $number) : bool
+    protected function isValid(string $number): bool
     {
         $baseNumber = $this->extractBaseNumber($number);
         if (!$baseNumber) {
@@ -74,4 +74,5 @@ class Suframa extends AbstractDocument
 
         return "$digit" === "{$this->digit}";
     }
+
 }
