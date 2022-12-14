@@ -2,4 +2,5 @@
 /composer.lock
 /phpunit.xml
 /build
+/local
 /.idea

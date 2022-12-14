@@ -252,6 +252,24 @@ echo $document->format(); //prints  0048032.98.2009.8.09.0000
 
 ```
 
+### Suframa
+
+Number of registration in "Superintendência da Zona Franca de Manaus" (Free Comercial Zones)
+
+```php
+
+use Brazanation\Documents\Suframa;
+
+$document = Suframa::createFromString('201111019');
+
+if (false === $document) {
+   echo "Not Valid";
+}
+
+echo $document; //prints  201111019
+echo $document->format(); //prints  20.1111.019
+
+```
 
 ### License
 
