@@ -216,8 +216,9 @@ class DigitCalculator
         $sum = 0;
         $position = 0;
         foreach ($this->number as $digit) {
+            $value = ord((string)$digit) - 48;
             $multiplier = $this->multipliers->offsetGet($position);
-            $total = $digit * $multiplier;
+            $total = $value * $multiplier;
             $sum += $this->calculateSingleSum($total);
             $position = $this->nextMultiplier($position);
         }

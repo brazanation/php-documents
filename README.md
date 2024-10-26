@@ -79,6 +79,26 @@ echo $document; // prints 99999090910270
 echo $document->format(); // prints 99.999.090/9102-70
 ```
 
+### CNPJ (cadastro nacional da pessoa jurídica) a partir de 2026
+
+Company Identification or National Register of Legal Entities
+> NOTE: In 2026 this identification changes to Alphanumeric Type with:
+> - 12 alphamuneric chacters A-Z and 0-9
+> - last two control digits (numeric only) (MODULE 11)
+
+```php
+use Brazanation\Documents\CnpjAlfa;
+
+$document = CnpjAlfa::createFromString('12ABC34501DE35');
+
+if (false === $document) {
+   echo "Not Valid";
+}
+echo $document; 12ABC34501DE35
+echo $document->format(); // prints 12.ABC.345/01DE-35
+```
+
+
 ### CNH (carteira nacional de habilitação)
 
 National Driving License
