@@ -8,7 +8,7 @@ class Para extends State
 {
     const LONG_NAME = 'Para';
 
-    const REGEX = '/^(15)(\d{3})(\d{3})(\d{1})$/';
+    const REGEX = '/^(15|75|76|77|78|79)(\d{3})(\d{3})(\d{1})$/'; //ajuste http://www.sintegra.gov.br/Cad_Estados/cad_PA.html
 
     const FORMAT = '$1.$2.$3-$4';
 
