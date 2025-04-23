@@ -79,7 +79,7 @@ echo $document; // prints 99999090910270
 echo $document->format(); // prints 99.999.090/9102-70
 ```
 
-### CNPJ (cadastro nacional da pessoa jurídica) a partir de 2026
+### CNPJ (cadastro nacional da pessoa jurídica ALFA) a partir de 2026
 
 Company Identification or National Register of Legal Entities
 > NOTE: In 2026 this identification changes to Alphanumeric Type with:
@@ -87,9 +87,9 @@ Company Identification or National Register of Legal Entities
 > - last two control digits (numeric only) (MODULE 11)
 
 ```php
-use Brazanation\Documents\CnpjAlfa;
+use Brazanation\Documents\Cnpj;
 
-$document = CnpjAlfa::createFromString('12ABC34501DE35');
+$document = Cnpj::createFromString('12ABC34501DE35');
 
 if (false === $document) {
    echo "Not Valid";

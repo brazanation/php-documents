@@ -27,13 +27,13 @@ final class NFCe extends AbstractAccessKey
      * @return NFe
      */
     public static function generate(
-        int $state,
-        \DateTime $generatedAt,
-        Cnpj $cnpj,
-        int $sequence,
-        int $invoiceNumber,
+        int          $state,
+        \DateTime    $generatedAt,
+        Cnpj         $cnpj,
+        int          $sequence,
+        int          $invoiceNumber,
         EmissionType $emissionType,
-        int $controlNumber
+        int          $controlNumber
     ) : AbstractAccessKey {
         $accessKey = self::generateKey(
             $state,

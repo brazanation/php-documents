@@ -81,7 +81,7 @@ abstract class AbstractAccessKey extends AbstractDocument
      */
     public function __construct(string $accessKey)
     {
-        $accessKey = preg_replace('/\D/', '', $accessKey);
+        //$accessKey = preg_replace('/\D/', '', $accessKey);
         parent::__construct($accessKey, static::LENGTH, static::NUMBER_OF_DIGITS, static::LABEL);
         $this->validateModel($accessKey);
         $this->loadFromKey($accessKey);
@@ -152,14 +152,14 @@ abstract class AbstractAccessKey extends AbstractDocument
      * @return AbstractAccessKey
      */
     protected static function generateKey(
-        int $state,
-        \DateTime $generatedAt,
-        Cnpj $cnpj,
-        Model $model,
-        int $sequence,
-        int $invoiceNumber,
+        int          $state,
+        \DateTime    $generatedAt,
+        Cnpj         $cnpj,
+        Model        $model,
+        int          $sequence,
+        int          $invoiceNumber,
         EmissionType $emissionType,
-        int $controlNumber
+        int          $controlNumber
     ) : AbstractAccessKey {
         $yearMonth = $generatedAt->format('ym');
         $sequence = str_pad($sequence, 3, 0, STR_PAD_LEFT);
