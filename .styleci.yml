@@ -1,4 +1,4 @@
-preset: PSR2
+preset: psr2
 
 risky: false
 
