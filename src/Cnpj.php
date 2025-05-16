@@ -19,7 +19,6 @@ final class Cnpj extends AbstractDocument
      */
     public function __construct(string $cnpj)
     {
-
         $cnpj = preg_replace('/[^A-Z0-9]/', '', strtoupper($cnpj));
         parent::__construct($cnpj, self::LENGTH, self::NUMBER_OF_DIGITS, self::LABEL);
     }
