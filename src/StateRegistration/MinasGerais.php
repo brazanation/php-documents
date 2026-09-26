@@ -14,7 +14,7 @@ class MinasGerais extends State
 
     const LENGTH = 13;
 
-    const NUMBER_OF_DIGITS = 1;
+    const NUMBER_OF_DIGITS = 2;
 
     const SHORT_NAME = 'MG';
 
@@ -30,13 +30,34 @@ class MinasGerais extends State
      */
     public function calculateDigit(string $baseNumber) : string
     {
-        $calculator = new DigitCalculator($baseNumber);
+        $firstDigit = $this->calculateFirstDigit($baseNumber);
+
+        $calculator = new DigitCalculator($baseNumber . $firstDigit);
         $calculator->useComplementaryInsteadOfModule();
         $calculator->withMultipliersInterval(2, 11);
         $calculator->replaceWhen('0', 10, 11);
         $calculator->withModule(DigitCalculator::MODULE_11);
-        $firstDigit = $calculator->calculate();
+        $secondDigit = $calculator->calculate();
 
-        return "{$firstDigit}";
+        return $firstDigit . $secondDigit;
+    }
+
+    /**
+     * First check digit. A zero is inserted after the third digit, then the
+     * digits are weighted 1 and 2. The digit is the complement of the sum modulo 10.
+     */
+    private function calculateFirstDigit(string $baseNumber) : string
+    {
+        $body = substr($baseNumber, 0, 3) . '0' . substr($baseNumber, 3);
+        $sum = 0;
+        $weight = 1;
+
+        for ($i = 0, $length = strlen($body); $i < $length; $i++) {
+            $product = (int) $body[$i] * $weight;
+            $sum += intdiv($product, 10) + ($product % 10);
+            $weight = ($weight === 1) ? 2 : 1;
+        }
+
+        return (string) ((10 - ($sum % 10)) % 10);
     }
 }
