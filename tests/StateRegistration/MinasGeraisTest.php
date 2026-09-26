@@ -50,6 +50,7 @@ class MinasGeraisTest extends DocumentTestCase
         return [
             [MG::LONG_NAME, '1'],
             [MG::LONG_NAME, '9987477353930'],
+            [MG::LONG_NAME, '0623079040006'],
         ];
     }
 }
